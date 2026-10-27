@@ -1,0 +1,2556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<!--seo-->
+<title>Play SWARM Free Online — Free Browser Game | 6 finger games</title>
+<meta name="description" content="Play SWARM free online. A free browser game about gravity: gather a swarm of light and drag ships into a black hole. No download, no sign-up, free on PC and phone.">
+<meta name="keywords" content="free online game, free browser game, free game, free games online, play free, play online free, free to play, no download, no sign-up, free html5 game, free mobile game, free space game, black hole game, gravity game, swarm game, casual game, arcade game, relaxing game, one-finger game, SWARM, 6 finger games, უფასო თამაში, უფასო ონლაინ თამაში, бесплатная игра, бесплатная онлайн игра, 免费游戏, 免费在线游戏">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://6fingergames.com/play/swarm/">
+<link rel="icon" type="image/png" href="/img/games/swarm/icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Play SWARM Free Online — Free Browser Game | 6 finger games">
+<meta property="og:description" content="Play SWARM free online. A free browser game about gravity: gather a swarm of light and drag ships into a black hole. No download, no sign-up, free on PC and phone.">
+<meta property="og:url" content="https://6fingergames.com/play/swarm/">
+<meta property="og:image" content="https://6fingergames.com/img/games/swarm/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"SWARM","url":"https://6fingergames.com/play/swarm/","description":"Play SWARM free online. A free browser game about gravity: gather a swarm of light and drag ships into a black hole. No download, no sign-up, free on PC and phone.","image":"https://6fingergames.com/img/games/swarm/hero.jpg","genre":"Casual arcade, physics","gamePlatform":"Web browser (PC, Mac, phone, tablet)","applicationCategory":"Game","inLanguage":["English","Georgian","Russian","Chinese"],"playMode":"SinglePlayer","author":{"@type":"Organization","name":"6 finger games","url":"https://6fingergames.com/","logo":"https://6fingergames.com/img/studio-logo.png","email":"3dstudio@mail.com","sameAs":["https://www.youtube.com/@6FingerGames","https://6fingergames.itch.io/"]},"publisher":{"@type":"Organization","name":"6 finger games","url":"https://6fingergames.com/","logo":"https://6fingergames.com/img/studio-logo.png","email":"3dstudio@mail.com","sameAs":["https://www.youtube.com/@6FingerGames","https://6fingergames.itch.io/"]},"keywords":"free online game, free browser game, free game, free games online, play free, play online free, free to play, no download, no sign-up, free html5 game, free mobile game, free space game, black hole game, gravity game, swarm game, casual game, arcade game, relaxing game, one-finger game, SWARM, 6 finger games, უფასო თამაში, უფასო ონლაინ თამაში, бесплатная игра, бесплатная онлайн игра, 免费游戏, 免费在线游戏","screenshot":["https://6fingergames.com/img/games/swarm/shots/01_pull.jpg","https://6fingergames.com/img/games/swarm/shots/02_level2.jpg","https://6fingergames.com/img/games/swarm/shots/03_swarm.jpg","https://6fingergames.com/img/games/swarm/shots/04_menu.jpg"],"operatingSystem":"Any (web browser)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://6fingergames.com/play/swarm/"}}</script>
+<!--/seo-->
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body {
+    width: 100%; height: 100%; overflow: hidden;
+    background: #04060f;
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    color: #dff;
+    user-select: none; -webkit-user-select: none;
+    touch-action: none;
+  }
+  #game { position: fixed; inset: 0; display: block; }
+
+  .overlay {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; gap: 18px;
+    padding: 24px;
+    z-index: 10;
+    background: radial-gradient(circle at 50% 40%, rgba(10,20,50,0.55), rgba(2,4,12,0.92));
+    backdrop-filter: blur(3px);
+    transition: opacity .5s ease;
+  }
+  .hidden { opacity: 0; pointer-events: none; }
+
+  h1.title {
+    font-size: clamp(46px, 13vw, 110px);
+    font-weight: 800; letter-spacing: 0.16em;
+    line-height: 1;
+    background: linear-gradient(90deg,#5ff6ff,#a97bff 45%,#ffd76a);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    filter: drop-shadow(0 0 24px rgba(120,180,255,.35));
+  }
+  #over h1.title {
+    line-height: 1.5;
+    padding: 0.08em 0.14em 0.34em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  .tagline {
+    font-size: clamp(14px, 4.2vw, 20px);
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: #8fd7ff; opacity: .85; font-weight: 600;
+  }
+  .btn {
+    cursor: pointer; border: none; outline: none;
+    font-family: inherit; font-weight: 700;
+    font-size: clamp(16px, 4.6vw, 21px); letter-spacing: .06em;
+    color: #061018;
+    padding: 15px 46px; border-radius: 40px;
+    background: linear-gradient(90deg,#6ff3ff,#8fb6ff);
+    box-shadow: 0 0 30px rgba(110,200,255,.45), inset 0 0 12px rgba(255,255,255,.35);
+    transition: transform .15s ease, box-shadow .2s ease, filter .2s;
+  }
+  .btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 0 46px rgba(120,210,255,.7); }
+  .btn:active { transform: scale(.97); }
+  .btn.ghost {
+    background: transparent; color: #bfe9ff;
+    border: 1.5px solid rgba(140,220,255,.4);
+    box-shadow: none; font-size: clamp(14px,4vw,17px); padding: 12px 30px;
+  }
+  .btn.ghost:hover { border-color: rgba(160,230,255,.8); box-shadow: 0 0 24px rgba(120,200,255,.25); }
+
+  .how {
+    max-width: 560px; font-size: clamp(14px, 3.8vw, 17px);
+    line-height: 1.7; color: #b9dcf5; opacity: .95;
+  }
+  .studio-mark {
+    font-size: 12px; letter-spacing: .22em; text-transform: uppercase;
+    color: #ffd27a; font-weight: 700; opacity: .9;
+  }
+  .menu-pane {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 12px; width: min(560px, 100%);
+  }
+  .menu-pane.off { display: none; }
+  .menu-stack { width: min(320px, 86vw); display: flex; flex-direction: column; gap: 10px; }
+  .menu-stack .btn { width: 100%; }
+  .sheet-body {
+    width: 100%; text-align: left;
+    font-size: clamp(14px, 3.6vw, 16px); line-height: 1.65; color: #d5ebf8;
+    max-height: min(52vh, 440px); overflow: auto;
+    padding: 2px 6px 8px;
+  }
+  .sheet-body p { margin-bottom: 12px; }
+  .sheet-body p:last-child { margin-bottom: 0; }
+  .sheet-body::-webkit-scrollbar { width: 8px; }
+  .sheet-body::-webkit-scrollbar-thumb { background: rgba(150,210,255,.35); border-radius: 8px; }
+  .sheet-body::-webkit-scrollbar-track { background: transparent; }
+  .about-lines { color: #e7f4ff; font-size: clamp(14px, 3.8vw, 16px); line-height: 1.7; }
+  .soon-line {
+    font-size: clamp(22px, 6vw, 34px); font-weight: 800; letter-spacing: .08em;
+    color: #ffd27a; margin: 28px 0 18px;
+  }
+  .langs { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .lang {
+    cursor: pointer; padding: 8px 15px; border-radius: 20px;
+    border: 1.5px solid rgba(140,220,255,.25);
+    color: #9fd0ee; font-weight: 700; font-size: 14px; letter-spacing:.05em;
+    background: rgba(20,40,70,.25); transition: all .18s;
+  }
+  .lang:hover { border-color: rgba(160,230,255,.6); }
+  .lang.active {
+    background: linear-gradient(90deg,#6ff3ff,#8fb6ff); color:#061018;
+    border-color: transparent; box-shadow: 0 0 20px rgba(110,200,255,.5);
+  }
+
+  /* HUD */
+  #hud {
+    position: fixed; inset: 0; z-index: 5; pointer-events: none;
+    display: none;
+    padding: calc(12px + env(safe-area-inset-top)) 16px 16px;
+  }
+  #hud.on { display: block; }
+  .pill.lives .val { color:#ff7a8a; letter-spacing:.08em; }
+  #monitor { position: fixed; left: 16px; top: calc(80px + env(safe-area-inset-top)); z-index: 6; pointer-events: none;
+    width: min(380px, calc(100vw - 32px)); display: flex; gap: 10px; padding: 8px;
+    background: rgba(6,14,28,.74); border: 1px solid rgba(120,200,255,.25); border-radius: 12px; backdrop-filter: blur(6px);
+    transition: opacity .35s, border-color .3s; }
+  #monitor.off { opacity: 0; }
+  #monCv { width: 84px; height: 84px; border-radius: 8px; flex: none; background: #02060c; }
+  .mon-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+  .mon-name { font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: #7fc4e8; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mon-msg { font-size: 14px; line-height: 1.35; color: #eaf6ff; min-height: 38px; }
+  .mon-hull { margin-top: auto; display: flex; align-items: center; gap: 8px; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #7fc4e8; font-weight: 800; }
+  .mon-bar { flex: 1; height: 6px; border-radius: 4px; background: rgba(255,255,255,.12); overflow: hidden; }
+  #monBar { height: 100%; width: 100%; background: #3ddc84; transition: width .2s; }
+  #monitor.hurt #monBar { background: #ffb547; }
+  #monitor.crit #monBar { background: #ff5f6d; }
+  #monitor.crit { border-color: rgba(255,95,109,.6); animation: monAlarm .8s infinite; }
+  #monitor.lost { border-color: rgba(255,95,109,.4); }
+  #monitor.lost .mon-msg { color: #ff8a94; font-weight: 800; letter-spacing: .12em; }
+  @keyframes monAlarm { 50% { box-shadow: 0 0 22px rgba(255,80,90,.5); } }
+  @media (max-width: 520px){ #monitor { top: calc(64px + env(safe-area-inset-top)); padding: 6px; gap: 8px; } #monCv { width: 60px; height: 60px; } .mon-msg { font-size: 12.5px; min-height: 32px; } }
+  .hud-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+  .pill {
+    background: rgba(8,18,38,.55); border: 1px solid rgba(120,200,255,.2);
+    border-radius: 14px; padding: 7px 14px; backdrop-filter: blur(6px);
+    font-weight: 700; letter-spacing: .04em;
+  }
+  .pill .lbl { font-size: 10px; letter-spacing:.18em; text-transform:uppercase; color:#7fc4e8; opacity:.8; display:block; }
+  .pill .val { font-size: clamp(18px,5vw,26px); color:#eaf8ff; line-height:1.1; }
+  @media (max-width: 520px){ .hud-top{ gap:5px; } .pill{ padding:6px 8px; border-radius:11px; } .pill .lbl{ font-size:8.5px; letter-spacing:.08em; } .pill .val{ font-size:17px; } }
+  .pill.time .val { color:#9ff; }
+  .pill.time.low .val { color:#ff9a9a; }
+  #combo {
+    position: fixed; left: 50%; top: 22%; transform: translateX(-50%);
+    font-size: clamp(26px,8vw,52px); font-weight: 900; letter-spacing:.06em;
+    background: linear-gradient(90deg,#ffd76a,#ff9adf);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+    opacity: 0; transition: opacity .25s, transform .25s; z-index:6; pointer-events:none;
+    filter: drop-shadow(0 0 18px rgba(255,180,120,.5));
+  }
+  #combo.show { opacity: 1; transform: translateX(-50%) scale(1.08); }
+
+  #pulseBtn {
+    position: fixed; right: 20px; bottom: calc(24px + env(safe-area-inset-bottom));
+    width: 78px; height: 78px; border-radius: 50%; z-index: 7;
+    border: 2px solid rgba(140,220,255,.5);
+    background: radial-gradient(circle at 50% 40%, rgba(90,200,255,.35), rgba(20,50,90,.35));
+    color:#dff; font-weight:800; font-size:12px; letter-spacing:.08em;
+    display:none; align-items:center; justify-content:center; cursor:pointer;
+    backdrop-filter: blur(4px); transition: transform .1s, opacity .2s;
+    text-transform: uppercase;
+  }
+  #pulseBtn.on { display:flex; }
+  #pulseBtn:active { transform: scale(.9); }
+  #pulseBtn.cool { opacity:.35; }
+
+  #toast {
+    position: fixed; left:50%; top:14%; transform:translateX(-50%);
+    z-index:8; font-size: clamp(20px,6vw,34px); font-weight:800; letter-spacing:.1em;
+    color:#baffd8; text-shadow:0 0 22px rgba(120,255,190,.5);
+    opacity:0; transition:opacity .4s; pointer-events:none; text-align:center;
+  }
+  #toast.show{opacity:1;}
+  #toast.long{ top:auto; bottom:calc(13% + env(safe-area-inset-bottom)); font-size:clamp(14px,3.8vw,19px); letter-spacing:.04em; width:max-content; max-width:min(88vw,620px); line-height:1.45; }
+
+  .small { font-size: 12px; opacity:.5; letter-spacing:.1em; }
+  #finalStats { font-size: clamp(15px,4.4vw,19px); line-height:1.9; color:#cfeaff; }
+  #finalStats b { color:#fff; }
+  .mute {
+    position: fixed; left: 14px; bottom: calc(14px + env(safe-area-inset-bottom));
+    z-index: 9; cursor:pointer; width:44px; height:44px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    border:1px solid rgba(140,220,255,.25); background:rgba(8,18,38,.5);
+    color:#9fd0ee; font-size:18px;
+  }
+
+  /* ---------- reward juice ---------- */
+  #banner{
+    position:fixed; left:50%; top:36%; transform:translate(-50%,-50%);
+    z-index:8; pointer-events:none; text-align:center; white-space:nowrap;
+    font-weight:900; letter-spacing:.06em;
+    font-size:clamp(30px,9vw,64px); opacity:0;
+  }
+  #banner.pop{ animation:bannerPop 1.6s cubic-bezier(.2,1.5,.3,1) forwards; }
+  @keyframes bannerPop{
+    0%{opacity:0; transform:translate(-50%,-50%) scale(.35);}
+    16%{opacity:1; transform:translate(-50%,-50%) scale(1.18);}
+    30%{transform:translate(-50%,-50%) scale(1);}
+    72%{opacity:1;}
+    100%{opacity:0; transform:translate(-50%,-64%) scale(1.06);}
+  }
+  #banner .sub{ display:block; font-size:.4em; letter-spacing:.32em; font-weight:700; opacity:.9; margin-top:8px; }
+  .grad-gold{ background:linear-gradient(90deg,#ffe27a,#ffb35c 45%,#ffe27a); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; filter:drop-shadow(0 0 28px rgba(255,190,90,.65)); }
+  .grad-cyan{ background:linear-gradient(90deg,#7dfcff,#8fb6ff); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; filter:drop-shadow(0 0 28px rgba(120,220,255,.6)); }
+  .grad-pink{ background:linear-gradient(90deg,#ff9adf,#ffd76a); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; filter:drop-shadow(0 0 28px rgba(255,150,200,.6)); }
+
+  #comboWrap{ position:fixed; left:50%; top:15%; transform:translateX(-50%); z-index:6; pointer-events:none; text-align:center; opacity:0; transition:opacity .25s; }
+  #comboWrap.show{ opacity:1; }
+  #combo{
+    position:static; transform:none;
+    font-size:clamp(26px,8vw,52px); font-weight:900; letter-spacing:.06em;
+    background:linear-gradient(90deg,#ffd76a,#ff9adf);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+    filter:drop-shadow(0 0 18px rgba(255,180,120,.5));
+    transition:transform .12s;
+  }
+  #combo.bump{ transform:scale(1.22); }
+  #comboBar{ width:170px; height:5px; margin:9px auto 0; border-radius:3px; background:rgba(255,255,255,.12); overflow:hidden; }
+  #comboBarFill{ height:100%; width:100%; border-radius:3px; background:linear-gradient(90deg,#ffd76a,#ff9adf); transform-origin:left; }
+
+  #grade{
+    font-size:clamp(80px,26vw,170px); font-weight:900; line-height:1;
+    opacity:0; transform:scale(.2) rotate(-14deg);
+  }
+  #grade.reveal{ animation:gradeIn .9s cubic-bezier(.2,1.6,.3,1) forwards; }
+  @keyframes gradeIn{ to{ opacity:1; transform:scale(1) rotate(0deg);} }
+  #record{
+    font-size:clamp(15px,4.4vw,20px); font-weight:800; letter-spacing:.2em; text-transform:uppercase;
+    color:#ffe27a; text-shadow:0 0 22px rgba(255,200,90,.7);
+    opacity:0; transition:opacity .5s;
+  }
+  #record.show{ opacity:1; animation:recPulse 1.2s ease-in-out infinite; }
+  @keyframes recPulse{ 0%,100%{transform:scale(1);} 50%{transform:scale(1.06);} }
+</style>
+</head>
+<body>
+<canvas id="game"></canvas>
+
+<!-- HUD -->
+<div id="hud">
+  <div class="hud-top">
+    <div class="pill"><span class="lbl" data-i18n="level">Level</span><span class="val" id="hLevel">1</span></div>
+    <div class="pill"><span class="lbl" data-i18n="savedLbl">Saved</span><span class="val" id="hSaved">0</span></div>
+    <div class="pill lives"><span class="lbl" data-i18n="livesLbl">Lives</span><span class="val" id="hLives">♥♥♥</span></div>
+    <div class="pill"><span class="lbl" data-i18n="score">Score</span><span class="val" id="hScore">0</span></div>
+  </div>
+</div>
+<div id="monitor" class="off">
+  <canvas id="monCv"></canvas>
+  <div class="mon-text">
+    <div class="mon-name" id="monName"></div>
+    <div class="mon-msg" id="monMsg"></div>
+    <div class="mon-hull"><span data-i18n="hull">Hull</span><div class="mon-bar"><div id="monBar"></div></div></div>
+  </div>
+</div>
+<div id="comboWrap"><div id="combo">x2</div><div id="comboBar"><div id="comboBarFill"></div></div></div>
+<div id="banner"></div>
+<div id="toast"></div>
+<div id="pulseBtn">Pulse</div>
+<div class="mute" id="muteBtn">♪</div>
+
+<!-- MENU -->
+<div class="overlay" id="menu">
+  <div class="studio-mark">6 Finger Games</div>
+  <div class="menu-pane" id="menuMain">
+    <h1 class="title">SWARM</h1>
+    <div class="tagline" data-i18n="tagline">You are gravity</div>
+    <div class="menu-stack">
+      <button class="btn" id="playBtn" data-i18n="play">Play</button>
+      <button class="btn ghost" id="howBtn" data-i18n="howBtn">How to play</button>
+      <button class="btn ghost" id="aboutBtn" data-i18n="aboutBtn">Studio</button>
+    </div>
+    <div class="langs" id="langs"></div>
+    <div class="small" data-i18n="hint">SPACE / button = pulse</div>
+  </div>
+  <div class="menu-pane off" id="menuHow">
+    <h2 class="tagline" data-i18n="howTitle" style="letter-spacing:.12em">How to play</h2>
+    <div class="sheet-body" id="howBody"></div>
+    <button class="btn ghost" id="howBack" data-i18n="back">Back</button>
+  </div>
+  <div class="menu-pane off" id="menuAbout">
+    <h2 class="tagline" data-i18n="aboutTitle" style="letter-spacing:.12em">SWARM</h2>
+    <div class="about-lines">
+      <div data-i18n="authorLine">Author: 6 Finger Games - Mobile</div>
+      <div data-i18n="designerLine">Game designer: Davit. T</div>
+    </div>
+    <div class="menu-stack">
+      <button class="btn ghost" data-soon="games" data-i18n="otherGames">Other Games</button>
+      <button class="btn ghost" data-soon="web" data-i18n="website">Website</button>
+      <button class="btn ghost" data-soon="support" data-i18n="support">Support</button>
+      <button class="btn ghost" id="aboutBack" data-i18n="back">Back</button>
+    </div>
+  </div>
+  <div class="menu-pane off" id="menuSoon">
+    <h2 class="tagline" id="soonTitle" style="letter-spacing:.12em"></h2>
+    <div class="soon-line" data-i18n="comingSoon">Coming soon</div>
+    <button class="btn ghost" id="soonBack" data-i18n="back">Back</button>
+  </div>
+</div>
+
+<!-- GAME OVER -->
+<div class="overlay hidden" id="over">
+  <h1 class="title" style="font-size:clamp(34px,10vw,70px)" data-i18n="timeup">Time's up</h1>
+  <div id="grade" class="grad-gold">S</div>
+  <div id="record"></div>
+  <div id="finalStats"></div>
+  <button class="btn" id="retryBtn" data-i18n="retry">Retry</button>
+  <button class="btn ghost" id="menuBtn" data-i18n="menu">Menu</button>
+  <div class="langs" id="langsOver"></div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------------- i18n ---------------- */
+const I18N = {
+  ka: {
+    tagline:"შენ ხარ გრავიტაცია",
+    how:"ატარე თითი ან მაუსი — შუქის ნაწილაკები მოგყვებიან და ქმნიან ცოცხალ როის. მიიტანე ისინი მოციმციმე კარიბჭემდე, სანამ დრო ამოიწურა. გაერიდე შავ ხვრელებს.",
+    howBtn:"როგორ ვითამაშო", howTitle:"როგორ ვითამაშო", aboutBtn:"სტუდია", aboutTitle:"SWARM", back:"უკან",
+    authorLine:"ავტორი: 6 Finger Games - Mobile",
+    designerLine:"თამაშის დიზაინერი: Davit. T",
+    otherGames:"სხვა თამაშები", website:"ვებსაიტი", support:"მხარდაჭერა", comingSoon:"მალე",
+    howParas:[
+      "SWARM მოკლე თამაშია გრავიტაციაზე. შენ ხარ მიზიდულობა. ატარე მაუსი ან თითი და პატარა ნათებები გამოგყვებიან, როიდ იკრიბებიან და კურსორის გარშემო ტრიალებენ.",
+      "ყოველი დონის აზრი ისაა, რომ ეს ნათებები მანათობელ შავ ხვრელში შეიყვანო, სანამ დრო ამოიწურება. ზემოთ მთვლელი გიჩვენებს, კიდევ რამდენი გჭირდება. ამ რიცხვს რომ მიაღწევ, შემდეგი დონე იწყება, ცოტა დამატებითი დროით. საბოლოო მოგება არ არსებობს. უბრალოდ ცდილობ, უფრო დიდხანს გაძლო და შენს საუკეთესო ქულას გადააჭარბო.",
+      "მოერიდე მცურავ იასამნისფერ ხვრელებს. თუ როი რომელიმეს შეეხო, ის შუქს შეჭამს და თავიდან მოგიწევს შეგროვება. წითელი წრეები როის აგდებს, ამიტომ ნათებები მათში ნუ გაატარებ. დროის ამოწურვა თამაშს ამთავრებს.",
+      "შორს რომ წახვიდე, მანათობელ ხვრელს თანაბარი რიტმით კვებავდე. ზედიზედ მიტანა კომბოს ზრდის და სანამ კომბო ძალაშია, ყოველი ნათება მეტს ფასობს. თუ ჩაბარებებს შორის დიდხანს დაიცდი, ისევ ჩვეულებრივ ფასს უბრუნდება. SPACE, ან ტელეფონზე იმპულსის ღილაკი, ცოტა ხნით უფრო შორს სწვდება და იქიდან მოაქვს ნათებები, რომლებსაც სხვანაირად ვერ დაიჭერ. გამოიყენე, როცა ველი მიმოფანტულია, მერე როი საფრთხეებს შემოუარე და ნუ გაატარებ მათში. დონის გავლა დარჩენილი დროით შემდეგ დონეზე წინსვლას გაძლევს. ბოლო წამებში დასრულება მეტ ბონუსს იძლევა, მაგრამ მხოლოდ მაშინ, თუ მართლა მოასწრებ."
+    ],
+    play:"თამაში", retry:"თავიდან", menu:"მენიუ",
+    level:"დონე", delivered:"მიტანილი", time:"დრო", score:"ქულა", best:"საუკეთესო",
+    timeup:"დრო ამოიწურა", hint:"SPACE / ღილაკი = იმპულსი",
+    levelClear:"დონე გავლილია!", pulse:"იმპულსი",
+    record:"ახალი რეკორდი!", clutch:"ბოლო წამებში!",
+    final:(s,l,b)=>`ქულა: <b>${s}</b><br>დონე: <b>${l}</b><br>საუკეთესო: <b>${b}</b>`
+  },
+  ru: {
+    tagline:"Ты — гравитация",
+    how:"Веди палец или мышь — частицы света потянутся к тебе и образуют живой рой. Доставь их к мерцающим вратам, пока не истекло время. Избегай чёрных дыр.",
+    howBtn:"Как играть", howTitle:"Как играть", aboutBtn:"Студия", aboutTitle:"SWARM", back:"Назад",
+    authorLine:"Автор: 6 Finger Games - Mobile",
+    designerLine:"Геймдизайнер: Davit. T",
+    otherGames:"Другие игры", website:"Сайт", support:"Поддержка", comingSoon:"Скоро",
+    howParas:[
+      "SWARM — короткая игра про гравитацию. Ты и есть притяжение. Веди мышь или палец, и маленькие огоньки потянутся за тобой, соберутся в рой и будут кружить вокруг курсора.",
+      "Смысл каждого уровня — занести эти огоньки в светящуюся чёрную дыру, пока не истекло время. Счётчик сверху показывает, сколько ещё нужно. Когда число наберётся, начнётся следующий уровень и добавится немного времени. Финала нет. Ты просто стараешься продержаться дольше и побить свой лучший счёт.",
+      "Держись подальше от дрейфующих фиолетовых дыр. Если рой коснётся одной из них, она съест эти огоньки, и их придётся собирать заново. Красные круги отталкивают рой, так что не веди огоньки сквозь них. Когда время кончается, забег заканчивается.",
+      "Чтобы зайти дальше, корми светящуюся дыру ровным ритмом. Сдачи подряд поднимают комбо, и пока оно держится, каждый огонёк стоит дороже. Если между сдачами ждать слишком долго, цена снова станет обычной. Пробел, или кнопка импульса на телефоне, ненадолго тянет дальше и забирает огоньки, до которых иначе не дотянуться. Пользуйся этим, когда поле рассеяно, а потом обходи опасности, а не проходи сквозь них. Пройденный уровень с оставшимся временем даёт запас на следующий. Финиш в последние секунды даёт больший бонус, но только если ты правда успеешь."
+    ],
+    play:"Играть", retry:"Заново", menu:"Меню",
+    level:"Уровень", delivered:"Доставлено", time:"Время", score:"Счёт", best:"Рекорд",
+    timeup:"Время вышло", hint:"ПРОБЕЛ / кнопка = импульс",
+    levelClear:"Уровень пройден!", pulse:"Импульс",
+    record:"Новый рекорд!", clutch:"Финиш на последних секундах!",
+    final:(s,l,b)=>`Счёт: <b>${s}</b><br>Уровень: <b>${l}</b><br>Рекорд: <b>${b}</b>`
+  },
+  en: {
+    tagline:"You are gravity",
+    how:"Move your finger or mouse — light motes will follow you and form a living swarm. Deliver them to the shimmering gate before time runs out. Avoid the black holes.",
+    howBtn:"How to play", howTitle:"How to play", aboutBtn:"Studio", aboutTitle:"SWARM", back:"Back",
+    authorLine:"Author: 6 Finger Games - Mobile",
+    designerLine:"Game designer: Davit. T",
+    otherGames:"Other Games", website:"Website", support:"Support", comingSoon:"Coming soon",
+    howParas:[
+      "SWARM is a short game about gravity. You are the pull. Move your mouse or finger and the little lights follow you, gather into a swarm, and orbit your cursor.",
+      "The point of each level is to carry those lights into the glowing black hole before the clock hits zero. The counter at the top tells you how many you still need. Clear that number and the next level starts, with a little extra time. There is no final win. You just try to last longer and beat your best score.",
+      "Stay away from the drifting purple holes. If your swarm touches one, it eats those lights and you have to gather them again. The red circles shove the swarm away, so don't drag your lights through them either. Running out of time ends the run.",
+      "To go further, keep feeding the glowing hole in a steady rhythm. Deliveries close together raise a combo, and each light is worth more while that combo holds. If you wait too long between drops, it falls back to normal. Space, or the Pulse button on a phone, briefly reaches farther out and pulls in lights you couldn't grab otherwise. Use it when the field is scattered, then walk the swarm around the hazards instead of through them. Clearing a level with time still on the clock gives you a head start on the next one. Finishing in the last few seconds pays a bigger bonus, but only if you actually make it."
+    ],
+    play:"Play", retry:"Retry", menu:"Menu",
+    level:"Level", delivered:"Delivered", time:"Time", score:"Score", best:"Best",
+    timeup:"Time's up", hint:"SPACE / button = pulse",
+    levelClear:"Level clear!", pulse:"Pulse",
+    record:"New record!", clutch:"Clutch finish!",
+    final:(s,l,b)=>`Score: <b>${s}</b><br>Level: <b>${l}</b><br>Best: <b>${b}</b>`
+  },
+  zh: {
+    tagline:"你就是引力",
+    how:"移动手指或鼠标 — 光粒子会追随你，形成活的虫群。在时间耗尽前把它们送到闪烁的门。避开黑洞。",
+    howBtn:"玩法", howTitle:"玩法", aboutBtn:"工作室", aboutTitle:"SWARM", back:"返回",
+    authorLine:"作者：6 Finger Games - Mobile",
+    designerLine:"游戏设计师：Davit. T",
+    otherGames:"其他游戏", website:"网站", support:"支持", comingSoon:"即将推出",
+    howParas:[
+      "SWARM 是一个关于引力的短游戏。你就是引力。移动鼠标或手指，小光点会跟着你，聚成虫群，绕着光标转。",
+      "每一关的目标是在时间归零前，把这些光送进发光的黑洞。顶部的计数告诉你还差多少。凑够数量就进入下一关，并加上一点时间。没有最终通关。你只是尽量撑得更久，打破自己的最高分。",
+      "躲开漂浮的紫色黑洞。虫群碰上一个，它就会吃掉那些光，你得重新收集。红圈会把虫群推开，所以不要从它们中间穿过去。时间耗尽，这一局就结束。",
+      "想走得更远，就用稳定的节奏给发光黑洞送光。连续送达会提高连击，连击还在时每一颗光都更值钱。两次送达隔太久，分数就回到普通。空格，或手机上的脉冲按钮，会短暂拉得更远，吸来平时够不着的光。场面散开时用它，然后绕开危险，不要直穿过去。关卡结束时还剩时间，下一关就更从容。最后几秒完成会有更大奖励，但前提是你真的来得及。"
+    ],
+    play:"开始", retry:"重试", menu:"菜单",
+    level:"关卡", delivered:"已送达", time:"时间", score:"分数", best:"最佳",
+    timeup:"时间到", hint:"空格 / 按钮 = 脉冲",
+    levelClear:"通关！", pulse:"脉冲",
+    record:"新纪录！", clutch:"绝杀！",
+    final:(s,l,b)=>`分数: <b>${s}</b><br>关卡: <b>${l}</b><br>最佳: <b>${b}</b>`
+  }
+};
+/* rescue mode texts: our ship under attack, its crew calls for help */
+const RESCUE_TEXT = {
+  en: {
+    saved:"Saved", lives:"Lives", hull:"Hull", timeup:"Game over",
+    hintMouse:"Hold the mouse button on an enemy ship, swing it and let go: throw it into the black hole",
+    hintTouch:"Touch an enemy ship, swing it and let go: throw it into the black hole",
+    shipSaved:"Ship saved!", savedSub:n=>`${n} people safe`,
+    signalLost:"SIGNAL LOST", lostSub:n=>`${n} people lost`,
+    nextShip:"Another ship is calling for help",
+    roles:{ captain:"Captain", comms:"Comms officer", medic:"Ship doctor", engineer:"Engineer", pilot:"Pilot", cargo:"Cargo master" },
+    calm:[
+      "Mayday, mayday! This is the {ship}. Enemy fighters are on us!",
+      "{n} people aboard and we can't outrun them. Whoever hears us, help!",
+      "Our guns are gone. Shields are holding, for now. Get them off us!"
+    ],
+    scared:[
+      "Hull breach on deck two! We can't take much more of this!",
+      "They're tearing us apart! Throw them into the black hole!",
+      "There are children on board! Please, hurry!"
+    ],
+    panic:[
+      "Fire in the engine room! We're losing her!",
+      "If this is the end... tell my family I'm sorry.",
+      "Please! Don't let us die out here!"
+    ],
+    kill:["One down!", "Yes! Keep going!", "Got one! Thank you!", "That's it, throw them all in!"],
+    thanks:[
+      "They're gone! You saved us. {n} lives... thank you!",
+      "Jump drive ready. We owe you everything!"
+    ],
+    final:(s,l,b,sv,lo)=>`Score: <b>${s}</b><br>Level: <b>${l}</b><br>People saved: <b>${sv}</b><br>People lost: <b>${lo}</b><br>Best: <b>${b}</b>`,
+    howParas:[
+      "A ship full of people is under attack. Enemy fighters circle it and shoot, and its hull won't hold for long. You are gravity: the only one who can help.",
+      "Hold the mouse button on an enemy ship (or touch it on a phone), swing it and let go to throw it. Throw it into the big black hole and it's gone. Throw one enemy into another and both explode.",
+      "Watch the crew on the monitor. When every enemy is gone, the ship jumps to safety and its people are saved. If the hull breaks, the ship explodes and you lose a life. Three lives, then the game is over.",
+      "Space lights still follow you: carry them into the black hole for extra points and combos. Pulse (Space, or the button on a phone) pushes nearby enemies away for a moment."
+    ]
+  },
+  ka: {
+    saved:"გადარჩენილი", lives:"სიცოცხლე", hull:"კორპუსი", timeup:"თამაში დასრულდა",
+    hintMouse:"მაუსის ღილაკით დაიჭირე მტრის ხომალდი, მოიქნიე და გაუშვი: ისროლე შავ ხვრელში",
+    hintTouch:"შეეხე მტრის ხომალდს, მოიქნიე და გაუშვი: ისროლე შავ ხვრელში",
+    shipSaved:"ხომალდი გადარჩა!", savedSub:n=>`${n} ადამიანი უსაფრთხოდაა`,
+    signalLost:"კავშირი გაწყდა", lostSub:n=>`${n} ადამიანი დაიღუპა`,
+    nextShip:"სხვა ხომალდიც დახმარებას ითხოვს",
+    roles:{ captain:"კაპიტანი", comms:"კავშირგაბმულობის ოფიცერი", medic:"ექიმი", engineer:"ინჟინერი", pilot:"პილოტი", cargo:"ტვირთის უფროსი" },
+    calm:[
+      "SOS, SOS! გესაუბრება ხომალდი „{ship}“. მტრის გამანადგურებლები გვესხმიან!",
+      "ბორტზე {n} ადამიანია და ვერ გავექცევით. ვინც გვისმენს, გვიშველე!",
+      "იარაღი აღარ გვაქვს. ფარი ჯერ უძლებს. მოგვაშორე ისინი!"
+    ],
+    scared:[
+      "მეორე გემბანზე კორპუსი გაიხვრიტა! დიდხანს ვეღარ გავძლებთ!",
+      "გვანადგურებენ! შავ ხვრელში ისროლე ისინი!",
+      "ბორტზე ბავშვები არიან! გთხოვ, იჩქარე!"
+    ],
+    panic:[
+      "ძრავის განყოფილებაში ხანძარია! ხომალდს ვკარგავთ!",
+      "თუ ეს დასასრულია... ჩემს ოჯახს უთხარი, რომ ვწუხვარ.",
+      "გთხოვ! აქ ნუ დაგვტოვებ სასიკვდილოდ!"
+    ],
+    kill:["ერთი წავიდა!", "ჰო! გააგრძელე!", "მოხვდა! მადლობა!", "ასე, ყველა შიგ ჩაყარე!"],
+    thanks:[
+      "წავიდნენ! შენ გადაგვარჩინე. {n} სიცოცხლე... მადლობა!",
+      "ნახტომის ძრავა მზადაა. ყველაფერი შენი დამსახურებაა!"
+    ],
+    final:(s,l,b,sv,lo)=>`ქულა: <b>${s}</b><br>დონე: <b>${l}</b><br>გადარჩენილი: <b>${sv}</b><br>დაღუპული: <b>${lo}</b><br>საუკეთესო: <b>${b}</b>`,
+    howParas:[
+      "ადამიანებით სავსე ხომალდს თავს დაესხნენ. მტრის გამანადგურებლები გარს უვლიან და ესვრიან, კორპუსი კი დიდხანს ვერ გაუძლებს. შენ ხარ გრავიტაცია: ერთადერთი, ვისაც დახმარება შეუძლია.",
+      "მაუსის ღილაკით დაიჭირე მტრის ხომალდი (ტელეფონზე უბრალოდ შეეხე), მოიქნიე და გაუშვი, რომ ისროლო. თუ დიდ შავ ხვრელში ჩააგდე, განადგურდება. თუ ერთ მტერს მეორეს ესროლე, ორივე აფეთქდება.",
+      "მონიტორზე ეკიპაჟს უყურე. როცა ყველა მტერი გაქრება, ხომალდი უსაფრთხო ადგილას გადახტება და მისი ხალხი გადარჩება. თუ კორპუსი გატყდა, ხომალდი აფეთქდება და ერთ სიცოცხლეს დაკარგავ. სამი სიცოცხლე გაქვს, მერე თამაში მთავრდება.",
+      "კოსმოსის ნათებები ისევ მოგყვებიან: შავ ხვრელში შეიყვანე დამატებითი ქულებისა და კომბოსთვის. იმპულსი (SPACE, ან ტელეფონზე ღილაკი) ახლოს მყოფ მტრებს ცოტა ხნით უკუაგდებს."
+    ]
+  },
+  ru: {
+    saved:"Спасено", lives:"Жизни", hull:"Корпус", timeup:"Игра окончена",
+    hintMouse:"Зажми кнопку мыши на вражеском корабле, раскрути и отпусти: швырни его в чёрную дыру",
+    hintTouch:"Коснись вражеского корабля, раскрути и отпусти: швырни его в чёрную дыру",
+    shipSaved:"Корабль спасён!", savedSub:n=>`${n} человек в безопасности`,
+    signalLost:"СВЯЗЬ ПОТЕРЯНА", lostSub:n=>`${n} человек погибли`,
+    nextShip:"Ещё один корабль зовёт на помощь",
+    roles:{ captain:"Капитан", comms:"Связист", medic:"Корабельный врач", engineer:"Инженер", pilot:"Пилот", cargo:"Начальник груза" },
+    calm:[
+      "Мэйдэй, мэйдэй! Говорит «{ship}». Нас атакуют вражеские истребители!",
+      "На борту {n} человек, и нам не уйти. Кто слышит, помоги!",
+      "Пушек больше нет. Щиты пока держат. Убери их от нас!"
+    ],
+    scared:[
+      "Пробоина на второй палубе! Долго мы не продержимся!",
+      "Они разрывают нас на части! Швырни их в чёрную дыру!",
+      "На борту дети! Пожалуйста, скорее!"
+    ],
+    panic:[
+      "Пожар в машинном отделении! Мы теряем корабль!",
+      "Если это конец... скажи моей семье, что мне жаль.",
+      "Пожалуйста! Не дай нам здесь погибнуть!"
+    ],
+    kill:["Один готов!", "Да! Продолжай!", "Попал! Спасибо!", "Так их, всех в дыру!"],
+    thanks:[
+      "Они ушли! Ты нас спас. {n} жизней... спасибо!",
+      "Прыжковый двигатель готов. Мы тебе всем обязаны!"
+    ],
+    final:(s,l,b,sv,lo)=>`Очки: <b>${s}</b><br>Уровень: <b>${l}</b><br>Спасено: <b>${sv}</b><br>Погибло: <b>${lo}</b><br>Рекорд: <b>${b}</b>`,
+    howParas:[
+      "На корабль, полный людей, напали. Вражеские истребители кружат вокруг и стреляют, и корпус долго не выдержит. Ты — гравитация, единственный, кто может помочь.",
+      "Зажми кнопку мыши на вражеском корабле (на телефоне просто коснись), раскрути и отпусти, чтобы швырнуть. Брось его в большую чёрную дыру, и он исчезнет. Брось одного врага в другого, и взорвутся оба.",
+      "Следи за экипажем на мониторе. Когда врагов не останется, корабль прыгнет в безопасное место, и его люди будут спасены. Если корпус не выдержит, корабль взорвётся, и ты потеряешь жизнь. Жизней три, потом игра окончена.",
+      "Космические огоньки всё так же летят за тобой: неси их в чёрную дыру ради очков и комбо. Импульс (пробел или кнопка на телефоне) ненадолго отталкивает ближайших врагов."
+    ]
+  },
+  zh: {
+    saved:"已救", lives:"生命", hull:"船体", timeup:"游戏结束",
+    hintMouse:"在敌舰上按住鼠标，甩动后松开：把它扔进黑洞",
+    hintTouch:"按住敌舰，甩动后松开：把它扔进黑洞",
+    shipSaved:"飞船得救了！", savedSub:n=>`${n} 人平安`,
+    signalLost:"信号中断", lostSub:n=>`${n} 人遇难`,
+    nextShip:"又一艘飞船在求救",
+    roles:{ captain:"船长", comms:"通讯官", medic:"船医", engineer:"工程师", pilot:"飞行员", cargo:"货运长" },
+    calm:[
+      "求救，求救！这里是「{ship}」号。敌方战机正在攻击我们！",
+      "船上有 {n} 人，我们甩不掉他们。听到的人，救救我们！",
+      "武器没了，护盾暂时还能撑住。帮我们赶走他们！"
+    ],
+    scared:[
+      "二层甲板船体破裂！我们撑不了多久了！",
+      "他们要把我们撕碎了！把他们扔进黑洞！",
+      "船上有孩子！求求你，快点！"
+    ],
+    panic:[
+      "引擎舱起火了！飞船要保不住了！",
+      "如果这就是结局……告诉我的家人，我很抱歉。",
+      "求求你！别让我们死在这里！"
+    ],
+    kill:["干掉一个！", "好！继续！", "打中了！谢谢！", "就这样，全扔进去！"],
+    thanks:[
+      "他们走了！你救了我们。{n} 条生命……谢谢你！",
+      "跃迁引擎就绪。我们欠你一切！"
+    ],
+    final:(s,l,b,sv,lo)=>`分数: <b>${s}</b><br>关卡: <b>${l}</b><br>救出: <b>${sv}</b><br>遇难: <b>${lo}</b><br>最佳: <b>${b}</b>`,
+    howParas:[
+      "一艘满载乘客的飞船遭到袭击。敌方战机围着它开火，船体撑不了多久。你就是引力，是唯一能帮忙的人。",
+      "在敌舰上按住鼠标（手机上直接按住），甩动后松开就能扔出去。扔进巨大的黑洞，它就消失了。把一个敌人砸向另一个，两个都会爆炸。",
+      "留意监视器里的船员。所有敌人消失后，飞船会跃迁到安全地带，乘客得救。如果船体被打穿，飞船会爆炸，你失去一条命。共有三条命，用完游戏结束。",
+      "太空里的光点仍会跟着你：把它们带进黑洞可以加分和连击。脉冲（空格键或手机上的按钮）能暂时推开附近的敌人。"
+    ]
+  }
+};
+for(const k in RESCUE_TEXT){
+  const t = RESCUE_TEXT[k];
+  Object.assign(I18N[k], { savedLbl:t.saved, livesLbl:t.lives, hull:t.hull, timeup:t.timeup, final:t.final, howParas:t.howParas, rescue:t });
+}
+
+let LANG = localStorage.getItem('swarm_lang_v2') || 'en';
+if(!I18N[LANG]) LANG = 'en';
+const T = () => I18N[LANG];
+
+function applyLang(){
+  document.documentElement.lang = LANG;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k = el.getAttribute('data-i18n');
+    if(T()[k] !== undefined && typeof T()[k] === 'string') el.textContent = T()[k];
+  });
+  pulseBtn.textContent = T().pulse;
+  const howBody = document.getElementById('howBody');
+  if(howBody && T().howParas) howBody.innerHTML = T().howParas.map(p=>'<p>'+p+'</p>').join('');
+  if(typeof menuView!=='undefined' && menuView==='soon'){
+    const soonTitle=document.getElementById('soonTitle');
+    if(soonTitle) soonTitle.textContent = T()[soonKind==='web'?'website':soonKind==='support'?'support':'otherGames'];
+  }
+  document.querySelectorAll('.lang').forEach(b=> b.classList.toggle('active', b.dataset.l===LANG));
+  localStorage.setItem('swarm_lang_v2', LANG);
+}
+
+/* ---------------- setup ---------------- */
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d', { alpha: false });
+let W=0,H=0,DPR=1;
+function resize(){
+  DPR = Math.min(window.devicePixelRatio||1, 2);
+  W = window.innerWidth; H = window.innerHeight;
+  canvas.width = W*DPR; canvas.height = H*DPR;
+  canvas.style.width = W+'px'; canvas.style.height = H+'px';
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+window.addEventListener('resize', resize);
+resize();
+
+/* glow sprite cache */
+const glowCache = {};
+function glow(hue){
+  const key = Math.round(hue/8)*8;
+  if(glowCache[key]) return glowCache[key];
+  const c = document.createElement('canvas'); c.width=c.height=64;
+  const g = c.getContext('2d');
+  const grd = g.createRadialGradient(32,32,0,32,32,32);
+  grd.addColorStop(0, `hsla(${key},100%,88%,1)`);
+  grd.addColorStop(0.25,`hsla(${key},100%,68%,0.85)`);
+  grd.addColorStop(0.6, `hsla(${key},100%,55%,0.28)`);
+  grd.addColorStop(1, `hsla(${key},100%,50%,0)`);
+  g.fillStyle=grd; g.fillRect(0,0,64,64);
+  glowCache[key]=c; return c;
+}
+function drawGlow(x,y,r,hue,alpha){
+  ctx.globalAlpha = alpha===undefined?1:alpha;
+  const s = glow(hue);
+  ctx.drawImage(s, x-r, y-r, r*2, r*2);
+  ctx.globalAlpha = 1;
+}
+
+/* ---------------- black hole, ray traced ----------------
+   Each pixel follows a ray of light past the hole (Schwarzschild gravity, rs = 1)
+   and collects the glowing disk where the ray crosses it. The ring over the top,
+   the band across the shadow and the brighter side all come from the physics.
+   Rendered on a small WebGL canvas and pasted into the game; the old flat
+   drawing below stays as the fallback when WebGL is missing. */
+const BHGL = (function(){
+  const UV_H = 1.0, ASPECT = 1.75;          // sprite: height 2 uv, width 2*ASPECT uv
+  const FOV = 0.27, DIST = 25.0, INCL = 0.16;
+  const SHADOW_UV = 0.375;                  // apparent shadow radius in uv units (rs=1, D=25, FOV=.27)
+  let cv = null, gl = null, prog = null, uTime, uRes, uFlash, lastT = -1, lastW = 0, lastH = 0, ok = false;
+  const VS = 'attribute vec2 p; varying vec2 vUv; void main(){ vUv = p; gl_Position = vec4(p,0.,1.); }';
+  const FS = `
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+varying vec2 vUv;
+uniform float uTime, uFlash;
+uniform vec2 uRes;
+const float R_IN = 1.9, R_OUT = 10.0, PI = 3.14159265;
+float hash(vec2 q){ return fract(sin(dot(q, vec2(127.1, 311.7))) * 43758.5453); }
+// value noise that wraps every K cells along x, so the disk has no seam
+float wnoise(vec2 q, float K){
+  vec2 i = floor(q), f = fract(q); f = f*f*(3.0-2.0*f);
+  float x0 = mod(i.x, K), x1 = mod(i.x + 1.0, K);
+  return mix(mix(hash(vec2(x0, i.y)), hash(vec2(x1, i.y)), f.x),
+             mix(hash(vec2(x0, i.y+1.0)), hash(vec2(x1, i.y+1.0)), f.x), f.y);
+}
+float gas(float ang, float r){
+  // angle 0..1 around the disk, stretched along the orbit
+  float a = ang / (2.0*PI);
+  float v = 0.0, amp = 0.55, K = 18.0, rs = 3.2;
+  for(int o = 0; o < 4; o++){
+    v += amp * wnoise(vec2(a*K, r*rs), K);
+    K *= 2.0; rs *= 2.1; amp *= 0.5;
+  }
+  return v;
+}
+vec4 disk(vec3 hit, vec3 dir){
+  float r = length(hit.xz);
+  if(r < R_IN || r > R_OUT) return vec4(0.0);
+  float phi = atan(hit.z, hit.x);
+  float omega = pow(r, -1.5) * 7.5;                 // Kepler: the inside turns faster
+  float ang = mod(phi - uTime*omega, 2.0*PI);
+  float n = gas(ang, r);
+  float lanes = 0.55 + 0.45*sin(r*9.0 + n*3.0);     // thin bands
+  float dens = smoothstep(R_IN, R_IN + 0.25, r) * (1.0 - smoothstep(R_OUT - 5.0, R_OUT, r));
+  // Doppler beaming + gravitational redshift
+  vec3 vel = sqrt(0.5 / r) * vec3(-hit.z, 0.0, hit.x) / r;
+  float beta = length(vel);
+  float gam = 1.0 / sqrt(1.0 - beta*beta);
+  float cosT = dot(vel / beta, -normalize(dir));
+  float g = 1.0 / (gam * (1.0 - beta*cosT)) * sqrt(1.0 - 1.0/r);
+  float heat = pow(R_IN / r, 1.5);                  // hotter near the inner edge
+  float I = dens * heat * pow(g, 0.85) * (0.5 + 0.9*n) * (0.75 + 0.25*lanes) * (5.6 + uFlash*2.5);
+  vec3 cool = vec3(0.9, 0.3, 0.07), warm = vec3(1.0, 0.64, 0.3), hot = vec3(1.0, 0.95, 0.88);
+  vec3 col = mix(cool, warm, clamp(I*0.8, 0.0, 1.0));
+  col = mix(col, hot, clamp((I - 0.7)*0.7, 0.0, 1.0));
+  col *= clamp(0.35 + I*0.65, 0.0, 1.0);
+  float alpha = clamp(dens * (0.55 + 0.8*n) * (0.7 + 0.6*heat), 0.0, 1.0);
+  return vec4(col, alpha);
+}
+void main(){
+  vec2 uv = vec2(vUv.x * ${ASPECT.toFixed(3)}, vUv.y);
+  vec3 ro = vec3(0.0, sin(${INCL.toFixed(3)}), -cos(${INCL.toFixed(3)})) * ${DIST.toFixed(1)};
+  vec3 fw = normalize(-ro), rt = normalize(cross(vec3(0.0, 1.0, 0.0), fw)), up = cross(fw, rt);
+  vec3 p = ro, v = normalize(fw + (uv.x*rt + uv.y*up) * ${FOV.toFixed(3)});
+  vec3 hc = cross(p, v); float h2 = dot(hc, hc);
+  vec3 col = vec3(0.0); float a = 0.0, glow = 0.0, glowHot = 0.0; bool inside = false;
+  for(int i = 0; i < 170; i++){
+    float r2 = dot(p, p), r = sqrt(r2);
+    if(r < 1.0){ inside = true; break; }
+    if(r > ${(DIST*1.25).toFixed(1)} && dot(p, v) > 0.0) break;
+    float dt = clamp(0.07*r, 0.025, 1.4);
+    vec3 acc = -1.5 * h2 * p / (r2*r2*r);
+    float rr = length(p.xz);
+    if(rr > R_IN*0.8 && rr < R_OUT + 3.0)
+      glow += dt * exp(-abs(p.y)*1.6) * pow(R_IN/rr, 1.2) * (1.0 - smoothstep(R_OUT - 4.0, R_OUT + 3.0, rr));
+    if(r < 3.2) glowHot += dt * exp(-abs(p.y)*1.2) * pow(1.5/r, 3.0);   // light trapped near the photon sphere
+    vec3 pn = p + v*dt;
+    v += acc*dt;
+    if(p.y * pn.y < 0.0){
+      vec3 hit = mix(p, pn, p.y / (p.y - pn.y));
+      vec4 d = disk(hit, v);
+      col += (1.0 - a) * d.rgb * d.a;
+      a += (1.0 - a) * d.a;
+      if(a > 0.985) break;
+    }
+    p = pn;
+  }
+  float ga = inside ? 0.0 : clamp(glow*(0.07 + uFlash*0.05), 0.0, 0.8);   // warm haze around the disk
+  col += (1.0 - a) * vec3(1.0, 0.56, 0.24) * ga;
+  a += (1.0 - a) * ga;
+  float gh = inside ? 0.0 : clamp(glowHot*(0.5 + uFlash*0.3), 0.0, 0.97);  // white-hot ring hugging the shadow
+  col += (1.0 - a) * vec3(1.0, 0.9, 0.76) * gh;
+  a += (1.0 - a) * gh;
+  if(inside) a += (1.0 - a);                         // the shadow: solid black
+  col = min(col, vec3(a));
+  // fade at the sprite edges so it never shows a hard border
+  float edge = (1.0 - smoothstep(0.82, 1.0, abs(vUv.y))) * (1.0 - smoothstep(0.9, 1.0, abs(vUv.x)));
+  col *= edge; a *= edge;
+  gl_FragColor = vec4(col, a);
+}`;
+
+  function init(){
+    try{
+      cv = document.createElement('canvas');
+      gl = cv.getContext('webgl', { premultipliedAlpha:true, preserveDrawingBuffer:true, antialias:false, alpha:true })
+        || cv.getContext('experimental-webgl', { premultipliedAlpha:true, preserveDrawingBuffer:true, alpha:true });
+      if(!gl) return false;
+      const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+        if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; };
+      prog = gl.createProgram();
+      gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS));
+      gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS));
+      gl.linkProgram(prog);
+      if(!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
+      gl.useProgram(prog);
+      const buf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+      const loc = gl.getAttribLocation(prog, 'p');
+      gl.enableVertexAttribArray(loc);
+      gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+      uTime = gl.getUniformLocation(prog, 'uTime');
+      uRes = gl.getUniformLocation(prog, 'uRes');
+      uFlash = gl.getUniformLocation(prog, 'uFlash');
+      return true;
+    }catch(e){ console.warn('black hole shader off:', e); gl = null; return false; }
+  }
+  ok = init();
+
+  // draws the hole centred at x,y with a shadow radius of r px
+  function draw(x, y, r, time, flash){
+    const hPx = r / SHADOW_UV * UV_H * 2, wPx = hPx * ASPECT;
+    const q = ('ontouchstart' in window) ? Math.min(DPR || 1, 1.5) * 0.6 : Math.min(DPR || 1, 2);   // phones: fewer pixels to trace
+    let cw = Math.round(wPx*q), ch = Math.round(hPx*q);
+    const big = Math.max(cw, ch); if(big > 1200){ cw = Math.round(cw*1200/big); ch = Math.round(ch*1200/big); }
+    if(cw !== lastW || ch !== lastH){ cv.width = cw; cv.height = ch; gl.viewport(0, 0, cw, ch); lastW = cw; lastH = ch; lastT = -1; }
+    // the disk moves slowly, so 30 renders a second is plenty
+    if(lastT < 0 || Math.abs(time - lastT) > 1/30 || flash > 0.01){
+      gl.uniform1f(uTime, time); gl.uniform2f(uRes, cw, ch); gl.uniform1f(uFlash, flash || 0);
+      gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      lastT = time;
+    }
+    ctx.drawImage(cv, x - wPx/2, y - hPx/2, wPx, hPx);
+  }
+  return { get ok(){ return ok; }, draw };
+})();
+
+/* the black hole as the game draws it: ray traced when possible, flat drawing otherwise */
+function drawGateBlackHole(x, y, r, phase, prog, flash){
+  if(!BHGL.ok){ drawGateBlackHole2D(x, y, r, phase, prog, flash); return; }
+  flash = flash || 0;
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.globalCompositeOperation = "lighter";
+  ctx.globalAlpha = Math.min(1, 0.2 + flash*0.4);
+  ctx.drawImage(softGlowCv, -r*3.6, -r*3.6, r*7.2, r*7.2);
+  ctx.globalAlpha = 1;
+  ctx.globalCompositeOperation = "source-over";
+  ctx.rotate(-0.09);
+  BHGL.draw(0, 0, r, phase*0.5, flash);
+  ctx.rotate(0.09);
+  ctx.restore();
+}
+
+/* Flat black hole drawing (used only when WebGL is missing).
+   Its disk and lensed ring are painted once per size as top-down textures;
+   every frame only turns them and squashes them flat, so it stays cheap. */
+const bhCache = {};
+function bhTextures(r){
+  const dpr = Math.min(DPR||1, 1.5);
+  const key = dpr+':'+Math.round(r);
+  if(bhCache[key]) return bhCache[key];
+  const rand = (()=>{ let s = 1234567; return ()=> (s = (s*16807) % 2147483647) / 2147483647; })();
+
+  function ringTexture(rIn, rOut, stops, streaks, lanes, hotEdge){
+    const c = document.createElement('canvas');
+    c.width = c.height = Math.ceil(rOut*2*dpr);
+    const g = c.getContext('2d');
+    g.scale(dpr,dpr); g.translate(rOut,rOut);
+    const rg = g.createRadialGradient(0,0,rIn,0,0,rOut);
+    for(const s of stops) rg.addColorStop(s[0], s[1]);
+    g.fillStyle = rg;
+    g.beginPath(); g.arc(0,0,rOut,0,6.2832); g.arc(0,0,rIn,0,6.2832,true); g.fill();
+    // turbulent gas: thin bright arcs, denser and hotter near the inner edge
+    g.lineCap = 'round';
+    for(let i=0;i<streaks;i++){
+      const t = Math.pow(rand(), 1.7);
+      const rr = rIn + (rOut-rIn)*t;
+      const a0 = rand()*6.2832, len = 0.25 + rand()*1.5;
+      g.strokeStyle = `hsla(${22+rand()*20},100%,${62+(1-t)*30}%,${(0.05+rand()*0.3)*(1-t*0.75)})`;
+      g.lineWidth = 0.5 + rand()*2.2*(1-t*0.5);
+      g.beginPath(); g.arc(0,0,rr,a0,a0+len); g.stroke();
+    }
+    // dark lanes between the bands
+    g.globalCompositeOperation = 'destination-out';
+    for(let i=0;i<lanes;i++){
+      const rr = rIn + (rOut-rIn)*(0.08+rand()*0.92);
+      const a0 = rand()*6.2832, len = 0.4 + rand()*2.2;
+      g.strokeStyle = `rgba(0,0,0,${0.08+rand()*0.22})`;
+      g.lineWidth = 0.8 + rand()*2.6;
+      g.beginPath(); g.arc(0,0,rr,a0,a0+len); g.stroke();
+    }
+    g.globalCompositeOperation = 'source-over';
+    if(hotEdge){
+      g.strokeStyle = 'rgba(255,248,230,0.85)'; g.lineWidth = 1.6;
+      g.beginPath(); g.arc(0,0,rIn+0.8,0,6.2832); g.stroke();
+    }
+    return { c, R:rOut };
+  }
+
+  const disk = ringTexture(r*1.28, r*4.6, [
+    [0,'rgba(255,252,240,0.95)'], [0.06,'rgba(255,232,185,0.9)'], [0.2,'rgba(255,176,95,0.72)'],
+    [0.42,'rgba(236,116,48,0.4)'], [0.68,'rgba(176,62,24,0.15)'], [1,'rgba(120,30,10,0)']
+  ], 240, 70, true);
+  const halo = ringTexture(r*1.03, r*2.1, [
+    [0,'rgba(255,250,236,0.95)'], [0.12,'rgba(255,222,165,0.8)'], [0.35,'rgba(255,160,80,0.45)'],
+    [0.7,'rgba(200,80,30,0.12)'], [1,'rgba(150,40,12,0)']
+  ], 120, 40, false);
+  return (bhCache[key] = { disk, halo });
+}
+
+const BH_TILT = -0.12, BH_FLAT = 0.23;
+function drawBHSparks(r, phase, front){
+  // hot clumps orbiting in the disk: inner ones faster, like real orbits
+  const dIn = r*1.3, dOut = r*4.2;
+  for(let i=0;i<22;i++){
+    const t = Math.pow(((i*0.618)%1), 1.3);
+    const rr = dIn + (dOut-dIn)*t;
+    const a = i*2.39 + phase*0.55*Math.pow(dIn/rr, 1.5);
+    const sy = Math.sin(a);
+    if((sy>0) !== front) continue;
+    const x = Math.cos(a)*rr, y = sy*rr*BH_FLAT;
+    const ca = Math.cos(BH_TILT), sa = Math.sin(BH_TILT);
+    const px = x*ca - y*sa, py = x*sa + y*ca;
+    const doppler = 0.55 + 0.45*(-Math.cos(a));            // the side coming toward us is brighter
+    const s = r*(0.07 + (1-t)*0.07);
+    drawGlow(px, py, s*3, 30 + (1-t)*14, (0.35 + 0.4*(1-t))*doppler);
+  }
+}
+
+function drawGateBlackHole2D(x, y, r, phase, prog, flash){
+  const T = bhTextures(r);
+  flash = flash || 0;
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.globalCompositeOperation = 'lighter';
+
+  // warm bloom around the whole thing
+  const bloom = ctx.createRadialGradient(0, 0, r*0.9, 0, 0, r*3.4);
+  bloom.addColorStop(0, `rgba(255,170,80,${0.22+flash*0.3})`);
+  bloom.addColorStop(0.4, `rgba(220,100,40,${0.09+flash*0.12})`);
+  bloom.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = bloom;
+  ctx.beginPath(); ctx.arc(0, 0, r*3.4, 0, Math.PI*2); ctx.fill();
+
+  const spin = phase*0.32;
+  const paintDisk = (alpha)=>{
+    ctx.save();
+    ctx.rotate(BH_TILT); ctx.scale(1, BH_FLAT); ctx.rotate(spin);
+    ctx.globalAlpha = alpha;
+    ctx.drawImage(T.disk.c, -T.disk.R, -T.disk.R, T.disk.R*2, T.disk.R*2);
+    ctx.restore();
+  };
+
+  // 1. the whole disk (its far half ends up behind the shadow)
+  paintDisk(0.95);
+  drawBHSparks(r, phase, false);
+
+  // 2. the far side of the disk, bent by gravity into a ring over and under the shadow
+  ctx.save();
+  ctx.rotate(BH_TILT); ctx.scale(1, 0.94); ctx.rotate(-phase*0.45);
+  ctx.globalAlpha = 0.62 + flash*0.3;
+  ctx.drawImage(T.halo.c, -T.halo.R, -T.halo.R, T.halo.R*2, T.halo.R*2);
+  ctx.restore();
+  ctx.save();                                               // the upper arc is the thickest and brightest
+  ctx.rotate(BH_TILT);
+  ctx.beginPath(); ctx.rect(-r*2.2, -r*2.2, r*4.4, r*2.2); ctx.clip();
+  ctx.scale(1.06, 1.04); ctx.rotate(-phase*0.45 + 1.3);
+  ctx.globalAlpha = 0.75;
+  ctx.drawImage(T.halo.c, -T.halo.R, -T.halo.R, T.halo.R*2, T.halo.R*2);
+  ctx.restore();
+
+  // 3. the shadow — hard black so the trail fade never shows through
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = '#000';
+  ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI*2); ctx.fill();
+
+  // 4. photon ring: a thin white-hot edge
+  ctx.globalCompositeOperation = 'lighter';
+  ctx.shadowColor = 'rgba(255,190,110,0.8)'; ctx.shadowBlur = 6;
+  ctx.strokeStyle = `rgba(255,240,215,${0.75+flash*0.25})`; ctx.lineWidth = 1.6;
+  ctx.beginPath(); ctx.arc(0, 0, r*1.015, 0, Math.PI*2); ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  // 5. the near half of the disk crosses in front of the shadow
+  ctx.save();
+  ctx.rotate(BH_TILT);
+  ctx.beginPath(); ctx.rect(-T.disk.R, 0, T.disk.R*2, T.disk.R); ctx.clip();
+  ctx.rotate(-BH_TILT);
+  paintDisk(1);
+  ctx.restore();
+  drawBHSparks(r, phase, true);
+
+  // 6. Doppler glow: the side of the disk that turns toward us shines brighter
+  ctx.save();
+  ctx.rotate(BH_TILT); ctx.scale(1, 0.22);
+  const dg = ctx.createRadialGradient(-r*1.9, 0, 0, -r*1.9, 0, r*2.2);
+  dg.addColorStop(0, `rgba(255,236,205,${0.32+0.06*Math.sin(phase*1.3)+flash*0.3})`);
+  dg.addColorStop(1, 'rgba(255,160,80,0)');
+  ctx.fillStyle = dg;
+  ctx.beginPath(); ctx.arc(-r*1.9, 0, r*2.2, 0, Math.PI*2); ctx.fill();
+  ctx.restore();
+
+  // delivery progress: a faint warm arc well outside the disk glow
+  if(prog>0.001){
+    ctx.globalAlpha = 1;
+    ctx.strokeStyle = 'rgba(255,214,150,0.5)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(0, 0, r*2.25, -Math.PI/2, -Math.PI/2 + Math.min(prog,1)*Math.PI*2);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+/* ---------------- cargo ships ----------------
+   Ships drift in space. Your gravity pulls them just like the lights, only
+   slower because they are heavy; the bigger the swarm, the stronger the pull.
+   Drag them into the big black hole. Purple holes swallow ships too.
+
+   Ship pictures: ships/ship01.png, ships/ship02.png ... up to ship20.png
+   (next to this file). 3/4 view with the nose to the lower LEFT, transparent PNG.
+   A 150 px wide picture is a normal ship; a wider picture makes a bigger,
+   heavier ship. Missing pictures are fine: the game draws its own ship. */
+const SHIP_MAX = 20;
+const SHIP_SPRITES = [];
+(function loadShipSprites(i){
+  if(i > SHIP_MAX) return;
+  const img = new Image();
+  img.onload = () => { SHIP_SPRITES.push(img); loadShipSprites(i+1); };   // stops at the first missing number
+  img.src = 'ships/ship' + String(i).padStart(2,'0') + '.png';
+})(1);
+
+const SHIP_STYLES = [
+  { hull:['#c9d6e4','#5d6f86'], stripe:'#ff9a3c', glass:'#7ff3ff' },
+  { hull:['#d8d0c4','#6e6355'], stripe:'#47d1ff', glass:'#b6ff9e' },
+  { hull:['#c4c9d9','#4c5470'], stripe:'#ff5f7a', glass:'#ffe27a' }
+];
+function shipLean(s){ return Math.max(-0.25, Math.min(0.25, -s.vy*0.05*(s.face || 1))) + Math.sin(s.t*0.9)*0.03; }
+function drawShipBody(s){
+  const r = s.r;
+  ctx.save();
+  ctx.translate(s.x, s.y);
+  const fl = 0.55 + 0.45*Math.sin(s.t*31) * Math.sin(s.t*17);
+  const eng = s.state==='drift' ? 0.3 + s.tow*0.5 : 0.2;
+
+  if(s.sprite){
+    // the pictures are drawn at a 3/4 angle with the nose to the lower left:
+    // they stay upright, flip to face their way and lean a little
+    const face = s.faceA || 1;
+    ctx.rotate(s.state==='fall' ? s.lean : shipLean(s));
+    ctx.scale(s.scale*s.stretch*face, s.scale/Math.sqrt(s.stretch));
+    const w = r*2.8, h = w*s.sprite.naturalHeight/s.sprite.naturalWidth;
+    ctx.globalCompositeOperation = 'lighter';
+    if(s.state!=='fall') drawGlow(w*0.38, -h*0.22, r*0.55*(0.8+fl*0.3), 195, eng);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.globalAlpha = Math.max(0, s.alpha == null ? 1 : s.alpha);
+    ctx.drawImage(s.sprite, -w/2, -h/2, w, h);
+  } else {
+    ctx.rotate(s.ang);
+    ctx.scale(s.scale*s.stretch, s.scale/Math.sqrt(s.stretch));
+    // engine glow: brighter while you pull it
+    ctx.globalCompositeOperation = 'lighter';
+    if(s.state!=='fall') drawGlow(-r*1.12, 0, r*0.6*(0.8+fl*0.3), 195, eng);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.globalAlpha = s.state==='fall' ? Math.max(0, s.alpha) : 1;
+    const st = s.style;
+    const g = ctx.createLinearGradient(0, -r, 0, r);
+    g.addColorStop(0, st.hull[0]); g.addColorStop(1, st.hull[1]);
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.moveTo( r*1.45, 0);
+    ctx.lineTo( r*0.55, -r*0.42); ctx.lineTo(-r*0.15, -r*0.48); ctx.lineTo(-r*0.55, -r*1.0);
+    ctx.lineTo(-r*0.95, -r*0.95); ctx.lineTo(-r*0.8,  -r*0.42); ctx.lineTo(-r*1.05, -r*0.4);
+    ctx.lineTo(-r*1.05,  r*0.4);  ctx.lineTo(-r*0.8,   r*0.42); ctx.lineTo(-r*0.95,  r*0.95);
+    ctx.lineTo(-r*0.55,  r*1.0);  ctx.lineTo(-r*0.15,  r*0.48); ctx.lineTo( r*0.55,  r*0.42);
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(230,245,255,0.55)'; ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.fillStyle = 'rgba(20,28,40,0.55)';
+    ctx.fillRect(-r*0.7, -r*0.32, r*0.95, r*0.64);
+    ctx.fillStyle = st.stripe;
+    ctx.fillRect(-r*0.6, -r*0.07, r*0.75, r*0.14);
+    ctx.fillStyle = st.glass;
+    ctx.globalAlpha = 0.9;
+    ctx.beginPath(); ctx.ellipse(r*0.62, 0, r*0.32, r*0.17, 0, 0, Math.PI*2); ctx.fill();
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = 'lighter';
+    if(Math.sin(s.blink*4) > 0.4){
+      drawGlow(-r*0.75, -r*0.98, r*0.35, 355, 0.95);
+      drawGlow(-r*0.75,  r*0.98, r*0.35, 130, 0.95);
+    }
+  }
+  ctx.restore();
+}
+
+/* ---------------- GOD MODE (for tuning; players never see it) ----------------
+   Open: type the word godmode on the keyboard (browsers keep Ctrl+Shift+O/D for
+   themselves).  Close: G.  Values are kept in this browser. */
+const GOD_KEY = 'swarm_god';
+const GOD_ROWS = [
+  // [key, label, help, min, max, step, default]
+  ['grip',      'მტრის მოზიდვის ძალა',      'რამდენად ძლიერად იზიდავ დაჭერილ მტერს (1 = ჩვეულებრივი)', 0.2, 3, 0.05, 1],
+  ['gripTime',  'დაჭერის ხანგრძლივობა',     'რამდენ ხანს გიჭირავს, სანამ თავს დააღწევს (1 = 1.6 წმ, ბომბდამშენი 1.15 წმ)', 0.3, 4, 0.05, 1],
+  ['pilotFight','პილოტის წინააღმდეგობა',    'რამდენად ცდილობს მტერი თავის დაღწევას (0 = არ ცდილობს)', 0, 3, 0.05, 1],
+  ['holeHelp',  'შავი ხვრელის დახმარება',   'სროლისას ხვრელი რამდენად ხრის მტერს თავისკენ (0 = არა)', 0, 4, 0.05, 1],
+  ['scatter',   'კოსმონავტების გაფანტვა',   'რამდენად შორს მიფრინავენ აფეთქების შემდეგ (1 = ჩვეულებრივი)', 0, 5, 0.05, 1],
+  ['flail',     'კოსმონავტების ფართხალი',   'რამდენ წამს იქნევენ ხელ-ფეხს', 0, 20, 0.5, 7],
+  ['dps',       'ხომალდის დაზიანების სიჩქარე', 'მტრის სროლის ძალა (1 = ჩვეულებრივი, 0.5 = ორჯერ ნელა კვდება)', 0.1, 3, 0.05, 1],
+  ['enemySpeed','მტრის სიჩქარე',            'რამდენად სწრაფად დაფრინავენ მტრები', 0.3, 2.5, 0.05, 1],
+  ['deathWait', 'პაუზა დაღუპვის შემდეგ',     'რამდენი წამი ჩანს აფეთქების შედეგი, სანამ შემდეგი დაიწყება', 2, 30, 0.5, 9],
+  ['startLevel','დაწყების დონე',            'თამაში ამ დონიდან დაიწყება (ტესტისთვის)', 1, 20, 1, 1]
+];
+const GOD_LEVELS = 15;
+function godDefaultCount(lv){ return [Math.min(8, 1 + Math.floor(lv*0.8)), lv >= 3 ? Math.min(4, Math.floor((lv-1)/2)) : 0]; }
+const GOD = (function(){
+  const g = {}; for(const r of GOD_ROWS) g[r[0]] = r[6];
+  g.counts = {};
+  try{ const s = JSON.parse(localStorage.getItem(GOD_KEY) || '{}'); for(const k in s) if(k in g) g[k] = s[k]; }catch(e){}
+  return g;
+})();
+function godSave(){ try{ localStorage.setItem(GOD_KEY, JSON.stringify(GOD)); }catch(e){} }
+function enemyCountFor(lv){
+  const c = GOD.counts[lv], d = godDefaultCount(lv);
+  return [c && c[0] != null && c[0] !== '' ? +c[0] : d[0], c && c[1] != null && c[1] !== '' ? +c[1] : d[1]];
+}
+
+(function buildGodPanel(){
+  const st = document.createElement('style');
+  st.textContent = `
+  #godPanel{position:fixed;top:12px;right:12px;bottom:12px;width:min(380px,calc(100vw - 24px));z-index:50;overflow:auto;
+    background:rgba(8,14,26,.94);border:1px solid rgba(255,200,90,.45);border-radius:12px;padding:12px 14px;color:#e6f2ff;
+    font:13px/1.35 "Segoe UI",sans-serif;display:none;user-select:text;-webkit-user-select:text;touch-action:auto}
+  #godPanel.on{display:block}
+  #godPanel h3{margin:0 0 2px;font-size:16px;color:#ffd27a;letter-spacing:.08em}
+  #godPanel .g-sub{color:#8fb0c8;font-size:11.5px;margin:0 0 10px}
+  #godPanel .g-row{margin:0 0 10px}
+  #godPanel .g-top{display:flex;justify-content:space-between;gap:8px;font-weight:700}
+  #godPanel .g-val{color:#ffd27a;font-variant-numeric:tabular-nums}
+  #godPanel .g-help{color:#8fa6ba;font-size:11px;margin:1px 0 3px}
+  #godPanel input[type=range]{width:100%;accent-color:#ffb547}
+  #godPanel table{width:100%;border-collapse:collapse;margin:4px 0 10px;font-size:12px}
+  #godPanel td,#godPanel th{padding:3px 4px;border-bottom:1px solid rgba(255,255,255,.08);text-align:center}
+  #godPanel th{color:#8fb0c8;font-weight:700}
+  #godPanel td input{width:52px;background:#0d1b2c;color:#fff;border:1px solid #2b4560;border-radius:5px;padding:2px 4px;text-align:center}
+  #godPanel button{background:#24364d;color:#fff;border:1px solid #3c5878;border-radius:7px;padding:6px 10px;margin:4px 6px 0 0;cursor:pointer;font-weight:700}
+  #godPanel button:hover{background:#2f4766}`;
+  document.head.appendChild(st);
+  const p = document.createElement('div'); p.id = 'godPanel';
+  let html = '<h3>GOD MODE</h3><div class="g-sub">გახსნა: აკრიფე godmode · G ხურავს · მნიშვნელობები ინახება ამ ბრაუზერში</div>';
+  for(const r of GOD_ROWS) html += `<div class="g-row"><div class="g-top"><span>${r[1]}</span><span class="g-val" id="gv_${r[0]}"></span></div><div class="g-help">${r[2]}</div><input type="range" min="${r[3]}" max="${r[4]}" step="${r[5]}" id="gr_${r[0]}"></div>`;
+  html += '<div class="g-top"><span>მტრების რაოდენობა დონეებზე</span></div><div class="g-help">ცარიელი = ავტომატური (ნაცრისფერი რიცხვი)</div><table><tr><th>დონე</th><th>გამანადგურებელი</th><th>ბომბდამშენი</th></tr>';
+  for(let lv=1; lv<=GOD_LEVELS; lv++){ const d = godDefaultCount(lv); html += `<tr><td>${lv}</td><td><input type="number" min="0" max="20" data-lv="${lv}" data-i="0" placeholder="${d[0]}"></td><td><input type="number" min="0" max="20" data-lv="${lv}" data-i="1" placeholder="${d[1]}"></td></tr>`; }
+  html += '</table><button id="godReset">ყველაფრის დაბრუნება</button><button id="godRestart">თავიდან დაწყება</button><button id="godClose">დახურვა (G)</button>';
+  p.innerHTML = html;
+  document.body.appendChild(p);
+  p.addEventListener('pointerdown', e => e.stopPropagation());
+  const fmt = (r, v) => r[5] >= 1 ? String(Math.round(v)) : (+v).toFixed(2);
+  function refresh(){
+    for(const r of GOD_ROWS){ const el = document.getElementById('gr_' + r[0]); el.value = GOD[r[0]]; document.getElementById('gv_' + r[0]).textContent = fmt(r, GOD[r[0]]); }
+    p.querySelectorAll('td input').forEach(inp => { const c = GOD.counts[inp.dataset.lv]; inp.value = c && c[inp.dataset.i] != null ? c[inp.dataset.i] : ''; });
+  }
+  for(const r of GOD_ROWS){
+    document.getElementById('gr_' + r[0]).addEventListener('input', e => { GOD[r[0]] = +e.target.value; document.getElementById('gv_' + r[0]).textContent = fmt(r, GOD[r[0]]); godSave(); });
+  }
+  p.querySelectorAll('td input').forEach(inp => inp.addEventListener('input', () => {
+    const lv = inp.dataset.lv, i = +inp.dataset.i; const c = GOD.counts[lv] || [null, null];
+    c[i] = inp.value === '' ? null : Math.max(0, Math.min(20, Math.round(+inp.value)));
+    if(c[0] == null && c[1] == null) delete GOD.counts[lv]; else GOD.counts[lv] = c;
+    godSave();
+  }));
+  document.getElementById('godReset').addEventListener('click', () => { for(const r of GOD_ROWS) GOD[r[0]] = r[6]; GOD.counts = {}; godSave(); refresh(); });
+  document.getElementById('godRestart').addEventListener('click', () => { startGame(); });
+  document.getElementById('godClose').addEventListener('click', () => p.classList.remove('on'));
+  refresh();
+  // typing godmode opens it; G closes it
+  let typed = '';
+  window.addEventListener('keydown', e => {
+    if(e.target && e.target.tagName === 'INPUT') return;
+    const k = (e.key || '').toUpperCase();
+    if(p.classList.contains('on')){ if(k === 'G' && !e.ctrlKey){ p.classList.remove('on'); } return; }
+    if(!e.ctrlKey && !e.altKey && /^[A-Z]$/.test(k)){
+      typed = (typed + k).slice(-7);
+      if(typed === 'GODMODE'){ typed = ''; refresh(); p.classList.add('on'); }
+    }
+  });
+})();
+
+/* ---------------- rescue mode ----------------
+   One of our ships is under attack. Enemy fighters circle it and shoot.
+   Grab an enemy with your gravity (hold the button / touch), swing it and let go:
+   into the black hole it goes, or into another enemy and both explode.
+   Clear every enemy and the ship jumps away saved; if its hull breaks it explodes,
+   its crew drifts out into space, and you lose one of three lives. */
+const ENEMY_PICS = [1, 5, 7, 9, 12, 13, 15];                         // ship file numbers used for enemies
+const FRIEND_PICS = [2, 3, 4, 6, 8, 10, 11, 14, 16, 17, 18, 19, 20];
+const SHIP_NAMES = ['Aurora','Kestrel','Helios','Lyra','Nomad','Meridian','Starling','Odyssey','Colchis','Tbilisi','Vesta','Halcyon'];
+const CREW = [
+  { id:'captain', name:'Daniel Kerr',  role:'captain',  look:{ skin:'#e0b48f', hair:'#3a2a20', suit:'#24406e', female:false, cap:true } },
+  { id:'mira',    name:'Mira Sol',     role:'comms',    look:{ skin:'#f1c9a8', hair:'#c8402e', suit:'#2b5d7a', female:true } },
+  { id:'ana',     name:'Ana Reyes',    role:'medic',    look:{ skin:'#c99272', hair:'#1e1612', suit:'#dfe7ee', female:true } },
+  { id:'tomas',   name:'Tomas Lind',   role:'engineer', look:{ skin:'#e8c2a0', hair:'#d9b36a', suit:'#8a5a2a', female:false } },
+  { id:'nino',    name:'Nino Beridze', role:'pilot',    look:{ skin:'#efc6a6', hair:'#2a1c16', suit:'#3a3f55', female:true } },
+  { id:'gus',     name:'Gus Morrow',   role:'cargo',    look:{ skin:'#d8a888', hair:'#cfcfcf', suit:'#5a6a4a', female:false, beard:true } }
+];
+// crew portraits: crew/<id>_calm.png, crew/<id>_scared.png, crew/<id>_panic.png (square PNG, ~256 px).
+// Missing pictures are fine: the monitor draws a silhouette instead.
+const CREW_PICS = {};
+function crewPic(id, mood){
+  const key = id + '_' + mood;
+  if(!(key in CREW_PICS)){
+    const img = new Image(); CREW_PICS[key] = null;
+    img.onload = () => { CREW_PICS[key] = img; };
+    img.src = 'crew/' + key + '.png';
+  }
+  return CREW_PICS[key];
+}
+function spriteNo(n){ return SHIP_SPRITES[n-1] || null; }
+
+let lives = 3, savedTotal = 0, lostTotal = 0;
+let friend = null, enemies = [], bullets = [], bodies = [], debris = [], spawnQueue = [];
+let rPhase = 'arrive', rPhaseT = 0, killCombo = 1, killComboT = 0;
+let grabbed = null, pointerDown = false, pvx = 0, pvy = 0, lastTx = 0, lastTy = 0;
+const IS_TOUCH = ('ontouchstart' in window);
+
+function shipBase(){ return Math.max(19, Math.min(32, Math.min(W,H)*0.041)); }
+
+function rescueSetup(){
+  enemies = []; bullets = []; spawnQueue = []; grabbed = null;
+  killCombo = 1; killComboT = 0;
+  // our ship parks well away from the black hole
+  let fx, fy, tries = 0;
+  do{ fx = rnd(W*0.18, W*0.82); fy = rnd(H*0.3, H*0.8); tries++; }
+  while(tries < 40 && Math.hypot(fx-gate.x, fy-gate.y) < Math.min(W,H)*0.36);
+  const pic = FRIEND_PICS[(level*7 + lives*3) % FRIEND_PICS.length];
+  const fromLeft = fx > W/2;
+  const crew = CREW.slice().sort(()=>Math.random()-0.5).slice(0, 2);
+  friend = { x: fromLeft ? -120 : W+120, y: fy + rnd(-60,60), tx: fx, ty: fy, vx:0, vy:0,
+    r: shipBase()*1.55, sprite: spriteNo(pic), style: SHIP_STYLES[level % SHIP_STYLES.length],
+    hp:100, maxHp:100, hitT:0, people: Math.round(rnd(40, 320)), name: SHIP_NAMES[(level + lostTotal) % SHIP_NAMES.length],
+    crew, face: fromLeft ? -1 : 1, faceA: fromLeft ? -1 : 1, t:0, blink:0, scale:1, stretch:1, alpha:1, tow:0.6, state:'drift' };
+  // the enemy wing: more and tougher every level
+  const [fighters, bombers] = enemyCountFor(level);          // GOD MODE can set these per level
+  for(let i=0;i<fighters;i++) spawnQueue.push({ t: 2.2 + i*0.7, type:'fighter' });
+  for(let i=0;i<bombers;i++) spawnQueue.push({ t: 3.0 + i*1.4, type:'bomber' });
+  // damage per hit is set so the whole wing deals a fixed damage rate for this level
+  const targetDps = (2.4 + level*0.35)*GOD.dps;
+  const theo = fighters*(2.5/1.6) + bombers*(8/3.0);
+  friend.dmgScale = targetDps/Math.max(theo, 0.1);
+  rPhase = 'arrive'; rPhaseT = 0;
+  monitorStart();
+}
+
+function spawnEnemy(type){
+  const big = type === 'bomber';
+  const e = { type, r: shipBase()*(big ? 1.25 : 0.9), mass: big ? 2.2 : 1,
+    sprite: spriteNo(ENEMY_PICS[Math.floor(rnd(0, ENEMY_PICS.length))]), style: SHIP_STYLES[2],
+    vx:0, vy:0, orbA: rnd(0, 6.283), orbR: rnd(130, 210)*Math.min(1.2, Math.max(0.7, Math.min(W,H)/700)),
+    orbV: (big ? 0.22 : 0.5)*(Math.random()<0.5 ? -1 : 1), cd: rnd(0.8, 1.8), dazed: 0,
+    face:1, faceA:1, t:rnd(0,10), blink:rnd(0,6), scale:1, stretch:1, alpha:1, tow:0, state:'approach' };
+  const side = Math.floor(rnd(0, 4));
+  e.x = side===1 ? W+60 : side===3 ? -60 : rnd(0, W);
+  e.y = side===0 ? -60 : side===2 ? H+60 : rnd(60, H);
+  enemies.push(e);
+}
+
+function enemyGone(e, how){
+  const i = enemies.indexOf(e); if(i >= 0) enemies.splice(i, 1);
+  if(grabbed === e) grabbed = null;
+  killComboT = 3; const mult = killCombo; killCombo = Math.min(killCombo + 1, 6);
+  const base = how === 'hole' ? (e.type === 'bomber' ? 250 : 100) : how === 'smash' ? 150 : 80;
+  const gain = base*mult;
+  score += gain;
+  floaters.push({ x:e.x, y:e.y - 20, t:1.2, txt:'+' + gain + (mult > 1 ? '  x' + mult : ''), big: mult > 1 });
+  if(Math.random() < 0.6) monitorSay('kill');
+  updateHUD();
+}
+
+/* explosions: a white flash, a rolling fireball, heavy smoke that hangs around,
+   sparks, and the ship's own picture broken into charred, burning pieces */
+let fx = [], wrecks = [];
+const charredCache = new Map();
+function charred(img){
+  // a darker, burnt copy of a ship picture for its wreckage
+  if(charredCache.has(img)) return charredCache.get(img);
+  const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight;
+  const g = c.getContext('2d');
+  g.drawImage(img, 0, 0);
+  g.globalCompositeOperation = 'source-atop';
+  g.fillStyle = 'rgba(28,14,6,0.42)'; g.fillRect(0, 0, c.width, c.height);
+  charredCache.set(img, c);
+  return c;
+}
+function explodeAt(x, y, size, hue){
+  fx.push({ k:'flash', x, y, r:80*size, life:0.3, max:0.3 });
+  for(let i=0;i<Math.round(16*size);i++){
+    const a = rnd(0, 6.283), sp = rnd(0.3, 2.4)*size, life = rnd(0.55, 1.15);
+    fx.push({ k:'fire', x:x + rnd(-6,6)*size, y:y + rnd(-6,6)*size, vx:Math.cos(a)*sp, vy:Math.sin(a)*sp, r:rnd(7,14)*size, grow:rnd(14,28)*size, life, max:life, hue:rnd(16,44) });
+  }
+  for(let i=0;i<Math.round(13*size);i++){
+    const a = rnd(0, 6.283), sp = rnd(0.12, 0.9)*size, life = rnd(2.4, 5);
+    fx.push({ k:'smoke', x:x + rnd(-10,10)*size, y:y + rnd(-10,10)*size, vx:Math.cos(a)*sp, vy:Math.sin(a)*sp, r:rnd(6,12)*size, grow:rnd(12,26)*size, life, max:life, delay:rnd(0.05, 0.45) });
+  }
+  spawnBurst(x, y, Math.round(22*size), hue, 6*size);
+  spawnRing(x, y, 40, 95*size, 3.5, 0.55);
+  spawnRing(x, y, 200, 50*size, 2, 0.4);
+  for(let i=0;i<Math.round(10*size);i++){
+    const a = rnd(0, 6.283), sp = rnd(0.6, 3.2)*size;
+    debris.push({ x, y, vx:Math.cos(a)*sp, vy:Math.sin(a)*sp, rot:rnd(0, 6), vr:rnd(-6, 6), s:rnd(1.5, 4)*size, life:rnd(2.5, 5) });
+  }
+  tone(90, 0.7, 'sawtooth', 0.1, 35);
+  setTimeout(()=>tone(55, 1.1, 'triangle', 0.1, 25), 70);
+}
+/* wreckage pictures: ships/wreck/wreck01.png ... (burnt pieces, any size, transparent PNG).
+   Bigger pictures make bigger pieces. Without them the ship picture is cut into pieces instead. */
+const WRECK_PICS = [];
+(function loadWreck(i){
+  if(i > 40) return;
+  const img = new Image();
+  img.onload = () => { WRECK_PICS.push(img); WRECK_PICS.sort((a, b) => b.naturalWidth*b.naturalHeight - a.naturalWidth*a.naturalHeight); loadWreck(i + 1); };
+  img.src = 'ships/wreck/wreck' + String(i).padStart(2, '0') + '.png';
+})(1);
+function scatterWreck(s, power, hold, big, mid, small){
+  // WRECK_PICS is sorted largest first: split it into three size groups
+  const n = WRECK_PICS.length, a = Math.max(1, Math.round(n*0.3)), b = Math.max(a + 1, Math.round(n*0.65));
+  const groups = [[WRECK_PICS.slice(0, a), big, 1.0], [WRECK_PICS.slice(a, b), mid, 0.9], [WRECK_PICS.slice(b), small, 0.8]];
+  const k = (s.r*2.8)/150;                                     // same scale the ship pictures use
+  for(const [list, count, sc] of groups){
+    if(!list.length) continue;
+    for(let c=0;c<count;c++){
+      const img = list[Math.floor(rnd(0, list.length))];
+      const w = img.naturalWidth*k*sc*rnd(0.85, 1.1), hh = w*img.naturalHeight/img.naturalWidth;
+      const ang = rnd(0, 6.283), off = rnd(0.1, 0.6)*s.r, sp = rnd(0.15, 0.7)*power*(list === groups[0][0] ? 0.6 : 1);
+      wrecks.push({ pic:img, w, h:hh, x:s.x + Math.cos(ang)*off, y:s.y + Math.sin(ang)*off*0.7, rot:rnd(-0.6, 0.6), vr:rnd(-0.7, 0.7)*(list === groups[0][0] ? 0.5 : 1),
+        vx:Math.cos(ang)*sp + s.vx*0.2, vy:Math.sin(ang)*sp + s.vy*0.2, face:Math.random() < 0.5 ? -1 : 1,
+        life:0, burn:rnd(2, 4.5), hold:(hold || 16)*rnd(0.85, 1.1), a:1 });
+    }
+  }
+}
+function breakShip(s, power, hold){
+  if(WRECK_PICS.length){
+    if((hold || 16) > 10) scatterWreck(s, power, hold, 2, 3, 4);   // our ship: a big wreck
+    else scatterWreck(s, power, hold, 0, 1, 2);                    // an enemy fighter
+    return;
+  }
+  if(!s.sprite) return;
+  const img = charred(s.sprite);
+  const w = s.r*2.8, h = w*s.sprite.naturalHeight/s.sprite.naturalWidth;
+  const cols = 3, rows = 3, face = s.faceA || 1, lean = shipLean(s);
+  // a jittered grid: neighbouring pieces share their jagged edges
+  const px = [], py = [];
+  for(let j=0;j<=rows;j++) for(let i=0;i<=cols;i++){
+    const edge = i===0 || j===0 || i===cols || j===rows;
+    px.push(-w/2 + w*i/cols + (edge ? 0 : rnd(-1,1)*w*0.09));
+    py.push(-h/2 + h*j/rows + (edge ? 0 : rnd(-1,1)*h*0.12));
+  }
+  const V = (i,j) => [px[j*(cols+1)+i], py[j*(cols+1)+i]];
+  const ca = Math.cos(lean), sa = Math.sin(lean);
+  for(let j=0;j<rows;j++) for(let i=0;i<cols;i++){
+    const poly = [V(i,j), V(i+1,j), V(i+1,j+1), V(i,j+1)];
+    const cx = (poly[0][0] + poly[1][0] + poly[2][0] + poly[3][0])/4, cy = (poly[0][1] + poly[1][1] + poly[2][1] + poly[3][1])/4;
+    const lx = cx*face, ly = cy, wx = lx*ca - ly*sa, wy = lx*sa + ly*ca, dl = Math.hypot(wx, wy) || 1;
+    const sp = rnd(0.2, 0.75)*power;
+    wrecks.push({ img, w, h, poly, cx, cy, face, x:s.x + wx, y:s.y + wy, rot:lean, vr:rnd(-0.8, 0.8),
+      vx:wx/dl*sp + s.vx*0.2 + rnd(-0.08, 0.08), vy:wy/dl*sp + s.vy*0.2 + rnd(-0.08, 0.08),
+      life:0, burn:rnd(1.8, 4), hold:hold || 16, a:1 });
+  }
+}
+function updateAftermath(dt){
+  for(let i=debris.length-1;i>=0;i--){ const d = debris[i]; d.x += d.vx; d.y += d.vy; d.vx *= 0.985; d.vy *= 0.985; d.rot += d.vr*dt; d.life -= dt; if(d.life <= 0) debris.splice(i,1); }
+  for(let i=fx.length-1;i>=0;i--){
+    const p = fx[i];
+    if(p.delay > 0){ p.delay -= dt; continue; }
+    if(p.vx !== undefined){ p.x += p.vx; p.y += p.vy; p.vx *= 0.965; p.vy *= 0.965; }
+    p.life -= dt; if(p.life <= 0) fx.splice(i,1);
+  }
+  for(let i=wrecks.length-1;i>=0;i--){
+    const p = wrecks[i];
+    p.x += p.vx; p.y += p.vy; p.rot += p.vr*dt; p.life += dt;
+    p.vx *= 0.998; p.vy *= 0.998;
+    if(p.life < p.burn && Math.random() < 0.35){
+      // burning edges: little flames and a smoke trail
+      fx.push({ k:'fire', x:p.x + rnd(-6,6), y:p.y + rnd(-6,6), vx:rnd(-0.2,0.2), vy:rnd(-0.2,0.2), r:rnd(2,4), grow:rnd(4,8), life:0.45, max:0.45, hue:rnd(18,40) });
+      if(Math.random() < 0.4) fx.push({ k:'smoke', x:p.x, y:p.y, vx:rnd(-0.15,0.15), vy:rnd(-0.15,0.15), r:rnd(3,5), grow:rnd(8,14), life:1.8, max:1.8 });
+    }
+    if(p.life > p.hold - 3) p.a = Math.max(0, (p.hold - p.life)/3);
+    if(p.a <= 0 || p.x < -150 || p.x > W + 150 || p.y < -150 || p.y > H + 150) wrecks.splice(i,1);
+  }
+  updateBodies(dt);
+}
+function drawAftermath(){
+  // smoke under everything else of the blast
+  ctx.globalCompositeOperation = 'source-over';
+  for(const p of fx){
+    if(p.k !== 'smoke' || p.delay > 0) continue;
+    const t = p.life/p.max, fadeIn = Math.min(1, (p.max - p.life)/0.25);
+    ctx.globalAlpha = 0.3*t*fadeIn;
+    ctx.fillStyle = '#2b2729';
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.r + p.grow*(1 - t), 0, 6.283); ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+  // wreck pieces
+  for(const p of wrecks){
+    if(p.pic){
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot); ctx.scale(p.face, 1);
+      ctx.globalAlpha = p.a; ctx.drawImage(p.pic, -p.w/2, -p.h/2, p.w, p.h); ctx.restore();
+      continue;
+    }
+    ctx.save();
+    ctx.translate(p.x, p.y); ctx.rotate(p.rot); ctx.scale(p.face, 1); ctx.translate(-p.cx, -p.cy);
+    ctx.beginPath(); ctx.moveTo(p.poly[0][0], p.poly[0][1]);
+    for(let k=1;k<p.poly.length;k++) ctx.lineTo(p.poly[k][0], p.poly[k][1]);
+    ctx.closePath(); ctx.clip();
+    ctx.globalAlpha = p.a;
+    ctx.drawImage(p.img, -p.w/2, -p.h/2, p.w, p.h);
+    ctx.restore();
+  }
+  // small debris
+  for(const d of debris){
+    ctx.save(); ctx.translate(d.x, d.y); ctx.rotate(d.rot); ctx.globalAlpha = Math.min(1, d.life);
+    ctx.fillStyle = '#6f7886'; ctx.fillRect(-d.s/2, -d.s/3, d.s, d.s*0.66); ctx.restore();
+  }
+  ctx.globalAlpha = 1;
+  // fire and the flash on top
+  ctx.globalCompositeOperation = 'lighter';
+  for(const p of fx){
+    if(p.delay > 0) continue;
+    const t = p.life/p.max;
+    if(p.k === 'fire') drawGlow(p.x, p.y, p.r + p.grow*(1 - t), p.hue - 14*(1 - t), Math.pow(t, 0.7));
+    else if(p.k === 'flash'){ drawGlow(p.x, p.y, p.r*(1.25 - t*0.25), 50, t); drawGlow(p.x, p.y, p.r*0.45, 60, t); }
+  }
+  ctx.globalCompositeOperation = 'source-over';
+}
+
+function startEnemyFall(e, cx, cy){
+  e.state = 'fall'; e.fallT = 0; e.cx = cx; e.cy = cy; e.fx0 = e.x; e.fy0 = e.y; e.lean = shipLean(e); e.alpha = 1;
+  if(grabbed === e) grabbed = null;
+}
+
+function tryGrab(x, y){
+  if(state !== STATE.PLAY || rPhase !== 'fight') return;
+  let best = null, bd = 1e9;
+  for(const e of enemies){
+    if(e.state === 'fall') continue;
+    const d = Math.hypot(e.x - x, e.y - y), reach = e.r*1.4 + (IS_TOUCH ? 60 : 38);
+    if(d < reach && d < bd){ bd = d; best = e; }
+  }
+  if(best && gripCd <= 0){ grabbed = best; best.state = 'held'; best.gripMax = best.gripT = (best.type === 'bomber' ? 1.15 : 1.6)*GOD.gripTime; tone(240, 0.12, 'triangle', 0.08, 420); }
+}
+let gripCd = 0;
+function releaseGrab(slipped){
+  if(!grabbed) return;
+  const e = grabbed; grabbed = null;
+  e.state = 'flung'; e.flungT = 2.2;
+  gripCd = 0.45;
+  // the throw is the speed it already swings with, plus a little flick of yours
+  if(!slipped){ e.vx += pvx*0.25; e.vy += pvy*0.25; }
+  else tone(320, 0.18, 'sawtooth', 0.05, 160);
+  const sp = Math.hypot(e.vx, e.vy), cap = 26/Math.sqrt(e.mass);
+  if(sp > cap){ e.vx *= cap/sp; e.vy *= cap/sp; }
+  tone(180, 0.25, 'sine', 0.08, 520);
+}
+
+function hitFriend(dmg, x, y){
+  if(!friend || friend.state !== 'drift') return;
+  friend.hp = Math.max(0, friend.hp - dmg);
+  friend.hitT = 0.25;
+  spawnBurst(x, y, 6, 30, 2.6);
+  tone(rnd(140, 190), 0.08, 'square', 0.035, 90);
+  monitorHit();
+  if(friend.hp <= 0) friendDies();
+}
+
+function friendDies(){
+  const f = friend;
+  f.state = 'dead';
+  explodeAt(f.x, f.y, 2.6, 28);
+  spawnRing(f.x, f.y, 20, 260, 5, 0.9);
+  breakShip(f, 1.4, 18);
+  // the crew drifts out of the wreck, the way the blast threw them
+  const n = 9 + Math.floor(rnd(0, 6));
+  for(let i=0;i<n;i++){
+    const a = rnd(0, 6.283), sp = rnd(0.08, 0.5)*GOD.scatter;
+    bodies.push({ x: f.x + rnd(-f.r*0.6, f.r*0.6), y: f.y + rnd(-f.r*0.45, f.r*0.45), vx: Math.cos(a)*sp + f.vx*0.2, vy: Math.sin(a)*sp + f.vy*0.2,
+      rot: rnd(0, 6.283), vr: rnd(-1.6, 1.6), s: rnd(4.2, 6.2)*Math.max(0.8, shipBase()/26), ph: rnd(0, 6), seed: rnd(0, 6.283), a: 1, life: 0 });
+  }
+  lives--; lostTotal += f.people;
+  rPhase = 'dead'; rPhaseT = 0;
+  grabbed = null;
+  monitorLost();
+  tone(55, 2.2, 'sine', 0.16, 30);
+  updateHUD();
+}
+
+function friendSaved(){
+  const f = friend;
+  f.state = 'jump'; f.jumpT = 0;
+  savedTotal += f.people;
+  const bonus = 500 + Math.round(f.hp)*5;
+  score += bonus;
+  rPhase = 'jump'; rPhaseT = 0;
+  spawnRing(f.x, f.y, 190, 140, 4, 0.6);
+  showBanner(T().rescue.shipSaved + `<span class="sub">${T().rescue.savedSub(f.people)} · +${bonus}</span>`, 'grad-cyan');
+  monitorSay('thanks');
+  fanfare(523);
+  updateHUD();
+}
+
+function updateRescue(dt){
+  // pointer speed, used for the throw
+  const dxp = attractor.tx - lastTx, dyp = attractor.ty - lastTy;
+  pvx = pvx*0.55 + dxp*0.45; pvy = pvy*0.55 + dyp*0.45;
+  lastTx = attractor.tx; lastTy = attractor.ty;
+  if(killComboT > 0){ killComboT -= dt; if(killComboT <= 0) killCombo = 1; }
+  if(gripCd > 0) gripCd -= dt;
+  rPhaseT += dt;
+  const f = friend;
+
+  if(f){
+    f.t += dt; f.blink += dt; f.hitT = Math.max(0, f.hitT - dt);
+    if(f.state === 'drift'){
+      // glide in, then hold position with a slow bob
+      const k = rPhase === 'arrive' ? 0.035 : 0.01;
+      f.vx += (f.tx + Math.sin(f.t*0.4)*14 - f.x)*k; f.vy += (f.ty + Math.cos(f.t*0.5)*10 - f.y)*k;
+      f.vx *= 0.86; f.vy *= 0.86; f.x += f.vx; f.y += f.vy;
+      if(rPhase === 'arrive' && Math.hypot(f.tx - f.x, f.ty - f.y) < 30){
+        rPhase = 'fight'; rPhaseT = 0;
+        if(level === 1 && lives === 3) toast(IS_TOUCH ? T().rescue.hintTouch : T().rescue.hintMouse, 5);
+      }
+      // smoke and fire when hurt
+      if(f.hp < 60 && Math.random() < (f.hp < 30 ? 0.5 : 0.2)) bursts.push({ x:f.x + rnd(-f.r*0.6, f.r*0.6), y:f.y + rnd(-f.r*0.3, f.r*0.3), vx:rnd(-0.3,0.3), vy:rnd(-0.6,-0.1), life:rnd(0.4,0.9), hue: f.hp < 30 ? rnd(15,35) : 220, size:rnd(1.5,3) });
+    } else if(f.state === 'jump'){
+      f.jumpT += dt;
+      const dir = -(f.face || 1);
+      f.vx += dir*(0.6 + f.jumpT*3); f.x += f.vx;
+      f.stretch = 1 + Math.min(4, f.jumpT*6); f.alpha = Math.max(0, 1 - f.jumpT*1.6);
+      if(f.jumpT > 0.25 && !f.flashed){ f.flashed = true; spawnRing(f.x, f.y, 200, 90, 3, 0.4); tone(880, 0.4, 'sine', 0.08, 1760); }
+    }
+  }
+
+  // enemies arrive one by one
+  if(rPhase === 'fight'){
+    for(let i=spawnQueue.length-1;i>=0;i--){ if(rPhaseT >= spawnQueue[i].t){ spawnEnemy(spawnQueue[i].type); spawnQueue.splice(i,1); } }
+  }
+
+  for(let i=enemies.length-1;i>=0;i--){
+    const e = enemies[i];
+    e.t += dt; e.blink += dt;
+    if(e.state === 'fall'){
+      e.fallT += dt;
+      const k = Math.min(e.fallT/0.8, 1), q = k*k*(3 - 2*k);
+      e.x = e.fx0 + (e.cx - e.fx0)*q; e.y = e.fy0 + (e.cy - e.fy0)*q;
+      e.scale = 1 - q*0.96; e.alpha = 1 - Math.pow(k, 1.6);
+      if(k >= 1){ enemies.splice(i,1); }
+      continue;
+    }
+    if(e.state === 'held'){
+      // a gravity rope, not a hand: it is pulled toward you with all its inertia,
+      // overshoots and swings around you, and its pilot burns the engines to break free
+      const dx = attractor.tx - e.x, dy = attractor.ty - e.y, d = Math.hypot(dx, dy) || 1;
+      const pull = 0.62*GOD.grip*Math.min(1, d/110)/e.mass;
+      e.vx += dx/d*pull; e.vy += dy/d*pull;
+      const fight = GOD.pilotFight;
+      e.vx -= (dx/d*0.1/e.mass + Math.sin(e.t*7)*0.08)*fight; e.vy -= (dy/d*0.1/e.mass + Math.cos(e.t*6)*0.08)*fight;
+      // next to the black hole the pilot burns everything to stay out: you cannot carry it in
+      const hx = e.x - gate.x, hy = e.y - gate.y, hd = Math.hypot(hx, hy) || 1, hr = gate.r*2.8;
+      if(hd < hr){ const p = (1 - hd/hr)*1.4*Math.max(0.4, fight); e.vx += hx/hd*p; e.vy += hy/hd*p; }
+      e.vx *= 0.986; e.vy *= 0.986;
+      const sp = Math.hypot(e.vx, e.vy), cap = 17/Math.sqrt(e.mass);
+      if(sp > cap){ e.vx *= cap/sp; e.vy *= cap/sp; }
+      e.x += e.vx; e.y += e.vy; e.tow = 1;
+      // the grip does not last: throw it in time, or it breaks free with the speed it has
+      e.gripT -= dt;
+      if(e.gripT <= 0 || d > 340){ releaseGrab(true); }
+    } else if(e.state === 'flung'){
+      e.flungT -= dt; e.tow = 0.6;
+      // the black hole bends a throw toward itself, so near misses still go in
+      const gdx = gate.x - e.x, gdy = gate.y - e.y, gd = Math.hypot(gdx, gdy) || 1, reach = gate.r*3.2;
+      if(gd < reach){ const g = (1 - gd/reach)*0.22*GOD.holeHelp; e.vx += gdx/gd*g; e.vy += gdy/gd*g; }
+      e.vx *= 0.992; e.vy *= 0.992;
+      e.x += e.vx; e.y += e.vy;
+      // bounce off the screen edges
+      if(e.x < e.r){ e.x = e.r; e.vx = Math.abs(e.vx)*0.6; } if(e.x > W - e.r){ e.x = W - e.r; e.vx = -Math.abs(e.vx)*0.6; }
+      if(e.y < e.r){ e.y = e.r; e.vy = Math.abs(e.vy)*0.6; } if(e.y > H - e.r){ e.y = H - e.r; e.vy = -Math.abs(e.vy)*0.6; }
+      const sp = Math.hypot(e.vx, e.vy);
+      // smash into another enemy: both explode
+      if(sp > 4.5){
+        for(const o of enemies){
+          if(o === e || o.state === 'fall' || o.state === 'held') continue;
+          if(Math.hypot(o.x - e.x, o.y - e.y) < (o.r + e.r)*0.75){
+            const mx = (o.x + e.x)/2, my = (o.y + e.y)/2;
+            explodeAt(mx, my, 1.3, 30);
+            breakShip(o, 1.6, 7); breakShip(e, 1.6, 7);
+            enemyGone(o, 'smash'); enemyGone(e, 'smash');
+            break;
+          }
+        }
+        if(enemies.indexOf(e) < 0) continue;
+        // a careless throw hurts our own ship
+        if(f && f.state === 'drift' && Math.hypot(f.x - e.x, f.y - e.y) < (f.r + e.r)*0.7){
+          hitFriend(6, (f.x + e.x)/2, (f.y + e.y)/2);
+          const nx = e.x - f.x, ny = e.y - f.y, nl = Math.hypot(nx, ny) || 1;
+          e.vx = nx/nl*sp*0.5; e.vy = ny/nl*sp*0.5;
+        }
+      }
+      // a slow drop is no throw: once it slows down the pilot takes control again
+      if(e.flungT <= 0 || (sp < 1.6 && e.flungT < 1.95)){ e.state = 'approach'; e.dazed = 0.6; }
+    } else {
+      // approach / attack: circle our ship and shoot at it
+      e.tow = 0;
+      if(e.dazed > 0) e.dazed -= dt;
+      if(f && f.state === 'drift'){
+        e.orbA += e.orbV*dt*GOD.enemySpeed;
+        const tx = f.x + Math.cos(e.orbA)*e.orbR, ty = f.y + Math.sin(e.orbA)*e.orbR*0.75;
+        const k = (e.type === 'bomber' ? 0.012 : 0.02)*GOD.enemySpeed;
+        e.vx += (tx - e.x)*k; e.vy += (ty - e.y)*k;
+        // pilots steer clear of the black hole: only your throw sends them in
+        const ax = e.x - gate.x, ay = e.y - gate.y, ad = Math.hypot(ax, ay) || 1, avoid = gate.r*3.4;
+        if(ad < avoid){ const p = (1 - ad/avoid)*0.9; e.vx += ax/ad*p; e.vy += ay/ad*p; }
+        for(const v of voids){ const bx = e.x - v.x, by = e.y - v.y, bd = Math.hypot(bx, by) || 1; if(bd < v.r*4){ const p = (1 - bd/(v.r*4))*0.6; e.vx += bx/bd*p; e.vy += by/bd*p; } }
+        e.vx *= 0.92; e.vy *= 0.92;
+        const maxSp = (e.type === 'bomber' ? 2.2 : 3.6)*GOD.enemySpeed, sp = Math.hypot(e.vx, e.vy);
+        if(sp > maxSp){ e.vx *= maxSp/sp; e.vy *= maxSp/sp; }
+        const dF = Math.hypot(f.x - e.x, f.y - e.y);
+        e.face = f.x > e.x ? -1 : 1;
+        if(e.dazed <= 0 && dF < e.orbR*1.6){
+          e.cd -= dt;
+          if(e.cd <= 0){
+            const big = e.type === 'bomber';
+            e.cd = (big ? rnd(2.6, 3.4) : rnd(1.3, 1.9))*(1 - Math.min(0.3, level*0.02));
+            const a = Math.atan2(f.y - e.y, f.x - e.x) + rnd(-0.05, 0.05), spd = big ? 4.2 : 7.5;
+            bullets.push({ x:e.x, y:e.y, vx:Math.cos(a)*spd, vy:Math.sin(a)*spd, life:3, big, dmg:(big ? 8 : 2.5)*f.dmgScale });
+            drawGlowLater.push([e.x, e.y, e.r*0.9, big ? 25 : 355, 0.9]);
+            tone(big ? 160 : 620, 0.07, big ? 'triangle' : 'square', 0.025, big ? 90 : 300);
+          }
+        }
+      } else {
+        // nothing left to shoot: they leave the way they came
+        const ox = e.x - W/2, oy = e.y - H/2, ol = Math.hypot(ox, oy) || 1;
+        e.vx += ox/ol*0.12; e.vy += oy/ol*0.12; e.vx *= 0.99; e.vy *= 0.99;
+        e.face = e.vx > 0 ? -1 : 1;
+        if(e.x < -140 || e.x > W + 140 || e.y < -140 || e.y > H + 140){ enemies.splice(i, 1); continue; }
+      }
+      e.x += e.vx; e.y += e.vy;
+    }
+    if(Math.abs(e.vx) > 0.35 && e.state !== 'approach') e.face = e.vx > 0 ? -1 : 1;
+    e.faceA += ((e.face || 1) - (e.faceA || 1))*Math.min(dt*6, 1);
+
+    // swallowed by the black hole or a purple hole
+    if(e.state !== 'fall' && e.state !== 'held'){
+      const gd = Math.hypot(gate.x - e.x, gate.y - e.y);
+      if(gd < gate.r*0.95 + e.r*0.2){
+        startEnemyFall(e, gate.x, gate.y); gate.flash = Math.max(gate.flash, 0.6);
+        tone(70, 0.9, 'sine', 0.12, 140);
+        enemyGone(e, 'hole'); enemies.push(e);       // keep drawing its fall
+        continue;
+      }
+      for(const v of voids){
+        if(Math.hypot(v.x - e.x, v.y - e.y) < v.r + e.r*0.2){ startEnemyFall(e, v.x, v.y); enemyGone(e, 'void'); enemies.push(e); break; }
+      }
+    }
+  }
+
+  // enemy fire
+  for(let i=bullets.length-1;i>=0;i--){
+    const b = bullets[i];
+    b.x += b.vx; b.y += b.vy; b.life -= dt;
+    if(f && f.state === 'drift' && Math.hypot(f.x - b.x, f.y - b.y) < f.r*0.8){ hitFriend(b.dmg, b.x, b.y); bullets.splice(i,1); continue; }
+    if(b.life <= 0 || b.x < -40 || b.x > W + 40 || b.y < -40 || b.y > H + 40) bullets.splice(i,1);
+  }
+  updateAftermath(dt);
+
+  // win, lose, next
+  const fighting = enemies.some(e => e.state !== 'fall') || spawnQueue.length > 0;
+  if(rPhase === 'fight' && !fighting && f && f.state === 'drift') friendSaved();
+  if(rPhase === 'jump' && rPhaseT > 2.6){ level++; resetLevel(); toast(T().level + ' ' + level); }
+  if(rPhase === 'dead' && f && !f.lostShown && rPhaseT > 1.6){ f.lostShown = true; showBanner(T().rescue.signalLost + `<span class="sub">${T().rescue.lostSub(f.people)}</span>`, 'grad-pink'); }
+  if(rPhase === 'dead' && rPhaseT > GOD.deathWait){
+    if(lives > 0){ resetLevel(); toast(T().rescue.nextShip, 2.6); }
+    else { gameOver(); }
+  }
+}
+
+function updateBodies(dt){
+  for(let i=bodies.length-1;i>=0;i--){
+    const b = bodies[i];
+    b.x += b.vx; b.y += b.vy; b.rot += b.vr*dt; b.ph += dt; b.life += dt;
+    if(b.life > 18) b.a = Math.max(0, b.a - dt*0.3);
+    if(b.a <= 0 || b.x < -80 || b.x > W + 80 || b.y < -80 || b.y > H + 80) bodies.splice(i,1);
+  }
+}
+
+let drawGlowLater = [];
+function drawBody(b){
+  const s = b.s;
+  ctx.save();
+  ctx.translate(b.x, b.y); ctx.rotate(b.rot);
+  ctx.globalAlpha = b.a;
+  // alive at first: arms and legs flail; then slower and slower until still
+  const alive = GOD.flail > 0 ? Math.max(0, 1 - b.life/GOD.flail) : 0;
+  const amp = 0.18 + 0.85*alive*alive, rate = 1.2 + 9*alive, q = b.ph*rate + (b.seed || 0);
+  ctx.strokeStyle = '#c9d1dc'; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.lineWidth = s*0.4;
+  const limb = (x0, y0, a, bend) => { const x1 = x0 + Math.cos(a)*s*0.6, y1 = y0 + Math.sin(a)*s*0.6;
+    ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.lineTo(x1 + Math.cos(a + bend)*s*0.55, y1 + Math.sin(a + bend)*s*0.55); };
+  ctx.beginPath();
+  limb(-s*0.22, s*0.55, 1.85 + Math.sin(q*0.9 + 1.7)*amp*0.9, -0.3 - Math.sin(q*1.1)*amp*0.6);     // legs
+  limb( s*0.22, s*0.55, 1.3 + Math.sin(q*0.8 + 4.1)*amp*0.9, 0.3 + Math.sin(q*1.2 + 2)*amp*0.6);
+  limb(-s*0.45, -s*0.25, 2.6 + Math.sin(q + 0.5)*amp*1.4, 0.5 + Math.sin(q*1.3)*amp*0.9);        // arms
+  limb( s*0.45, -s*0.25, 0.55 + Math.sin(q*1.1 + 3.3)*amp*1.4, -0.5 - Math.sin(q*1.4 + 1)*amp*0.9);
+  ctx.stroke();
+  ctx.fillStyle = '#9aa6b5'; ctx.fillRect(-s*0.5, -s*0.55, s*1.0, s*0.9);    // backpack
+  ctx.fillStyle = '#e3e8ef';
+  ctx.beginPath(); ctx.ellipse(0, s*0.05, s*0.5, s*0.65, 0, 0, 6.283); ctx.fill();   // suit
+  ctx.beginPath(); ctx.arc(0, -s*0.85, s*0.5, 0, 6.283); ctx.fill();                 // helmet
+  ctx.fillStyle = '#16222f';
+  ctx.beginPath(); ctx.ellipse(s*0.08, -s*0.85, s*0.32, s*0.24, 0, 0, 6.283); ctx.fill();   // visor
+  ctx.fillStyle = 'rgba(255,255,255,0.6)';
+  ctx.beginPath(); ctx.arc(s*0.2, -s*0.95, s*0.08, 0, 6.283); ctx.fill();
+  ctx.restore();
+}
+
+function drawRescue(hue){
+  const f = friend;
+  ctx.globalCompositeOperation = 'lighter';
+  // bullets
+  for(const b of bullets){
+    if(b.big){ drawGlow(b.x, b.y, 11, 25, 1); drawGlow(b.x, b.y, 4, 45, 1); }
+    else {
+      ctx.strokeStyle = 'rgba(255,90,110,0.95)'; ctx.lineWidth = 2.2;
+      ctx.beginPath(); ctx.moveTo(b.x - b.vx*2.2, b.y - b.vy*2.2); ctx.lineTo(b.x, b.y); ctx.stroke();
+      drawGlow(b.x, b.y, 6, 355, 0.8);
+    }
+  }
+  for(const g of drawGlowLater) drawGlow(g[0], g[1], g[2], g[3], g[4]);
+  drawGlowLater = [];
+  drawAftermath();
+  // our ship, with a shield flash when hit and its hull bar
+  if(f && f.state !== 'dead'){
+    if(f.state === 'drift'){
+      ctx.globalCompositeOperation = 'lighter';
+      const sh = 0.08 + f.hitT*1.6;
+      ctx.strokeStyle = `rgba(120,230,255,${Math.min(0.7, sh)})`; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.ellipse(f.x, f.y, f.r*1.6, f.r*1.15, 0, 0, 6.283); ctx.stroke();
+      ctx.globalCompositeOperation = 'source-over';
+    }
+    drawShipBody(f);
+    if(f.state === 'drift'){
+      const w = f.r*2.4, x = f.x - w/2, y = f.y - f.r*1.55 - 10, k = f.hp/f.maxHp;
+      ctx.fillStyle = 'rgba(4,10,22,0.75)'; ctx.fillRect(x - 1, y - 1, w + 2, 7);
+      ctx.fillStyle = k > 0.6 ? '#3ddc84' : k > 0.3 ? '#ffb547' : '#ff5f6d';
+      ctx.fillRect(x, y, w*k, 5);
+    }
+  }
+  // enemies, marked red; the one you can grab gets a ring
+  let near = null, nd = 1e9;
+  if(!grabbed && rPhase === 'fight'){
+    for(const e of enemies){
+      if(e.state === 'fall') continue;
+      const d = Math.hypot(e.x - attractor.tx, e.y - attractor.ty), reach = e.r*1.4 + (IS_TOUCH ? 60 : 38);
+      if(d < reach && d < nd){ nd = d; near = e; }
+    }
+  }
+  for(const e of enemies){
+    if(e.state !== 'fall'){
+      ctx.globalCompositeOperation = 'lighter';
+      drawGlow(e.x, e.y, e.r*1.5, 355, e.state === 'held' ? 0.35 : 0.18);
+      ctx.globalCompositeOperation = 'source-over';
+    }
+    drawShipBody(e);
+    if(e.state === 'held' && e.gripMax){
+      const k = Math.max(0, e.gripT/e.gripMax);
+      ctx.strokeStyle = k > 0.35 ? 'rgba(160,240,255,0.95)' : 'rgba(255,120,120,0.95)'; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.arc(e.x, e.y, e.r*1.7, -Math.PI/2, -Math.PI/2 + k*Math.PI*2); ctx.stroke();
+    }
+    if(e === near || e.state === 'held'){
+      ctx.strokeStyle = e.state === 'held' ? `hsla(${hue},100%,80%,0.9)` : 'rgba(255,255,255,0.55)';
+      ctx.lineWidth = 1.5; ctx.setLineDash([5, 5]);
+      ctx.beginPath(); ctx.arc(e.x, e.y, e.r*1.45, 0, 6.283); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+  }
+  // the grip: a bright line from you to the enemy you hold
+  if(grabbed){
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.strokeStyle = `hsla(${hue},100%,75%,0.7)`; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(attractor.x, attractor.y); ctx.lineTo(grabbed.x, grabbed.y); ctx.stroke();
+    ctx.globalCompositeOperation = 'source-over';
+  }
+  for(const b of bodies) drawBody(b);
+  ctx.globalAlpha = 1;
+}
+
+/* ---------------- crew monitor ---------------- */
+const monEl = document.getElementById('monitor'), monCv = document.getElementById('monCv');
+const monName = document.getElementById('monName'), monMsg = document.getElementById('monMsg'), monBar = document.getElementById('monBar');
+const monCtx = monCv.getContext('2d');
+let monText = '', monShown = 0, monSpeaker = 0, monNextT = 0, monMood = 'calm', monLost = false, monGlitch = 0, monLastKind = '';
+function moodOf(){ if(!friend) return 'calm'; const k = friend.hp/friend.maxHp; return k > 0.65 ? 'calm' : k > 0.32 ? 'scared' : 'panic'; }
+function fillMsg(s){ return s.replace('{ship}', friend ? friend.name : '').replace('{n}', friend ? friend.people : ''); }
+function monitorSay(kind){
+  const R = T().rescue, pool = R[kind]; if(!pool || !friend) return;
+  if(kind === 'kill' && (monShown < monText.length || monLastKind === 'thanks')) return;   // don't cut a sentence short
+  monSpeaker = kind === 'calm' ? 0 : (monSpeaker + 1) % friend.crew.length;
+  monText = fillMsg(pool[Math.floor(Math.random()*pool.length)]);
+  monShown = 0; monNextT = 4.5 + Math.random()*2.5; monLastKind = kind;
+  const c = friend.crew[monSpeaker];
+  monName.textContent = R.roles[c.role] + ' · ' + c.name + ' · ' + friend.name;
+}
+function monitorStart(){ monLost = false; monGlitch = 0.6; monMood = 'calm'; monEl.classList.remove('off','hurt','crit','lost'); monitorSay('calm'); }
+function monitorHit(){ monGlitch = Math.max(monGlitch, 0.35); }
+function monitorLost(){ monLost = true; monEl.classList.add('lost'); monText = T().rescue.signalLost; monShown = 0; }
+function updateMonitor(dt){
+  if(state !== STATE.PLAY || !friend){ monEl.classList.add('off'); return; }
+  monEl.classList.remove('off');
+  monGlitch = Math.max(0, monGlitch - dt);
+  if(!monLost && friend.state === 'drift'){
+    const m = moodOf();
+    if(m !== monMood){ monMood = m; monitorSay(m); }
+    monNextT -= dt;
+    if(monNextT <= 0 && monShown >= monText.length) monitorSay(monMood);
+  }
+  monShown = Math.min(monText.length, monShown + dt*42);
+  monMsg.textContent = monText.slice(0, Math.floor(monShown));
+  const k = friend.hp/friend.maxHp;
+  monBar.style.width = (k*100) + '%';
+  monEl.classList.toggle('hurt', k <= 0.65 && k > 0.32);
+  monEl.classList.toggle('crit', k <= 0.32 && !monLost);
+}
+function drawMonitor(now){
+  if(!friend || monEl.classList.contains('off')) return;
+  const S = Math.round(monCv.clientWidth*(DPR || 1)) || 84;
+  if(monCv.width !== S){ monCv.width = monCv.height = S; }
+  const g = monCtx, t = now/1000;
+  const dmg = 1 - friend.hp/friend.maxHp, panic = monMood === 'panic', scared = monMood === 'scared';
+  g.setTransform(1, 0, 0, 1, 0, 0);
+  g.fillStyle = '#04101a'; g.fillRect(0, 0, S, S);
+  if(!monLost){
+    const c = friend.crew[monSpeaker], L = c.look;
+    const shake = (panic ? 2.2 : scared ? 0.9 : 0.2)*S/84;
+    g.save();
+    g.translate(Math.sin(t*37)*shake, Math.cos(t*29)*shake);
+    const pic = crewPic(c.id, monMood) || crewPic(c.id, 'calm');
+    if(pic){ g.drawImage(pic, 0, 0, S, S); }
+    else {
+      // stand-in portrait until the real pictures arrive
+      g.fillStyle = '#0c2232'; g.fillRect(0, 0, S, S);
+      g.fillStyle = L.suit; g.beginPath(); g.ellipse(S*0.5, S*1.02, S*0.42, S*0.3, 0, 0, 6.283); g.fill();
+      if(L.cap){ g.fillStyle = '#e8c35a'; g.fillRect(S*0.14, S*0.8, S*0.14, S*0.05); g.fillRect(S*0.72, S*0.8, S*0.14, S*0.05); }
+      g.fillStyle = L.skin; g.fillRect(S*0.44, S*0.6, S*0.12, S*0.14);
+      if(L.female){ g.fillStyle = L.hair; g.beginPath(); g.ellipse(S*0.5, S*0.5, S*0.22, S*0.28, 0, 0, 6.283); g.fill(); }
+      g.fillStyle = L.skin; g.beginPath(); g.ellipse(S*0.5, S*0.44, S*0.16, S*0.2, 0, 0, 6.283); g.fill();
+      g.fillStyle = L.hair; g.beginPath(); g.ellipse(S*0.5, S*0.3, S*0.17, S*0.09, 0, 0, 6.283); g.fill();
+      if(L.beard){ g.fillStyle = L.hair; g.beginPath(); g.ellipse(S*0.5, S*0.56, S*0.12, S*0.08, 0, 0, 6.283); g.fill(); }
+      if(L.cap){ g.fillStyle = '#1b2f52'; g.fillRect(S*0.32, S*0.2, S*0.36, S*0.08); }
+      g.fillStyle = '#1a1a1a';
+      const eo = panic ? S*0.025 : S*0.018;
+      g.beginPath(); g.arc(S*0.44, S*0.43, eo, 0, 6.283); g.arc(S*0.56, S*0.43, eo, 0, 6.283); g.fill();
+      g.strokeStyle = '#5a2a22'; g.lineWidth = S*0.02;
+      g.beginPath();
+      if(panic){ g.ellipse(S*0.5, S*0.53, S*0.035, S*0.03, 0, 0, 6.283); } else if(scared){ g.moveTo(S*0.45, S*0.53); g.lineTo(S*0.55, S*0.53); } else { g.arc(S*0.5, S*0.5, S*0.05, 0.3, 2.8); }
+      g.stroke();
+    }
+    g.restore();
+    // red alarm light
+    if(panic && Math.sin(t*9) > 0){ g.fillStyle = 'rgba(255,40,50,0.18)'; g.fillRect(0, 0, S, S); }
+  }
+  // static: more of it as the ship gets hurt, all of it when the signal is lost
+  const noise = monLost ? 1 : Math.min(1, dmg*0.55 + monGlitch);
+  if(noise > 0.02){
+    const n = Math.round(S*S*0.02*noise*(monLost ? 6 : 1));
+    for(let i=0;i<n;i++){ const v = (Math.random()*255)|0; g.fillStyle = `rgba(${v},${v},${v},${monLost ? 0.9 : 0.5})`; g.fillRect(Math.random()*S, Math.random()*S, 2, 1); }
+    if(Math.random() < noise*0.5){ const y = Math.random()*S; g.drawImage(monCv, 0, y, S, S*0.08, (Math.random()-0.5)*S*0.12, y, S, S*0.08); }
+  }
+  // scanlines
+  g.fillStyle = 'rgba(0,0,0,0.22)';
+  for(let y=0;y<S;y+=3) g.fillRect(0, y, S, 1);
+  if(monLost){ g.fillStyle = 'rgba(0,0,0,0.5)'; g.fillRect(0, S*0.42, S, S*0.16); g.fillStyle = '#ff6d78'; g.font = `800 ${Math.round(S*0.11)}px Segoe UI, sans-serif`; g.textAlign = 'center'; g.fillText('NO SIGNAL', S/2, S*0.535); }
+}
+
+/* ---------------- audio ---------------- */
+let AC=null, muted = localStorage.getItem('swarm_mute')==='1';
+function audio(){ if(!AC){ try{ AC = new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} } return AC; }
+function tone(freq, dur, type, vol, glide){
+  if(muted) return; const ac=audio(); if(!ac) return;
+  const o=ac.createOscillator(), g=ac.createGain();
+  o.type=type||'sine'; o.frequency.value=freq;
+  if(glide) o.frequency.exponentialRampToValueAtTime(glide, ac.currentTime+dur);
+  g.gain.setValueAtTime(0, ac.currentTime);
+  g.gain.linearRampToValueAtTime(vol||0.12, ac.currentTime+0.012);
+  g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime+dur);
+  o.connect(g); g.connect(ac.destination); o.start(); o.stop(ac.currentTime+dur+0.02);
+}
+
+/* ---------------- game state ---------------- */
+const STATE = { MENU:0, PLAY:1, OVER:2 };
+let state = STATE.MENU;
+
+let attractor = { x:W/2, y:H/2, tx:W/2, ty:H/2, vx:0, vy:0 };
+let swarm = [];      // attached particles
+let motes = [];      // free particles
+let voids = [];      // enemies
+let repulsors = [];  // red pushers
+let gate = { x:0,y:0,r:46, phase:0, flash:0 };
+let absorb = [];     // particles being delivered
+let floaters = [];   // score popups
+let bursts = [];     // reward sparks
+let rings = [];      // expanding ring waves
+let clearing=false, clearT=0, clutch=false, newRecord=false;
+
+const bannerEl=document.getElementById('banner');
+const comboWrapEl=document.getElementById('comboWrap');
+const comboBarFill=document.getElementById('comboBarFill');
+const gradeEl=document.getElementById('grade');
+const recordEl=document.getElementById('record');
+
+function spawnBurst(x,y,n,hue,speed){
+  for(let i=0;i<n;i++){
+    const a=rnd(0,6.283), sp=rnd(0.6,speed);
+    bursts.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,life:rnd(0.35,0.85),hue:hue+rnd(-24,24),size:rnd(1.6,3.6)});
+  }
+}
+function spawnRing(x,y,hue,maxR,width,life){
+  rings.push({x,y,r:6,vr:maxR/(life||0.5),t:life||0.5,life:life||0.5,hue,width:width||2});
+}
+function showBanner(html,cls){
+  bannerEl.className=''; bannerEl.innerHTML=html;
+  bannerEl.classList.add(cls||'grad-cyan');
+  void bannerEl.offsetWidth; bannerEl.classList.add('pop');
+}
+function fanfare(base){
+  [0,4,7,12].forEach((st,i)=> setTimeout(()=>tone(base*Math.pow(2,st/12),0.22,'sine',0.1), i*90));
+}
+
+let level=1, delivered=0, need=10, timeLeft=30, score=0;
+let best = parseInt(localStorage.getItem('swarm_best')||'0',10);
+let combo=1, comboTimer=0;
+let pulseCd=0, pulseActive=0;
+let shakeless = true; // no screen shake (design choice)
+let deathFade=0;       // quiet tragic death staging
+
+const MAX_SWARM = 150;
+let pointerInside=false;
+
+function swarmHue(){
+  // cyan -> violet -> gold as swarm grows
+  const n = swarm.length;
+  const t = Math.min(n/90, 1);
+  return 190 + t*130; // 190 .. 320 -> then wrap to gold
+}
+function swarmHueGold(){
+  const n = swarm.length;
+  if(n < 90) return 190 + (n/90)*130;
+  return 45; // gold when huge
+}
+function curHue(){ return swarmHueGold(); }
+
+function rnd(a,b){ return a + Math.random()*(b-a); }
+
+function spawnMote(){
+  // spawn away from gate & attractor a bit
+  let x,y,tries=0;
+  do{ x=rnd(30,W-30); y=rnd(30,H-30); tries++; }
+  while(tries<8 && Math.hypot(x-gate.x,y-gate.y)<90);
+  motes.push({
+    x,y, vx:rnd(-0.25,0.25), vy:rnd(-0.25,0.25),
+    ph: rnd(0,6.28), hue: rnd(175,205), r: rnd(2.6,4.2), seed: Math.random()*1000
+  });
+}
+
+function resetLevel(){
+  swarm=[]; motes=[]; voids=[]; repulsors=[]; absorb=[]; floaters=[];
+  delivered=0;
+  combo=1; comboTimer=0; comboWrapEl.classList.remove('show');
+  gate.r = Math.max(34, Math.min(58, Math.min(W,H)*0.072));
+  gate.flash = 0;
+  gate.x = rnd(W*0.25, W*0.75); gate.y = rnd(H*0.32, H*0.7);
+  attractor.x = attractor.tx = W/2; attractor.y = attractor.ty = H*0.85;
+  attractor.vx = attractor.vy = 0;
+  lastTx = attractor.tx; lastTy = attractor.ty; pvx = pvy = 0;
+
+  // lights are for points
+  for(let i=0;i<26;i++) spawnMote();
+  // purple holes from level 4: they eat lights and swallow enemies too
+  const voidCount = level >= 7 ? 2 : level >= 4 ? 1 : 0;
+  for(let i=0;i<voidCount;i++){
+    let vx,vy,tries=0;
+    do{ vx=rnd(W*0.12,W*0.88); vy=rnd(H*0.2,H*0.85); tries++; }
+    while(tries<20 && Math.hypot(vx-gate.x,vy-gate.y)<170);
+    voids.push({ x: vx, y: vy, r: rnd(16,22), pull: rnd(60,80), vx: rnd(-0.25,0.25), vy: rnd(-0.25,0.25), spin: rnd(0,6.28) });
+  }
+  rescueSetup();
+  updateHUD();
+}
+
+function startGame(){
+  level=Math.max(1, Math.round(GOD.startLevel)); score=0; combo=1; comboTimer=0; deathFade=0;
+  lives=3; savedTotal=0; lostTotal=0; bodies=[]; fx=[]; wrecks=[]; debris=[];
+  clearing=false; clearT=0; newRecord=false; bursts=[]; rings=[];
+  comboWrapEl.classList.remove('show'); recordEl.classList.remove('show');
+  resetLevel();
+  state=STATE.PLAY;
+  menu.classList.add('hidden'); over.classList.add('hidden');
+  hud.classList.add('on');
+  pulseBtn.classList.toggle('on', IS_TOUCH);
+  toast(T().level+' '+level);
+  audio();
+}
+
+function nextLevel(){ level++; resetLevel(); }
+
+function gameOver(){
+  state=STATE.OVER;
+  deathFade=0.0001; // begin quiet fade
+  newRecord = score>best;
+  if(newRecord){ best=score; localStorage.setItem('swarm_best', String(best)); }
+  // soft tragic tone
+  tone(220,1.1,'sine',0.12,110);
+  setTimeout(()=>tone(150,1.4,'sine',0.09,70),180);
+  setTimeout(()=>{
+    hud.classList.remove('on'); pulseBtn.classList.remove('on');
+    comboWrapEl.classList.remove('show');
+    document.getElementById('finalStats').innerHTML = T().final(score, level, best, savedTotal, lostTotal);
+    // pompous grade reveal
+    const g = score>=12000?'S': score>=6000?'A': score>=2500?'B': score>=900?'C':'D';
+    gradeEl.textContent=g;
+    gradeEl.className = g==='S'?'grad-gold': g==='A'?'grad-cyan': g==='B'?'grad-pink':'grad-cyan';
+    gradeEl.classList.remove('reveal'); void gradeEl.offsetWidth; gradeEl.classList.add('reveal');
+    if(newRecord){
+      recordEl.textContent='★ '+T().record+' ★';
+      recordEl.classList.add('show');
+      spawnBurst(W/2,H*0.42,60,45,6);
+      spawnRing(W/2,H*0.42,45,260,4,0.8);
+      fanfare(784);
+    } else { recordEl.classList.remove('show'); }
+    over.classList.remove('hidden');
+  }, 1100);
+}
+
+/* ---------------- HUD ---------------- */
+const hud=document.getElementById('hud');
+const hLevel=document.getElementById('hLevel'), hSaved=document.getElementById('hSaved'),
+      hLives=document.getElementById('hLives'), hScore=document.getElementById('hScore');
+const comboEl=document.getElementById('combo');
+const menu=document.getElementById('menu'), over=document.getElementById('over');
+const pulseBtn=document.getElementById('pulseBtn');
+const toastEl=document.getElementById('toast');
+let toastT=0;
+function toast(msg,dur){ toastEl.textContent=msg; toastEl.classList.toggle('long', msg.length>22); toastEl.classList.add('show'); toastT=dur||1.6; }
+function updateHUD(){
+  hLevel.textContent=level; hSaved.textContent=savedTotal; hScore.textContent=score;
+  hLives.textContent='♥'.repeat(Math.max(0,lives)) + '♡'.repeat(Math.max(0,3-lives));
+}
+
+/* ---------------- input ---------------- */
+function setTarget(x,y){
+  attractor.tx=x; attractor.ty=y; pointerInside=true;
+}
+canvas.addEventListener('pointerdown', e=>{ audio(); setTarget(e.clientX,e.clientY); lastTx=e.clientX; lastTy=e.clientY; pointerDown=true; tryGrab(e.clientX,e.clientY); });
+window.addEventListener('pointerup', ()=>{ pointerDown=false; releaseGrab(); });
+window.addEventListener('pointercancel', ()=>{ pointerDown=false; releaseGrab(); });
+canvas.addEventListener('pointermove', e=>{ setTarget(e.clientX,e.clientY); });
+window.addEventListener('pointerdown', e=>{ if(state===STATE.PLAY) setTarget(e.clientX,e.clientY); });
+window.addEventListener('pointermove', e=>{ if(state===STATE.PLAY) setTarget(e.clientX,e.clientY); });
+
+function doPulse(){
+  if(pulseCd>0 || state!==STATE.PLAY) return;
+  pulseActive=0.45; pulseCd=3.2;
+  // pulse also knocks nearby enemies back for a moment
+  for(const en of enemies){ if(en.state==='fall'||en.state==='held') continue; const dx=en.x-attractor.x, dy=en.y-attractor.y, d=Math.hypot(dx,dy)||1; if(d<230){ en.vx+=dx/d*9/en.mass; en.vy+=dy/d*9/en.mass; en.dazed=1.2; } }
+  tone(300,0.3,'triangle',0.13,720);
+  pulseBtn.classList.add('cool');
+}
+window.addEventListener('keydown', e=>{
+  if(e.code==='Space'){ e.preventDefault(); if(state===STATE.PLAY) doPulse(); else if(state===STATE.MENU) startGame(); }
+});
+pulseBtn.addEventListener('pointerdown', e=>{ e.preventDefault(); e.stopPropagation(); doPulse(); });
+
+/* language buttons */
+function buildLangs(box){
+  [['en','EN'],['ka','ქართული'],['ru','RU'],['zh','中文']].forEach(([code,name])=>{
+    const b=document.createElement('div'); b.className='lang'; b.dataset.l=code; b.textContent=name;
+    b.addEventListener('click', ()=>{ LANG=code; applyLang(); if(state===STATE.OVER) document.getElementById('finalStats').innerHTML=T().final(score,level,best,savedTotal,lostTotal); });
+    box.appendChild(b);
+  });
+}
+buildLangs(document.getElementById('langs'));
+buildLangs(document.getElementById('langsOver'));
+
+document.getElementById('playBtn').addEventListener('click', startGame);
+document.getElementById('retryBtn').addEventListener('click', startGame);
+let menuView='main', soonKind='games';
+function showMenu(view){
+  menuView=view;
+  document.getElementById('menuMain').classList.toggle('off', view!=='main');
+  document.getElementById('menuHow').classList.toggle('off', view!=='how');
+  document.getElementById('menuAbout').classList.toggle('off', view!=='about');
+  document.getElementById('menuSoon').classList.toggle('off', view!=='soon');
+  if(view==='soon'){
+    document.getElementById('soonTitle').textContent = T()[soonKind==='web'?'website':soonKind==='support'?'support':'otherGames'];
+  }
+}
+document.getElementById('howBtn').addEventListener('click', ()=>showMenu('how'));
+document.getElementById('aboutBtn').addEventListener('click', ()=>showMenu('about'));
+document.getElementById('howBack').addEventListener('click', ()=>showMenu('main'));
+document.getElementById('aboutBack').addEventListener('click', ()=>showMenu('main'));
+document.getElementById('soonBack').addEventListener('click', ()=>showMenu('about'));
+document.querySelectorAll('[data-soon]').forEach(b=>{
+  b.addEventListener('click', ()=>{ soonKind=b.dataset.soon; showMenu('soon'); });
+});
+document.getElementById('menuBtn').addEventListener('click', ()=>{
+  state=STATE.MENU; over.classList.add('hidden'); hud.classList.remove('on');
+  pulseBtn.classList.remove('on'); menu.classList.remove('hidden');
+  showMenu('main');
+  clearing=false; bursts=[]; rings=[];
+  comboWrapEl.classList.remove('show'); recordEl.classList.remove('show'); bannerEl.className='';
+  swarm=[];motes=[];voids=[];repulsors=[];enemies=[];bullets=[];bodies=[];debris=[];fx=[];wrecks=[];friend=null;grabbed=null;
+  for(let i=0;i<40;i++) spawnMote();
+});
+const muteBtn=document.getElementById('muteBtn');
+muteBtn.addEventListener('click', ()=>{
+  muted=!muted; localStorage.setItem('swarm_mute', muted?'1':'0');
+  muteBtn.textContent = muted?'✕':'♪'; muteBtn.style.opacity = muted?0.5:1;
+});
+muteBtn.textContent = muted?'✕':'♪'; muteBtn.style.opacity = muted?0.5:1;
+
+/* background stars for menu */
+let stars=[]; for(let i=0;i<70;i++) stars.push({x:Math.random(),y:Math.random(),r:rnd(0.5,1.8),p:rnd(0,6.28)});
+let dust=[]; for(let i=0;i<56;i++) dust.push({
+  x:Math.random(), y:Math.random(),
+  r:rnd(0.4,1.35),
+  vx:rnd(-0.006,0.006), vy:rnd(-0.0035,0.0035),
+  a:rnd(0.12,0.38),
+  warm:Math.random()<0.62
+});
+
+/* Milky Way sky — computed pixel by pixel once per screen size, then laid under
+   every frame. No canvas gradients here: the browser dithers those with a fixed
+   pattern, and hundreds of them stacked showed up as a fine grid.
+   A glowing galactic band from lower left to upper right with dark dust rifts,
+   two distant nebulae, thousands of faint stars, a few bright ones, and the
+   dark vignette at the edges. */
+let skyCv = null, skyW = 0, skyH = 0;
+function skyNoise(seed){
+  const hash = (x, y) => { let h = (x*374761393 + y*668265263 + seed*2147483647) | 0; h = (h ^ (h >>> 13)) * 1274126177 | 0; return ((h ^ (h >>> 16)) >>> 0) / 4294967295; };
+  const vn = (x, y) => { const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi;
+    const u = xf*xf*(3 - 2*xf), v = yf*yf*(3 - 2*yf);
+    const a = hash(xi, yi), b = hash(xi+1, yi), c = hash(xi, yi+1), d = hash(xi+1, yi+1);
+    return a + (b - a)*u + (c - a)*v + (a - b - c + d)*u*v; };
+  return (x, y) => { let s = 0, amp = 0.5, f = 1; for(let o=0;o<5;o++){ s += amp*vn(x*f, y*f); f *= 2.03; amp *= 0.5; } return s; };
+}
+function buildSky(){
+  const sd = Math.min(DPR || 1, 1.5);
+  const cw = Math.ceil(W*sd), ch = Math.ceil(H*sd);
+  // the soft light is computed at half size and smoothed up; stars are added at full size
+  const hw = Math.ceil(cw/2), hh = Math.ceil(ch/2);
+  const half = document.createElement('canvas'); half.width = hw; half.height = hh;
+  const hg = half.getContext('2d');
+  const img = hg.createImageData(hw, hh), px = img.data;
+  const n1 = skyNoise(11), n2 = skyNoise(29), n3 = skyNoise(47);
+  const m = Math.min(hw, hh), L = Math.hypot(hw, hh);
+  const ang = -Math.atan2(hh, hw)*0.85, ca = Math.cos(ang), sa = Math.sin(ang);
+  const cx = hw*0.5, cy = hh*0.56, bw = m*0.2, coreU = L*0.06;
+  const neb = [[hw*0.14, hh*0.22, m*0.22, [70, 32, 105]], [hw*0.86, hh*0.8, m*0.22, [18, 70, 88]]];
+  const sc = 4/m;                                                     // noise scale
+  let i = 0;
+  for(let y=0;y<hh;y++){
+    for(let x=0;x<hw;x++, i+=4){
+      const dx = x - cx, dy = y - cy;
+      const u = dx*ca + dy*sa, v = -dx*sa + dy*ca;                     // along / across the band
+      const t1 = n1(x*sc, y*sc), t2 = n2(x*sc*2.2, y*sc*2.2);
+      const wob = (t1 - 0.5)*bw*0.5;
+      const band = Math.exp(-Math.pow((v + wob)/(bw*1.05), 2));
+      const core = Math.exp(-Math.pow((u - coreU)/(L*0.2), 2)) * Math.exp(-Math.pow(v/(bw*0.55), 2));
+      const clouds = 0.45 + 0.75*t2;
+      // dust rifts wander down the middle of the band
+      const rift = Math.sin(u/L*9 + 1.3)*bw*0.22 + Math.sin(u/L*23)*bw*0.08;
+      const dust = Math.exp(-Math.pow((v - rift)/(bw*0.26), 2)) * Math.max(0, n3(x*sc*1.6, y*sc*1.6)*1.9 - 0.55);
+      const glow = band*clouds*(1 - Math.min(0.85, dust*0.9));
+      const warm = Math.min(1, core*1.3);
+      let r = 4 + glow*(30 + 60*warm) + core*70*(1 - dust*0.6);
+      let g = 6 + glow*(34 + 40*warm) + core*52*(1 - dust*0.6);
+      let b = 15 + glow*(58 + 10*warm) + core*36*(1 - dust*0.6);
+      // a touch of violet in the clouds
+      const vio = band*Math.max(0, t1 - 0.55)*1.4;
+      r += vio*26; b += vio*30;
+      for(const q of neb){
+        const d = Math.hypot(x - q[0], y - q[1])/q[2];
+        const k = Math.exp(-d*d*1.6) * (0.5 + t2);
+        r += q[3][0]*k*0.5; g += q[3][1]*k*0.5; b += q[3][2]*k*0.5;
+      }
+      // dark vignette at the screen edges
+      const ex = (x/hw - 0.5)*2, ey = (y/hh - 0.5)*2, e = Math.max(0, Math.hypot(ex*0.8, ey) - 0.62);
+      const vg = 1 - Math.min(0.5, e*0.75);
+      const dn = Math.random() - 0.5;                                  // random dither, no pattern
+      px[i]   = r*vg + dn; px[i+1] = g*vg + dn; px[i+2] = b*vg + dn; px[i+3] = 255;
+    }
+  }
+  hg.putImageData(img, 0, 0);
+
+  const c = document.createElement('canvas'); c.width = cw; c.height = ch;
+  const g = c.getContext('2d');
+  g.imageSmoothingEnabled = true; g.imageSmoothingQuality = 'high';
+  g.drawImage(half, 0, 0, cw, ch);
+
+  // stars: denser inside the band
+  let seed = 20261027;
+  const R = () => (seed = (seed*16807) % 2147483647) / 2147483647;
+  const Lf = Math.hypot(cw, ch), bwf = Math.min(cw, ch)*0.2;
+  const angF = -Math.atan2(ch, cw)*0.85, cf = Math.cos(angF), sf = Math.sin(angF);
+  const gauss = () => (R() + R() + R() + R() - 2)*0.87;
+  g.globalCompositeOperation = 'lighter';
+  const dot = (x, y, s, rgb, a) => { g.fillStyle = `rgba(${rgb},${a})`; g.fillRect(x, y, s, s); };
+  for(let k=0;k<3200;k++){
+    const u = (R() - 0.5)*Lf*1.1, v = gauss()*bwf*0.9;
+    dot(cw*0.5 + u*cf - v*sf, ch*0.56 + u*sf + v*cf, 0.4 + R()*0.8, R()<0.6 ? '220,230,255' : '255,236,205', 0.15 + R()*0.5);
+  }
+  for(let k=0;k<Math.round(cw*ch/1300);k++) dot(R()*cw, R()*ch, 0.4 + R()*0.9, R()<0.7 ? '210,225,255' : '255,230,200', 0.12 + R()*0.55);
+  // a few bright stars: layered dots for the halo, small spikes on some
+  for(let k=0;k<34;k++){
+    const x = R()*cw, y = R()*ch, s = (0.8 + R()*1.3)*sd, rgb = R() < 0.35 ? '255,214,170' : '190,215,255';
+    for(let q=4;q>=1;q--){ g.fillStyle = `rgba(${rgb},${0.05})`; g.beginPath(); g.arc(x, y, s*q*1.6, 0, 6.283); g.fill(); }
+    g.fillStyle = `rgba(${rgb},0.95)`; g.beginPath(); g.arc(x, y, s*0.7, 0, 6.283); g.fill();
+    if(k % 5 === 0){
+      g.strokeStyle = `rgba(${rgb},0.3)`; g.lineWidth = 0.7*sd;
+      g.beginPath(); g.moveTo(x - s*9, y); g.lineTo(x + s*9, y); g.moveTo(x, y - s*9); g.lineTo(x, y + s*9); g.stroke();
+    }
+  }
+  g.globalCompositeOperation = 'source-over';
+  skyCv = c; skyW = W; skyH = H;
+}
+
+/* soft round glow made from real pixels (no dithered gradient), reused for the black hole bloom */
+const softGlowCv = (function(){
+  const S = 128, c = document.createElement('canvas'); c.width = c.height = S;
+  const g = c.getContext('2d'), img = g.createImageData(S, S), p = img.data;
+  for(let y=0, i=0;y<S;y++) for(let x=0;x<S;x++, i+=4){
+    const d = Math.hypot(x - S/2 + 0.5, y - S/2 + 0.5)/(S/2);
+    const a = d >= 1 ? 0 : Math.pow(1 - d, 2.2);
+    p[i] = 255; p[i+1] = 150; p[i+2] = 70; p[i+3] = Math.round(a*255);
+  }
+  g.putImageData(img, 0, 0);
+  return c;
+})();
+
+function drawAtmosphere(now){
+  const t=now*0.00005;
+  ctx.save();
+  ctx.globalCompositeOperation='source-over';
+  ctx.globalAlpha=1;
+  ctx.shadowBlur=0;
+
+  // (the Milky Way picture underneath is drawn by render)
+
+  // distant dust, dimmer than the playable motes
+  ctx.globalCompositeOperation='lighter';
+  for(const p of dust){
+    p.x+=p.vx*0.016; p.y+=p.vy*0.016;
+    if(p.x<0)p.x+=1; if(p.x>1)p.x-=1;
+    if(p.y<0)p.y+=1; if(p.y>1)p.y-=1;
+    const tw=0.65+0.35*Math.sin(now*0.0004+p.x*12);
+    ctx.globalAlpha=p.a*tw*0.55;
+    ctx.fillStyle=p.warm?'#e7b48a':'#9eb6d4';
+    ctx.beginPath();
+    ctx.arc(p.x*W, p.y*H, p.r, 0, 6.283);
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+/* film grain: a few noise tiles, drawn one screen pixel per grain (never stretched,
+   which is what made the old grain show as a grid on scaled screens), swapped and
+   shifted about 24 times a second so no tile edge or repeat can be seen */
+const GRAIN_TILE = 256, grainTiles = [];
+for(let k=0;k<4;k++){
+  const c = document.createElement('canvas'); c.width = c.height = GRAIN_TILE;
+  const g = c.getContext('2d'), img = g.createImageData(GRAIN_TILE, GRAIN_TILE), d = img.data;
+  for(let i=0;i<d.length;i+=4){
+    const n = 128 + (Math.random() + Math.random() + Math.random() - 1.5)*120;
+    d[i] = d[i+1] = d[i+2] = n; d[i+3] = 255;
+  }
+  g.putImageData(img, 0, 0);
+  grainTiles.push(c);
+}
+let grainK = 0, grainOx = 0, grainOy = 0, grainTick = -1;
+function drawFilmGrade(now){
+  // (the edge vignette is part of the sky picture)
+  const tick = (now/42)|0;
+  if(tick !== grainTick){ grainTick = tick; grainK = (Math.random()*grainTiles.length)|0; grainOx = (Math.random()*GRAIN_TILE)|0; grainOy = (Math.random()*GRAIN_TILE)|0; }
+  const gs = Math.max(1, Math.round(DPR || 1)), step = GRAIN_TILE*gs;    // whole screen pixels only
+  ctx.save();
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.imageSmoothingEnabled = false;
+  ctx.globalCompositeOperation = 'soft-light';
+  ctx.globalAlpha = 0.16;
+  const tile = grainTiles[grainK], cw = canvas.width, ch = canvas.height;
+  for(let y = -grainOy*gs; y < ch; y += step)
+    for(let x = -grainOx*gs; x < cw; x += step)
+      ctx.drawImage(tile, x, y, step, step);
+  ctx.restore();
+}
+for(let i=0;i<40;i++) spawnMote(); // idle menu motes
+
+/* ---------------- physics update ---------------- */
+function update(dt){
+  // attractor spring (weighty, delayed)
+  const stiff=0.018, damp=0.86;
+  attractor.vx += (attractor.tx-attractor.x)*stiff;
+  attractor.vy += (attractor.ty-attractor.y)*stiff;
+  attractor.vx*=damp; attractor.vy*=damp;
+  attractor.x += attractor.vx; attractor.y += attractor.vy;
+
+  if(pulseActive>0) pulseActive-=dt;
+  if(pulseCd>0){ pulseCd-=dt; if(pulseCd<=0) pulseBtn.classList.remove('cool'); }
+  if(comboTimer>0){ comboTimer-=dt; if(comboTimer<=0) combo=1; }
+
+  const grabR = pulseActive>0 ? 230 : 120;
+
+  // free motes
+  for(let i=motes.length-1;i>=0;i--){
+    const m=motes[i];
+    m.ph+=dt*2;
+    // gentle wander
+    m.vx += Math.cos(m.ph*0.6+m.seed)*0.004;
+    m.vy += Math.sin(m.ph*0.5+m.seed)*0.004;
+    // attraction
+    const dx=attractor.x-m.x, dy=attractor.y-m.y; const d=Math.hypot(dx,dy)||1;
+    if(d<grabR){
+      const f=(1-d/grabR)*0.55;
+      m.vx += dx/d*f; m.vy += dy/d*f;
+    }
+    m.vx*=0.94; m.vy*=0.94;
+    m.x+=m.vx; m.y+=m.vy;
+    // wrap softly
+    if(m.x<-20)m.x=W+20; if(m.x>W+20)m.x=-20; if(m.y<-20)m.y=H+20; if(m.y>H+20)m.y=-20;
+    // attach
+    if(d<26 && swarm.length<MAX_SWARM){
+      swarm.push({x:m.x,y:m.y,vx:m.vx,vy:m.vy,ph:rnd(0,6.28),r:rnd(2.4,3.8),ang:rnd(0,6.28),orb:rnd(16,60)});
+      motes.splice(i,1);
+      score+=1; updateHUD();
+      spawnBurst(m.x,m.y,4,m.hue,2.2);
+      spawnRing(m.x,m.y,m.hue,26,1.5,0.35);
+      tone(rnd(520,760),0.07,'sine',0.05);
+      if(motes.length < need+8) spawnMote();
+    }
+  }
+
+  // swarm particles: swirl around attractor (iterate backwards: splice-safe)
+  const hue=curHue();
+  const blobR = 14 + Math.sqrt(swarm.length)*3.4;
+  for(let i=swarm.length-1;i>=0;i--){
+    const p=swarm[i];
+    const dx=attractor.x-p.x, dy=attractor.y-p.y; const d=Math.hypot(dx,dy)||1;
+    // spring toward blob shell
+    let f=0;
+    if(d>blobR) f=0.08; else f=-0.05*(1-d/blobR);
+    p.vx += dx/d*f; p.vy += dy/d*f;
+    // tangential swirl
+    p.vx += -dy/d*0.035; p.vy += dx/d*0.035;
+    // follow attractor momentum slightly
+    p.vx += attractor.vx*0.004; p.vy += attractor.vy*0.004;
+    p.vx*=0.90; p.vy*=0.90;
+    p.x+=p.vx; p.y+=p.vy;
+
+    // voids eat
+    let eaten=false;
+    for(const v of voids){
+      const vdx=v.x-p.x, vdy=v.y-p.y; const vd=Math.hypot(vdx,vdy)||1;
+      if(vd<v.pull){
+        const vf=(1-vd/v.pull)*0.5;
+        p.vx -= vdx/vd*vf*-1*0; // placeholder
+        // pull toward void
+        p.vx += vdx/vd*vf; p.vy += vdy/vd*vf;
+      }
+      if(vd<v.r*0.7){ eaten=true; }
+    }
+    // repulsors push
+    for(const rp of repulsors){
+      const rdx=p.x-rp.x, rdy=p.y-rp.y; const rd=Math.hypot(rdx,rdy)||1;
+      if(rd<rp.r*2.4){ const rf=(1-rd/(rp.r*2.4))*0.6; p.vx+=rdx/rd*rf; p.vy+=rdy/rd*rf; }
+    }
+    if(eaten){
+      swarm.splice(i,1);
+      // tiny dark puff
+      floaters.push({x:p.x,y:p.y,t:0.5,txt:'',dark:true});
+      tone(rnd(120,180),0.12,'sawtooth',0.05,80);
+      continue;
+    }
+
+    // gate delivery
+    const gdx=gate.x-p.x, gdy=gate.y-p.y; const gd=Math.hypot(gdx,gdy)||1;
+    if(gd<gate.r){
+      swarm.splice(i,1);
+      absorb.push({x:p.x,y:p.y,hue});
+    }
+  }
+
+  updateRescue(dt);
+  updateMonitor(dt);
+
+  // absorb animation -> deliver
+  for(let i=absorb.length-1;i>=0;i--){
+    const a=absorb[i];
+    const dx=gate.x-a.x, dy=gate.y-a.y; const d=Math.hypot(dx,dy)||1;
+    a.x+=dx/d*7; a.y+=dy/d*7; a.t=(a.t||0)+dt;
+    if(d<8 || a.t>0.6){
+      absorb.splice(i,1);
+      delivered++;
+      comboTimer=1.6; combo=Math.min(combo+1, 20);
+      const gain=10*combo; score+=gain;
+      floaters.push({x:gate.x+rnd(-20,20),y:gate.y-20,t:1.0,txt:'+'+gain});
+      spawnBurst(gate.x,gate.y,10,140,4.2);
+      spawnRing(gate.x,gate.y,140,70,2.5,0.45);
+      if(combo>=3){
+        comboEl.textContent='x'+combo;
+        comboWrapEl.classList.add('show');
+        comboEl.classList.add('bump'); setTimeout(()=>comboEl.classList.remove('bump'),120);
+      }
+      tone(440+combo*45,0.1,'sine',0.09);
+      updateHUD();
+    }
+  }
+
+  // voids drift & bounce
+  for(const v of voids){
+    v.spin+=dt*1.5;
+    v.x+=v.vx; v.y+=v.vy;
+    if(v.x<40||v.x>W-40) v.vx*=-1;
+    if(v.y<40||v.y>H-40) v.vy*=-1;
+    v.x=Math.max(30,Math.min(W-30,v.x)); v.y=Math.max(30,Math.min(H-30,v.y));
+  }
+  for(const rp of repulsors) rp.ph+=dt*2;
+
+  // floaters
+  for(let i=floaters.length-1;i>=0;i--){
+    const f=floaters[i]; f.t-=dt; f.y-=dt*22;
+    if(f.t<=0) floaters.splice(i,1);
+  }
+
+  gate.phase+=dt*2;
+  gate.flash=Math.max(0, gate.flash-dt*1.4);
+  updateHUD();
+}
+
+/* ---------------- render ---------------- */
+function render(){
+  // Fade the previous frame. Alpha must stay above 0.5: a gentler fade
+  // rounds back to the same pixel and leaves a permanent smear where
+  // the swarm moved, which only a full canvas reset used to clear.
+  ctx.globalCompositeOperation='source-over';
+  ctx.globalAlpha=1;
+  ctx.shadowBlur=0;
+  if(!skyCv || skyW!==W || skyH!==H) buildSky();
+  ctx.globalAlpha=0.58;
+  ctx.drawImage(skyCv,0,0,W,H);
+  ctx.globalAlpha=1;
+
+  drawAtmosphere(performance.now());
+
+  ctx.globalCompositeOperation='lighter';
+
+  // background stars
+  for(const s of stars){
+    const a=0.25+0.25*Math.sin(s.p+performance.now()*0.001);
+    ctx.globalAlpha=a*0.5; ctx.fillStyle='#8fb6ff';
+    ctx.beginPath(); ctx.arc(s.x*W, s.y*H, s.r, 0, 6.28); ctx.fill();
+  }
+  ctx.globalAlpha=1;
+
+  const hue = state===STATE.PLAY ? curHue() : 195;
+
+  // delivery target — glowing black hole (capture radius is still gate.r)
+  if(state===STATE.PLAY || state===STATE.OVER){
+    drawGateBlackHole(gate.x, gate.y, gate.r*0.92, gate.phase, 0, gate.flash);
+  } else if(state===STATE.MENU){
+    drawGateBlackHole(W*0.5, H*0.5, Math.min(W,H)*0.12, gate.phase, 0, 0);
+  }
+
+  // repulsors
+  for(const rp of repulsors){
+    const pulse=1+Math.sin(rp.ph)*0.12;
+    drawGlow(rp.x,rp.y,rp.r*1.9*pulse,355,0.4);
+    ctx.strokeStyle='rgba(255,110,130,0.7)'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.arc(rp.x,rp.y,rp.r*pulse,0,6.28); ctx.stroke();
+  }
+
+  // voids (black holes) — draw dark core with accretion glow
+  for(const v of voids){
+    drawGlow(v.x,v.y,v.r*3.4,275,0.45);
+    ctx.globalCompositeOperation='source-over';
+    ctx.fillStyle='#03040c';
+    ctx.beginPath(); ctx.arc(v.x,v.y,v.r,0,6.28); ctx.fill();
+    ctx.globalCompositeOperation='lighter';
+    ctx.strokeStyle='rgba(190,140,255,0.6)'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.arc(v.x,v.y,v.r,v.spin,v.spin+4.2); ctx.stroke();
+  }
+
+  // free motes
+  for(const m of motes){
+    drawGlow(m.x,m.y,m.r*4.5,m.hue,0.9);
+  }
+
+  // our ship, the enemies, their fire, and the crew if the ship is lost
+  if(state===STATE.PLAY || state===STATE.OVER){
+    drawRescue(hue);
+    ctx.globalCompositeOperation='lighter';
+  }
+
+  // swarm
+  for(const p of swarm){
+    drawGlow(p.x,p.y,p.r*5,hue,1);
+  }
+  // attractor core
+  if(state===STATE.PLAY){
+    const coreR = pulseActive>0 ? 30 : 20;
+    drawGlow(attractor.x,attractor.y,coreR*2.4,hue,1);
+    ctx.strokeStyle=`hsla(${hue},100%,85%,0.9)`; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.arc(attractor.x,attractor.y,10,0,6.28); ctx.stroke();
+    if(pulseActive>0){
+      ctx.strokeStyle=`hsla(${hue},100%,80%,${pulseActive*1.6})`; ctx.lineWidth=2;
+      ctx.beginPath(); ctx.arc(attractor.x,attractor.y,210*(1-pulseActive/0.45)+20,0,6.28); ctx.stroke();
+    }
+  }
+
+  // absorbing particles
+  for(const a of absorb){ drawGlow(a.x,a.y,12,140,0.9); }
+
+  // reward sparks & ring waves
+  for(const b of bursts){ drawGlow(b.x,b.y,b.size*4,b.hue,Math.max(b.life,0)); }
+  for(const r of rings){
+    const a=Math.max(r.t/r.life,0);
+    ctx.strokeStyle=`hsla(${r.hue},100%,75%,${a*0.8})`; ctx.lineWidth=r.width*a+0.5;
+    ctx.beginPath(); ctx.arc(r.x,r.y,r.r,0,6.283); ctx.stroke();
+  }
+
+  // floaters
+  ctx.globalCompositeOperation='source-over';
+  for(const f of floaters){
+    if(f.dark) continue;
+    ctx.globalAlpha=Math.max(f.t,0);
+    ctx.fillStyle='#fff3c4'; ctx.font=f.big?'800 24px Segoe UI, sans-serif':'700 18px Segoe UI, sans-serif'; ctx.textAlign='center';
+    ctx.fillText(f.txt,f.x,f.y);
+  }
+  ctx.globalAlpha=1;
+
+  // quiet death staging: swarm fades away slowly, gentle
+  if(state===STATE.OVER && deathFade>0){
+    deathFade=Math.min(deathFade+0.012,1);
+    ctx.globalCompositeOperation='lighter';
+    for(const p of swarm){
+      p.x+=p.vx*0.4; p.y+=p.vy*0.4 - 0.2;
+      drawGlow(p.x,p.y,p.r*5*(1-deathFade*0.6),hue,(1-deathFade)*0.9);
+    }
+    if(deathFade>=1) swarm=[];
+  }
+  ctx.globalCompositeOperation='source-over';
+
+  drawFilmGrade(performance.now());
+  if(state===STATE.PLAY) drawMonitor(performance.now()); else monEl.classList.add('off');
+
+  // combo fade + urgency bar
+  if(comboTimer<=0){ comboWrapEl.classList.remove('show'); }
+  else { comboBarFill.style.transform='scaleX('+(comboTimer/1.6)+')'; }
+  if(toastT>0){ toastT-=1/60; if(toastT<=0) toastEl.classList.remove('show'); }
+}
+
+/* ---------------- loop ---------------- */
+let last=performance.now();
+function loop(now){
+  const dt=Math.min((now-last)/1000,0.05); last=now;
+  // reward sparks & ring waves advance in every state
+  for(let i=bursts.length-1;i>=0;i--){ const b=bursts[i]; b.x+=b.vx; b.y+=b.vy; b.vx*=0.92; b.vy*=0.92; b.life-=dt; if(b.life<=0) bursts.splice(i,1); }
+  for(let i=rings.length-1;i>=0;i--){ const r=rings[i]; r.r+=r.vr*dt; r.t-=dt; if(r.t<=0) rings.splice(i,1); }
+  if(state===STATE.PLAY){
+    if(clearing){ clearT-=dt; update(dt*0.35); if(clearT<=0){ clearing=false; nextLevel(); } }
+    else update(dt);
+  } else if(state===STATE.MENU){
+    // idle ambient motion of attractor
+    attractor.tx=W/2+Math.cos(now*0.0004)*W*0.25;
+    attractor.ty=H/2+Math.sin(now*0.0006)*H*0.2;
+    attractor.vx += (attractor.tx-attractor.x)*0.01; attractor.vy += (attractor.ty-attractor.y)*0.01;
+    attractor.vx*=0.9; attractor.vy*=0.9; attractor.x+=attractor.vx; attractor.y+=attractor.vy;
+    for(const m of motes){
+      m.ph+=dt*2; m.x+=Math.cos(m.ph*0.6+m.seed)*0.3; m.y+=Math.sin(m.ph*0.5+m.seed)*0.3;
+      const dx=attractor.x-m.x,dy=attractor.y-m.y,d=Math.hypot(dx,dy)||1;
+      if(d<120){ m.vx+=dx/d*0.05; m.vy+=dy/d*0.05; }
+      m.vx*=0.95;m.vy*=0.95;m.x+=m.vx;m.y+=m.vy;
+      if(m.x<-20)m.x=W+20;if(m.x>W+20)m.x=-20;if(m.y<-20)m.y=H+20;if(m.y>H+20)m.y=-20;
+    }
+    gate.phase+=dt*2;
+  } else if(state===STATE.OVER){
+    // voids keep drifting quietly
+    for(const v of voids){ v.spin+=dt; v.x+=v.vx*0.4; v.y+=v.vy*0.4;
+      if(v.x<40||v.x>W-40)v.vx*=-1; if(v.y<40||v.y>H-40)v.vy*=-1; }
+    for(const m of motes){ m.ph+=dt*2; m.x+=Math.cos(m.ph*0.6+m.seed)*0.3; m.y+=Math.sin(m.ph*0.5+m.seed)*0.3; }
+    updateAftermath(dt);
+  }
+  render();
+  requestAnimationFrame(loop);
+}
+applyLang();
+window.__dbg = { startGame, tryGrab, releaseGrab, get enemies(){return enemies;}, get friend(){return friend;}, get rPhase(){return rPhase;}, get lives(){return lives;}, get savedTotal(){return savedTotal;}, get bodies(){return bodies;}, get attractor(){return attractor;}, get gate(){return gate;}, get swarm(){return swarm;}, get motes(){return motes;}, get state(){return state;}, get level(){return level;}, get score(){return score;}, setTarget, gameOver };
+requestAnimationFrame(loop);
+
+})();
+</script>
+</body>
+</html>

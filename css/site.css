@@ -1,0 +1,175 @@
+/* 6 finger games — shared site style (dark, store-like) */
+:root{
+  --bg:#101014;
+  --bg2:#18181c;
+  --card:#1c1c21;
+  --card-hi:#26262c;
+  --line:#2c2c33;
+  --text:#ffffff;
+  --muted:#a7a7b0;
+  --dim:#6f6f78;
+  --accent:#26bbff;
+  --accent-hi:#61cdff;
+  --green:#3ddc84;
+  --amber:#ffb547;
+  --radius:14px;
+  --side:248px;
+  --top:64px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;background:var(--bg);color:var(--text);
+  font:15px/1.5 "Segoe UI",Inter,Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit}
+
+/* ---------- top bar ---------- */
+.topbar{position:sticky;top:0;z-index:20;height:var(--top);display:flex;align-items:center;gap:14px;
+  padding:0 24px;background:rgba(16,16,20,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:16px}
+.brand img{width:40px;height:40px}
+.topbar .grow{flex:1}
+.topbar .toplink{color:var(--muted);font-weight:600;padding:8px 12px;border-radius:8px}
+.topbar .toplink:hover{color:var(--text);background:var(--card)}
+
+/* ---------- layout ---------- */
+.shell{display:flex;min-height:calc(100vh - var(--top))}
+.side{position:sticky;top:var(--top);align-self:flex-start;width:var(--side);flex:none;height:calc(100vh - var(--top));
+  padding:20px 14px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:4px;overflow:auto}
+.side .navlabel{color:var(--dim);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:8px 12px 6px}
+.nav a{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;color:var(--muted);font-weight:600}
+.nav a svg{width:20px;height:20px;flex:none;opacity:.85}
+.nav a:hover{background:var(--card);color:var(--text)}
+.nav a.on{background:var(--card-hi);color:var(--text)}
+.nav a.on svg{opacity:1;color:var(--accent)}
+.nav a .count{margin-left:auto;font-size:12px;color:var(--dim);font-weight:700}
+.side .sidefoot{margin-top:auto;padding:12px;color:var(--dim);font-size:13px;line-height:1.7}
+.side .sidefoot a:hover{color:var(--text)}
+
+main{flex:1;min-width:0;padding:36px 40px 60px}
+.page{max-width:1240px;margin:0 auto}
+
+/* ---------- headings ---------- */
+h1.big{font-size:44px;line-height:1.08;font-weight:800;letter-spacing:-.02em;margin:0 0 8px}
+.lead{color:var(--muted);font-size:17px;margin:0 0 30px;max-width:720px}
+.section{margin:0 0 46px}
+.section-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin:0 0 16px}
+.section-head h2{font-size:26px;font-weight:800;letter-spacing:-.01em;margin:0}
+.section-head p{color:var(--muted);margin:0}
+.section-head .more{margin-left:auto;color:var(--accent);font-weight:700;font-size:14px;white-space:nowrap}
+.section-head .more:hover{color:var(--accent-hi)}
+
+/* ---------- game cards ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:18px}
+.card{display:flex;gap:18px;padding:12px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  transition:background .15s,border-color .15s,transform .15s}
+a.card:hover{background:var(--card-hi);border-color:#3a3a43;transform:translateY(-2px)}
+.card .thumb{width:150px;height:150px;flex:none;border-radius:10px;object-fit:cover;background:#0c0c0f}
+.card .body{display:flex;flex-direction:column;justify-content:center;min-width:0;padding:4px 6px 4px 0}
+.card .icon{width:36px;height:36px;border-radius:8px;object-fit:contain;margin:0 0 10px}
+.card h3{margin:0 0 6px;font-size:18px;font-weight:800;letter-spacing:-.01em}
+.card p{margin:0;color:var(--muted);font-size:14.5px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.card .tags{align-self:flex-start}
+.empty{padding:28px;border:1px dashed var(--line);border-radius:var(--radius);color:var(--dim);text-align:center}
+
+/* contact cards */
+.card.contact{align-items:center}
+.card.contact .cicon{width:64px;height:64px;flex:none;border-radius:12px;background:var(--bg2);display:grid;place-items:center;color:var(--accent)}
+.card.contact .cicon svg{width:30px;height:30px}
+
+/* ---------- tags / buttons ---------- */
+.tag{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:6px;background:var(--bg2);color:var(--muted)}
+.tag.online{color:var(--green);background:rgba(61,220,132,.12)}
+.tag.download{color:var(--accent);background:rgba(38,187,255,.12)}
+.tag.soon{color:var(--amber);background:rgba(255,181,71,.12)}
+.tag.free{color:#04210f;background:var(--green)}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:13px 18px;border-radius:10px;border:0;cursor:pointer;
+  font-weight:800;font-size:15px;background:var(--card-hi);color:var(--text);transition:background .15s}
+.btn:hover{background:#33333b}
+.btn.primary{background:var(--accent);color:#06121a}
+.btn.primary:hover{background:var(--accent-hi)}
+.btn svg{width:18px;height:18px}
+.btn.disabled{background:var(--bg2);color:var(--dim);cursor:default}
+
+/* ---------- game page ---------- */
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-weight:600;margin:0 0 18px}
+.back:hover{color:var(--text)}
+.gtitle{display:flex;align-items:center;gap:14px;margin:0 0 22px}
+.gtitle img{width:52px;height:52px;border-radius:10px}
+.gtitle h1{margin:0;font-size:38px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.gtitle h1 .sub{display:block;margin-top:4px;font-size:16px;font-weight:700;letter-spacing:.01em;color:var(--green)}
+.section-head h2 a:hover{color:var(--accent)}
+.gtext .about-p{color:#d4d4da;margin:0 0 24px;font-size:16px}
+.faq{margin:4px 0 26px}
+.faq dt{font-weight:800;margin:14px 0 4px}
+.faq dd{margin:0;color:#c9c9d1}
+.langline{color:var(--dim);font-size:13px;margin:10px 0 0}
+.gwrap{display:grid;grid-template-columns:minmax(0,1fr) 330px;grid-template-areas:"media panel" "text panel";column-gap:32px;align-items:start}
+.gmedia{grid-area:media}.gtext{grid-area:text}.panel{grid-area:panel}
+.hero{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius);background:#0c0c0f}
+.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:12px 0 30px}
+.shots button{padding:0;border:2px solid transparent;border-radius:10px;overflow:hidden;cursor:pointer;background:none}
+.shots button:hover,.shots button.on{border-color:var(--accent)}
+.shots img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.gwrap h2{font-size:22px;margin:0 0 10px;font-weight:800}
+.gtext h2{margin-top:26px}
+.gtext .about h2{margin-top:0}
+.gwrap .about p{color:#d4d4da;margin:0 0 12px;font-size:16px}
+.gwrap ul.feat{margin:6px 0 28px;padding:0;list-style:none}
+.gwrap ul.feat li{position:relative;padding:8px 0 8px 26px;border-bottom:1px solid var(--line);color:#d4d4da}
+.gwrap ul.feat li:before{content:"";position:absolute;left:4px;top:15px;width:9px;height:9px;border-radius:2px;background:var(--accent);transform:rotate(45deg)}
+.panel{position:sticky;top:calc(var(--top) + 24px);display:flex;flex-direction:column;gap:12px}
+.panel .tags{margin:0 0 4px}
+.panel .freeline{margin:0;color:var(--muted);font-size:13px;text-align:center}
+.panel .logo{width:100%;max-height:150px;object-fit:contain;margin:0 0 6px}
+.panel .meta{margin:8px 0 0;border-top:1px solid var(--line)}
+.panel .meta div{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.panel .meta span:first-child{color:var(--muted)}
+.panel .meta span:last-child{text-align:right}
+.notfound{padding:60px 0;color:var(--muted)}
+
+/* lightbox */
+.lightbox{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
+.lightbox.on{display:flex}
+.lightbox img{max-width:min(1400px,100%);max-height:100%;border-radius:10px}
+
+/* ---------- text pages (privacy) ---------- */
+.doc{max-width:780px}
+.doc h1{font-size:38px;font-weight:800;margin:0 0 4px;letter-spacing:-.02em}
+.doc .date{color:var(--dim);margin:0 0 24px}
+.doc h2{font-size:20px;margin:28px 0 8px}
+.doc p{color:#d4d4da;margin:0 0 12px;font-size:16px;line-height:1.65}
+.doc a{color:var(--accent)}
+
+.foot{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);color:var(--dim);font-size:13px;display:flex;flex-wrap:wrap;gap:6px 18px}
+.foot a:hover{color:var(--text)}
+
+/* ---------- phones / small screens ---------- */
+@media (max-width:900px){
+  .gwrap{grid-template-columns:1fr;grid-template-areas:"media" "panel" "text"}
+  .panel{margin:0 0 30px}
+  .panel{position:static}
+}
+@media (max-width:760px){
+  :root{--top:56px}
+  .topbar{padding:0 16px}
+  .topbar .toplink{display:none}
+  .brand img{width:34px;height:34px}
+  .shell{display:block}
+  .side{position:sticky;top:var(--top);z-index:10;width:auto;height:auto;flex-direction:row;padding:8px 12px;gap:6px;
+    border-right:0;border-bottom:1px solid var(--line);background:var(--bg);overflow-x:auto}
+  .side .navlabel,.side .sidefoot{display:none}
+  .nav{display:flex;gap:6px}
+  .nav a{white-space:nowrap;padding:8px 12px}
+  .nav a .count{display:none}
+  main{padding:24px 16px 48px}
+  h1.big{font-size:32px}
+  .section-head p{width:100%}
+  .grid{grid-template-columns:1fr}
+  .card .thumb{width:104px;height:104px}
+  .card .icon{display:none}
+  .card h3{font-size:17px}
+  .gtitle h1{font-size:28px}
+}
