@@ -66,6 +66,11 @@ h1.big{font-size:44px;line-height:1.08;font-weight:800;letter-spacing:-.02em;mar
   transition:background .15s,border-color .15s,transform .15s}
 a.card:hover{background:var(--card-hi);border-color:#3a3a43;transform:translateY(-2px)}
 .card .thumb{width:150px;height:150px;flex:none;border-radius:10px;object-fit:cover;background:#0c0c0f}
+.card .tcol{flex:none;display:flex;flex-direction:column;gap:6px}
+.plats{display:flex;justify-content:center;gap:6px;flex-wrap:wrap}
+.plat{display:inline-flex;align-items:center;justify-content:center;width:30px;height:24px;border-radius:6px;background:var(--bg2);color:var(--muted);transition:color .15s}
+.plat svg{width:16px;height:16px}
+.card:hover .plat{color:#fff}
 .card .body{display:flex;flex-direction:column;justify-content:center;min-width:0;padding:4px 6px 4px 0}
 .card .icon{width:36px;height:36px;border-radius:8px;object-fit:contain;margin:0 0 10px}
 .card h3{margin:0 0 6px;font-size:18px;font-weight:800;letter-spacing:-.01em}
@@ -113,6 +118,21 @@ a.card:hover{background:var(--card-hi);border-color:#3a3a43;transform:translateY
 .shots button{padding:0;border:2px solid transparent;border-radius:10px;overflow:hidden;cursor:pointer;background:none}
 .shots button:hover,.shots button.on{border-color:var(--accent)}
 .shots img{width:100%;aspect-ratio:16/9;object-fit:cover}
+/* videos in the gallery */
+.stage .hero[hidden],.vbox[hidden]{display:none}
+.vbox{position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;background:#000}
+.vbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vbox iframe.vertical{left:50%;width:auto;aspect-ratio:9/16;transform:translateX(-50%)}
+.vposter{position:absolute;inset:0;display:block;background:#0c0c0f center/cover no-repeat;cursor:pointer}
+.vposter:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),rgba(0,0,0,0) 45%)}
+.vplay{position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;background:rgba(16,16,20,.72);border:2px solid rgba(255,255,255,.85);z-index:1;transition:transform .15s,background .15s}
+.vplay:before{content:"";position:absolute;left:30px;top:22px;border-style:solid;border-width:16px 0 16px 25px;border-color:transparent transparent transparent #fff}
+.vposter:hover .vplay{transform:scale(1.08);background:var(--accent)}
+.vlabel{position:absolute;left:18px;bottom:14px;z-index:1;font-weight:800;font-size:18px;text-shadow:0 1px 6px rgba(0,0,0,.6)}
+.shots .vthumb{position:relative}
+.vplay.small{width:34px;height:34px;margin:-17px 0 0 -17px;border-width:1.5px}
+.vplay.small:before{left:13px;top:9px;border-width:7px 0 7px 11px}
+.vtag{position:absolute;left:6px;bottom:5px;font-size:11px;font-weight:800;background:rgba(0,0,0,.65);padding:1px 7px;border-radius:5px;color:#fff}
 .gwrap h2{font-size:22px;margin:0 0 10px;font-weight:800}
 .gtext h2{margin-top:26px}
 .gtext .about h2{margin-top:0}
