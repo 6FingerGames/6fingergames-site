@@ -398,12 +398,18 @@
     spawnUntil = WATER_Y + 200;
     floats.length = 0;
     chestSlots.clear();
+    for (const k in lastHaz) delete lastHaz[k];
+    hazYs.length = 0; lastBig = -1e9;
     // a welcoming shallow field
     for (let i = 0; i < 8; i++) spawnEntity(WATER_Y + 60 + i * 40);
   }
 
   let spawnUntil = WATER_Y + 200;
   const chestSlots = new Set();   // reef slots that already hold a treasure chest
+  // minimum vertical gap (world px) between two hazards of the same kind
+  const HAZ_GAP = { shark: 700, angler: 600, barracuda: 350, sail: 350, squid: 300, efish: 250, mine: 220, puffer: 200, jelly: 160, piranha: 140 };
+  const lastHaz = {}, hazYs = [];   // where each hazard kind last spawned, and the latest hazard positions
+  let lastBig = -1e9;               // last shark or devil fish
 
   // ---------- Audio: tiny procedural voice for a tiny funny woman ----------
   let AC = null, master = null;
@@ -600,11 +606,11 @@
   function hazardKind(depth) {
     const pool = [];
     if (depth >= 10 && depth < 30) pool.push("piranha", "piranha", "puffer", "sail");
-    if (depth >= 15 && depth < 50) pool.push("jelly", "efish");
-    if (depth >= 25 && depth < 60) pool.push("mine");
+    if (depth >= 15 && depth < 90) pool.push("jelly", "efish");
+    if (depth >= 25 && depth < 110) pool.push("mine");
     if (depth >= 40) pool.push("shark");
     if (depth >= 20 && depth < 50) pool.push("squid");
-    if (depth >= 30 && depth < 60) pool.push("barracuda");
+    if (depth >= 30 && depth < 100) pool.push("barracuda");
     if (depth >= 65 && Math.random() < 0.4) pool.push("angler");
     // below 80m only the devil fish is left, so it must always be on offer there
     if (depth >= 80 && pool.length === 0) pool.push("angler");
@@ -630,6 +636,16 @@
     const gapW = W - wall * 2;
     if (depth > 65 && Math.random() < 0.012 && gapW > 80) kind = "angler";
     else if (depth > 40 && Math.random() < 0.03 && gapW > 96) kind = "shark";
+
+    // keep hazards apart: each kind needs a minimum vertical gap, the two big hunters share one,
+    // and only a few hazards fit in one screen (more the deeper you go)
+    if (HAZ_GAP[kind]) {
+      const big = kind === "shark" || kind === "angler";
+      const tooClose = y - (lastHaz[kind] ?? -1e9) < HAZ_GAP[kind] || (big && y - lastBig < 650);
+      const onScreen = hazYs.filter(v => y - v < H).length;
+      if (tooClose || onScreen >= Math.min(5, 2 + Math.floor(depth / 30))) kind = Math.random() < 0.5 ? "coin" : "bubble";
+      else { lastHaz[kind] = y; if (big) lastBig = y; hazYs.push(y); if (hazYs.length > 20) hazYs.shift(); }
+    }
 
     // each fish swims at its own pace
     const e = { kind, x, y, r: 12, t: Math.random() * Math.PI * 2, dead: false, vx: 0, baseX: x, dir: Math.random() < 0.5 ? -1 : 1, puff: 0, spd: rand(0.6, 1.4) };
