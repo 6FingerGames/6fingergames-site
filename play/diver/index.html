@@ -56,7 +56,7 @@
 
   // ---------- Canvas setup ----------
   const canvas = document.getElementById("game");
-  let ctx = canvas.getContext("2d");   // let: drawWallLayer points it at an offscreen layer for a moment
+  const ctx = canvas.getContext("2d");
   let W = 0, H = 0, DPR = 1;
 
   function resize() {
@@ -332,6 +332,19 @@
   let aboutRect = { x: 0, y: 0, w: 0, h: 0 };
   let menuView = "main";
   let soonKind = "games";
+  // studio links on the "Studio" screen
+  const STUDIO_LINKS = {
+    games: { title: "otherGames", sub: "6fingergames.itch.io", url: "https://6fingergames.itch.io" },
+    web: { title: "website", sub: "6fingergames.com", url: "https://6fingergames.com" },
+    youtube: { name: "YouTube", sub: "@6FingerGames", url: "https://www.youtube.com/@6FingerGames" },
+    support: { title: "support", sub: "3dstudio@mail.com", url: "mailto:3dstudio@mail.com" }
+  };
+  const STUDIO_ORDER = ["games", "web", "youtube", "support"];
+  function openLink(url) {
+    if (url.startsWith("mailto:")) { location.href = url; return; }
+    const w = window.open(url, "_blank");
+    if (w) w.opener = null; else location.href = url;   // pop-up blocked: open it in this tab
+  }
   let menuHits = [];
   function layoutLangs() {
     const bw = 84, bh = 26, gap = 8;
@@ -776,7 +789,7 @@
         return;
       }
       if (menuView === "about") {
-        if (id === "games" || id === "web" || id === "support") { soonKind = id; menuView = "soon"; }
+        if (STUDIO_LINKS[id]) openLink(STUDIO_LINKS[id].url);
         else if (id === "back") menuView = "main";
         return;
       }
@@ -1428,7 +1441,8 @@
     ctx.globalAlpha = 1;
 
     // ----- canyon walls, then the reefs that grow out of them -----
-    drawWallLayer(camTop);
+    drawWalls(camTop);
+    drawReefs(camTop);
 
     // ----- pickups and fish in front of the walls -----
     for (const e of entities) {
@@ -1752,12 +1766,14 @@
         // the left wall gets the strip mirrored
         ctx.translate(tw, -camTop);
         ctx.scale(-1, 1);
-        ctx.fillStyle = ctx.createPattern(tex, "repeat-y");
-        ctx.fillRect(0, y0, tw, y1 - y0);
       } else {
         ctx.translate(W - tw, -camTop);
-        ctx.fillStyle = ctx.createPattern(tex, "repeat-y");
-        ctx.fillRect(0, y0, tw, y1 - y0);
+      }
+      // drawn in bands, each in the shade for its depth
+      const SL = 48;
+      for (let wy = Math.max(y0, Math.floor(camTop / SL) * SL); wy < y1; wy += SL) {
+        ctx.fillStyle = wallPattern(shadeStep(depthAt(wy + SL / 2)));
+        ctx.fillRect(0, wy, tw, SL);
       }
       ctx.restore();
       // near the surface the strip melts into the water colour instead of ending in a hard cut
@@ -1769,31 +1785,33 @@
     }
   }
 
-  // walls and reefs are painted on their own layer, so they can darken with depth like the water does
-  const wallLayer = document.createElement("canvas");
-  const wallCtx = wallLayer.getContext("2d");
+  // walls and reefs darken with depth like the water does. Shading them live every frame was far too
+  // slow on phones, so each art is darkened once into SHADES steps and the step for its depth is drawn.
+  const SHADES = 16;
+  const shadeCache = {}, wallPats = [];
   function depthShade(d) { return Math.min(0.82, Math.max(0, d) / 110 * 0.82); }
-  function drawWallLayer(camTop) {
-    if (wallLayer.width !== canvas.width || wallLayer.height !== canvas.height) {
-      wallLayer.width = canvas.width;
-      wallLayer.height = canvas.height;
+  function shadeStep(d) { return Math.round(depthShade(d) / 0.82 * (SHADES - 1)); }
+  // a darkened copy of art k; maxH also shrinks big art to the size it is drawn at
+  function shaded(k, step, maxH) {
+    const arr = shadeCache[k] || (shadeCache[k] = []);
+    if (!arr[step]) {
+      const im = IMG[k];
+      const s = maxH ? Math.min(1, maxH / im.naturalHeight) : 1;
+      const c = document.createElement("canvas");
+      c.width = Math.max(1, Math.round(im.naturalWidth * s));
+      c.height = Math.max(1, Math.round(im.naturalHeight * s));
+      const x = c.getContext("2d");
+      x.drawImage(im, 0, 0, c.width, c.height);
+      if (step > 0) {
+        x.globalCompositeOperation = "source-atop";
+        x.fillStyle = `rgba(3,16,36,${(step / (SHADES - 1) * 0.82).toFixed(3)})`;
+        x.fillRect(0, 0, c.width, c.height);
+      }
+      arr[step] = c;
     }
-    const main = ctx;
-    ctx = wallCtx;
-    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    ctx.clearRect(0, 0, W, H);
-    drawWalls(camTop);
-    drawReefs(camTop);
-    // the shade only lands on rock that was just drawn (source-atop)
-    const g = ctx.createLinearGradient(0, 0, 0, H);
-    for (const f of [0, 0.5, 1]) g.addColorStop(f, `rgba(3,16,36,${depthShade(depthAt(camTop + H * f)).toFixed(3)})`);
-    ctx.globalCompositeOperation = "source-atop";
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, W, H);
-    ctx.globalCompositeOperation = "source-over";
-    ctx = main;
-    ctx.drawImage(wallLayer, 0, 0, W, H);
+    return arr[step];
   }
+  function wallPattern(step) { return wallPats[step] || (wallPats[step] = ctx.createPattern(shaded("wallTex", step), "repeat-y")); }
 
   // reef art is drawn for the right wall: its straighter side (fR) goes against the rock, and the
   // left wall gets it mirrored. The flat side is made to blend into the wall strip, so it overlaps it.
@@ -1850,22 +1868,25 @@
         if (!r) continue;
         const sy = r.y - camTop;
         if (sy < -r.h - 80 || sy > H + 20) continue;
+        const step = shadeStep(depthAt(r.y + r.h / 2));
         // plants first: their roots sit 14px down inside the rock, so the reef covers them
         for (let j = 0; j < r.plants.length; j++) {
           const c = r.plants[j];
           const pid = 1 + Math.floor(hash(k * 4.4 + j * 7.1 + side * 3) * 6);
           const key = "wp" + pid;
           if (!ready(key)) continue;
+          const im = shaded(key, step, 64 * DPR);
+          const pw = 30 + hash(k * 1.9 + j) * 12, ph = pw * im.height / im.width;
           ctx.save();
           ctx.translate(r.colX(c), sy + r.tops[c] * r.h + 14);
           ctx.rotate(Math.sin(tSec * 0.9 + k * 0.7 + j * 1.9) * 0.1);
-          blit(key, 30 + hash(k * 1.9 + j) * 12, false, PLANT_BOTTOM[pid - 1]);
+          ctx.drawImage(im, -pw / 2, -ph * PLANT_BOTTOM[pid - 1], pw, ph);
           ctx.restore();
         }
         ctx.save();
         ctx.translate(r.x + r.w / 2, sy + r.h / 2);
         if (r.flip) ctx.scale(-1, 1);
-        ctx.drawImage(IMG[r.kind], -r.w / 2, -r.h / 2, r.w, r.h);
+        ctx.drawImage(shaded(r.kind, step, 180 * DPR), -r.w / 2, -r.h / 2, r.w, r.h);
         ctx.restore();
       }
     }
@@ -2439,9 +2460,10 @@
         const bh = compact ? 50 : 56;
         const gap = 10;
         let by = sheet.y + 162;
-        anyHot = drawLinkBtn("games", T("otherGames"), T("comingSoon"), cx - bw / 2, by, bw, bh) || anyHot;
-        anyHot = drawLinkBtn("web", T("website"), T("comingSoon"), cx - bw / 2, by + bh + gap, bw, bh) || anyHot;
-        anyHot = drawLinkBtn("support", T("support"), T("comingSoon"), cx - bw / 2, by + (bh + gap) * 2, bw, bh) || anyHot;
+        STUDIO_ORDER.forEach((id, i) => {
+          const L = STUDIO_LINKS[id];
+          anyHot = drawLinkBtn(id, L.title ? T(L.title) : L.name, L.sub, cx - bw / 2, by + (bh + gap) * i, bw, bh) || anyHot;
+        });
       }
       const bw = Math.min(220, sheet.w - 48);
       anyHot = drawBtn("back", T("back"), cx - bw / 2, sheet.y + sheet.h - 64, bw, 44, false) || anyHot;
