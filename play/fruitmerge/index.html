@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<!--seo-->
+<title>Play FRUIT MERGE 6 Free Online — Free Browser Game | 6 finger games</title>
+<meta name="description" content="">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://6fingergames.com/play/fruitmerge/">
+<link rel="icon" type="image/png" href="/img/games/fruitmerge/icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Play FRUIT MERGE 6 Free Online — Free Browser Game | 6 finger games">
+<meta property="og:description" content="">
+<meta property="og:url" content="https://6fingergames.com/play/fruitmerge/">
+<meta property="og:image" content="https://6fingergames.com/img/games/fruitmerge/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"FRUIT MERGE 6","url":"https://6fingergames.com/play/fruitmerge/","description":"","image":"https://6fingergames.com/img/games/fruitmerge/hero.jpg","genre":"","gamePlatform":"Web browser (PC, Mac, Phone, Tablet,","applicationCategory":"Game","inLanguage":["English","Geogian","Russian","Chines "],"playMode":"SinglePlayer","author":{"@type":"Organization","name":"6 finger games","url":"https://6fingergames.com/","logo":"https://6fingergames.com/img/studio-logo.png","email":"3dstudio@mail.com","sameAs":["https://www.youtube.com/@6FingerGames","https://6fingergames.itch.io/"]},"publisher":{"@type":"Organization","name":"6 finger games","url":"https://6fingergames.com/","logo":"https://6fingergames.com/img/studio-logo.png","email":"3dstudio@mail.com","sameAs":["https://www.youtube.com/@6FingerGames","https://6fingergames.itch.io/"]},"keywords":"","screenshot":["https://6fingergames.com/img/games/fruitmerge/shots/01.png"],"operatingSystem":"Any (web browser)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://6fingergames.com/play/fruitmerge/"}}</script>
+<!--/seo-->
+<meta name="author" content="Davit.t">
+<meta name="copyright" content="© 2026 Davit.t / 6FingerGames.com. All rights reserved.">
+<script src="security.js"></script>
+<style>
+  :root { --ink:#3a2b22; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html,body { height:100%; }
+  body {
+    background:radial-gradient(120% 100% at 50% 0%, #fdf6e7 0%, #f7e9cd 60%, #eed9b5 100%);
+    font-family:"Segoe UI", system-ui, sans-serif;
+    color:var(--ink); overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+    line-height:1.45;
+    -webkit-user-select:none; user-select:none; touch-action:none;
+  }
+  #wrap { position:relative; height:100%; display:flex; align-items:center; justify-content:center; container-type:inline-size; }
+  canvas { display:block; border-radius:18px; box-shadow:0 18px 50px rgba(120,60,20,.28); cursor:pointer; }
+  .hud {
+    position:absolute; top:4.2cqw; left:0; right:0;
+    display:flex; justify-content:space-between; align-items:flex-start;
+    padding:0 9.5cqw 0 4cqw; pointer-events:none; font-weight:700;
+  }
+  .hud .score { font-size:4.4cqw; text-shadow:0 2px 0 #fff8; line-height:1.45; }
+  .hud .best { font-size:2.2cqw; opacity:.75; font-weight:600; }
+  .hud .right { display:flex; gap:1cqw; pointer-events:auto; position:relative; top:.25cqw; }
+  .hud .left {
+    background:url(assets/plaque.png) no-repeat center/100% 100%;
+    width:33cqw; aspect-ratio:341/168;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:1.5cqw 4cqw 2.5cqw; text-align:center;
+    transform-origin:center;
+  }
+  .hud .left.score-pop { animation:plaquePop .48s cubic-bezier(.2,.8,.25,1); }
+  .hud .score.score-pop { animation:numberPop .48s cubic-bezier(.2,.8,.25,1); }
+  @keyframes plaquePop {
+    0% { transform:scale(1); filter:brightness(1); }
+    38% { transform:scale(1.09) rotate(-1deg); filter:brightness(1.2) drop-shadow(0 0 8px #ffd23e88); }
+    70% { transform:scale(.98) rotate(.4deg); }
+    100% { transform:scale(1); filter:brightness(1); }
+  }
+  @keyframes numberPop {
+    0% { transform:scale(1); color:var(--ink); }
+    40% { transform:scale(1.28); color:#d96824; text-shadow:0 2px 0 #fff8,0 0 10px #ffd23e; }
+    100% { transform:scale(1); color:var(--ink); }
+  }
+  button {
+    font:inherit; font-weight:800; color:#7a4a1f;
+    background:url(assets/btncircle.png) no-repeat center/100% 100%;
+    border:none; border-radius:0;
+    width:12.4cqw; height:14cqw; padding:0 0 .8cqw;
+    cursor:pointer; font-size:3.4cqw; line-height:1.45;
+    filter:drop-shadow(0 2px 2px rgba(120,60,20,.15));
+  }
+  button:hover { filter:brightness(1.07); }
+  button:focus-visible { outline:3px solid #e2703a; }
+  #lang {
+    background-image:url(assets/btncircle.png);
+    width:12.4cqw; font-size:2.8cqw; text-align:center;
+  }
+  .langwrap { position:relative; }
+  #langMenu {
+    position:absolute; top:105%; right:0; z-index:30;
+    background:#fdf3d9; border:3px solid #d9a441; border-radius:14px;
+    box-shadow:0 8px 22px rgba(120,60,20,.3);
+    display:flex; flex-direction:column; min-width:22cqw; overflow:hidden;
+  }
+  #langMenu button {
+    background:none; border:none; filter:none; box-shadow:none;
+    width:100%; height:auto; padding:1.4cqw 2cqw;
+    font-size:2.8cqw; text-align:center; color:#7a4a1f; border-radius:0;
+  }
+  #langMenu button:hover { background:#f3dfae; }
+  #langMenu button.active { background:#ecd194; }
+  .overlay {
+    position:absolute; inset:0; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:14px;
+    background:rgba(60,30,15,.45); backdrop-filter:blur(4px);
+    border-radius:18px; text-align:center; color:#fff;
+  }
+  .overlay h1 { font-size:42px; text-shadow:0 3px 0 #0003; line-height:1.4; }
+  .overlay p { font-size:18px; line-height:1.5; }
+  .overlay button {
+    font-size:6cqw; width:16cqw; height:18cqw;
+    background-image:url(assets/btncircle.png);
+    padding:0 0 1.5cqw;
+  }
+  .dialog {
+    width:82cqw; padding:6cqw; border:3px solid #d9a441; border-radius:6cqw;
+    background:#fdf3d9; color:var(--ink); box-shadow:0 12px 35px #3c1e1444;
+    display:flex; flex-direction:column; align-items:center; gap:3.5cqw;
+  }
+  .dialog h1 { font-size:6.2cqw; color:#7a4a1f; text-shadow:none; }
+  .dialog p { font-size:3.5cqw; line-height:1.5; }
+  .dialog .actions { width:100%; display:flex; flex-direction:column; gap:2cqw; }
+  .dialog button {
+    width:100%; height:auto; padding:2.1cqw 3cqw; border:2px solid #d9a441;
+    border-radius:3cqw; background:linear-gradient(#ffe8a3,#f4c768);
+    font-size:3.3cqw; line-height:1.4; filter:none;
+  }
+  .dialog button.secondary { background:#f7ead0; color:#866c56; }
+  #adCountdown { font-size:13cqw; font-weight:900; color:#d96824; line-height:1.2; }
+  .ownership {
+    position:absolute; bottom:4.5cqw; left:0; right:0; padding:0 4cqw;
+    font-size:2.4cqw; line-height:1.5; color:#fff1cf; text-shadow:0 2px 3px #3c1e14;
+    pointer-events:none;
+  }
+  .ownership span { font-size:2.1cqw; opacity:.82; }
+  .hidden { display:none !important; }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <canvas id="cv" width="574" height="1133"></canvas>
+  <div class="hud">
+    <div class="left">
+      <div class="score" id="score">0</div>
+      <div class="best" id="best"></div>
+    </div>
+    <div class="right">
+      <div class="langwrap">
+        <button id="lang" title="Language">EN</button>
+        <div id="langMenu" class="hidden">
+          <button data-l="en">EN</button>
+          <button data-l="ka">ქართული</button>
+          <button data-l="ru">Русский</button>
+          <button data-l="zh">中文</button>
+          <button data-l="ja">日本語</button>
+        </div>
+      </div>
+      <button id="mute" title="Sound">♪</button>
+      <button id="fs" title="Fullscreen">⛶</button>
+      <button id="pause" title="Pause">II</button>
+    </div>
+  </div>
+  <div class="overlay" id="menu">
+    <button id="play">▶</button>
+    <div class="ownership">© 2026 Davit.t · 6FingerGames.com<br><span id="rights"></span></div>
+  </div>
+  <div class="overlay hidden" id="over">
+    <h1 id="overTitle"></h1>
+    <p id="overScore"></p>
+    <p id="overBest"></p>
+    <button id="retry">↻</button>
+  </div>
+  <div class="overlay hidden" id="paused">
+    <h1 id="pauseTitle"></h1>
+    <button id="resume">▶</button>
+  </div>
+  <div class="overlay hidden" id="revive">
+    <div class="dialog">
+      <h1 id="reviveTitle"></h1>
+      <p id="reviveText"></p>
+      <div class="actions">
+        <button id="watchAd"></button>
+        <button id="declineRevive" class="secondary"></button>
+      </div>
+    </div>
+  </div>
+  <div class="overlay hidden" id="ad">
+    <div class="dialog">
+      <p id="adLabel"></p>
+      <div id="adCountdown">3</div>
+    </div>
+  </div>
+</div>
+<script src="i18n.js"></script>
+<script src="audio.js"></script>
+<script src="physics.js"></script>
+<script src="render.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
