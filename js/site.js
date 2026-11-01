@@ -43,6 +43,23 @@
   }
   for(var i = 0; i < thumbs.length; i++) thumbs[i].addEventListener('click', function(){ select(this, true); });
 
+  // YouTube's sharp 1280x720 poster is missing on some videos (it then sends a 120x90 grey picture): use the smaller one
+  function sharpOrLow(el, apply){
+    var low = el.getAttribute('data-low'); if(!low) return;
+    var im = new Image();
+    im.onload = function(){ if(im.naturalWidth <= 120) apply(low); };
+    im.onerror = function(){ apply(low); };
+    im.src = el.getAttribute('data-poster') || el.getAttribute('src');
+  }
+  var lows = document.querySelectorAll('[data-low]');
+  for(var q = 0; q < lows.length; q++) (function(el){
+    sharpOrLow(el, function(low){
+      el.setAttribute('data-poster', low);
+      if(el.tagName === 'IMG') el.src = low;
+      else if(el.classList.contains('vposter')) el.style.backgroundImage = "url('" + low + "')";
+    });
+  })(lows[q]);
+
   if(vbox){
     var first = vbox.querySelector('.vposter');
     if(first) first.addEventListener('click', function(e){ e.preventDefault(); playVideo(first); });
