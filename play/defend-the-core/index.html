@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<!--seo-->
+<title>Play DEFEND THE CORE Free Online — Free Browser Game | 6 finger games</title>
+<meta name="description" content="Play DEFEND THE CORE free online. Turn a shield of light around a tiny glowing child, block waves of shadow ghosts, collect crystals and upgrade your guardian. No download, free on PC and phone.">
+<meta name="keywords" content="free online game, free browser game, free game, free games online, play free, play online free, free to play, no download, no sign-up, free html5 game, free mobile game, defense game, shield game, ghost game, survival game, arcade game, one-finger game, casual game, DEFEND THE CORE, 6 finger games, უფასო თამაში, უფასო ონლაინ თამაში, бесплатная игра, бесплатная онлайн игра, 免费游戏, 免费在线游戏">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://6fingergames.com/play/defend-the-core/">
+<link rel="icon" type="image/png" href="/img/games/defend-the-core/icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Play DEFEND THE CORE Free Online — Free Browser Game | 6 finger games">
+<meta property="og:description" content="Play DEFEND THE CORE free online. Turn a shield of light around a tiny glowing child, block waves of shadow ghosts, collect crystals and upgrade your guardian. No download, free on PC and phone.">
+<meta property="og:url" content="https://6fingergames.com/play/defend-the-core/">
+<meta property="og:image" content="https://6fingergames.com/img/games/defend-the-core/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"DEFEND THE CORE","url":"https://6fingergames.com/play/defend-the-core/","description":"Play DEFEND THE CORE free online. Turn a shield of light around a tiny glowing child, block waves of shadow ghosts, collect crystals and upgrade your guardian. No download, free on PC and phone.","image":"https://6fingergames.com/img/games/defend-the-core/hero.jpg","genre":"Arcade, defense, survival","gamePlatform":"Web browser (PC, Mac, phone, tablet)","applicationCategory":"Game","inLanguage":["English"],"playMode":"SinglePlayer","author":{"@type":"Organization","name":"6 finger games","url":"https://6fingergames.com/","logo":"https://6fingergames.com/img/studio-logo.png","email":"3dstudio@mail.com","sameAs":["https://www.youtube.com/@6FingerGames","https://6fingergames.itch.io/"]},"publisher":{"@type":"Organization","name":"6 finger games","url":"https://6fingergames.com/","logo":"https://6fingergames.com/img/studio-logo.png","email":"3dstudio@mail.com","sameAs":["https://www.youtube.com/@6FingerGames","https://6fingergames.itch.io/"]},"keywords":"free online game, free browser game, free game, free games online, play free, play online free, free to play, no download, no sign-up, free html5 game, free mobile game, defense game, shield game, ghost game, survival game, arcade game, one-finger game, casual game, DEFEND THE CORE, 6 finger games, უფასო თამაში, უფასო ონლაინ თამაში, бесплатная игра, бесплатная онлайн игра, 免费游戏, 免费在线游戏","screenshot":[],"operatingSystem":"Any (web browser)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://6fingergames.com/play/defend-the-core/"}}</script>
+<!--/seo-->
+<meta name="theme-color" content="#0b0a24">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/defend.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  
+  <filter id="wisp" x="-8%" y="-30%" width="116%" height="160%"><feTurbulence type="fractalNoise" baseFrequency="0.028 0.05" numOctaves="2" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"/></filter>
+</defs></svg>
+<div id="stage">
+  <canvas id="c"></canvas>
+
+  <section id="menu" class="screen">
+    <div class="head">
+      <h1 class="logo"><img src="img/logo.webp" alt="Defend the Core" width="989" height="516"></h1>
+      <p class="tagline">Guard the little light from the shadows</p>
+    </div>
+    <div class="menu-buttons">
+      <button class="btn primary" id="btnPlay">PLAY</button>
+      <button class="btn" id="btnShop">UPGRADES</button>
+      <button class="btn small snd-toggle" id="btnSoundMenu"></button>
+      <button class="btn small" id="btnAbout">ABOUT</button>
+      <div class="stat-line"><i class="orb"></i><b id="menuCoins">0</b> &nbsp; BEST <b id="menuBest">0</b></div>
+    </div>
+  </section>
+
+  <section id="shop" class="screen dim hidden">
+    <h2 class="title">UPGRADES</h2>
+    <div class="stat-line big"><i class="orb"></i><b id="shopCoins">0</b></div>
+    <div class="shop-list" id="shopList"></div>
+    <button class="btn small" id="btnShopBack">BACK</button>
+  </section>
+
+  <section id="result" class="screen dim hidden">
+    <h2 class="title" id="resTitle">THE LIGHT FADES</h2>
+    <div class="result">
+      <div class="lbl">REACHED WAVE</div>
+      <div class="big" id="resWave">1</div>
+      <div class="newbest hidden" id="resNew">NEW RECORD!</div>
+      <div class="lbl">SCORE <b id="resScore">0</b> &nbsp; BEST <b id="resBest">0</b></div>
+      <div class="earn"><i class="orb"></i> <b id="resCoins">+0</b></div>
+      <div class="lbl sub" id="resBreak"></div>
+    </div>
+    <div class="menu-buttons">
+      <button class="btn primary" id="btnResShop">UPGRADES</button>
+      <button class="btn green hidden" id="btnDouble">DOUBLE &middot; WATCH AD</button>
+      <button class="btn" id="btnAgain">PLAY AGAIN</button>
+      <button class="btn small" id="btnResMenu">MENU</button>
+    </div>
+  </section>
+
+  <section id="revive" class="screen dim hidden">
+    <h2 class="title">THE LIGHT IS FADING</h2>
+    <p class="msg">Watch a short ad to restore the little light and push the shadows back.</p>
+    <div class="menu-buttons">
+      <button class="btn green" id="btnRevive">RESTORE &middot; WATCH AD</button>
+      <button class="btn small" id="btnNoRevive">NO THANKS</button>
+    </div>
+  </section>
+
+  <div id="aboutBack" class="backdrop hidden"></div>
+  <div id="about" class="panel hidden">
+    <h2>ABOUT</h2>
+    <p><b>DEFEND THE CORE</b> &middot; v0.1</p>
+    <p id="aboutAuthor"></p>
+    <p id="aboutStudio"></p>
+    <p id="aboutEmail"></p>
+    <p id="aboutSite"></p>
+    <button class="btn small" id="btnAboutClose">CLOSE</button>
+  </div>
+
+  <section id="pause" class="screen dim hidden">
+    <h2 class="title">PAUSED</h2>
+    <button class="btn primary" id="btnResume">RESUME</button>
+  </section>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/lock.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/ads.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>

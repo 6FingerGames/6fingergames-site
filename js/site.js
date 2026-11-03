@@ -38,7 +38,7 @@
       autoplay ? playVideo(btn) : showPoster(btn);
     } else {
       if(vbox){ vbox.innerHTML = ''; vbox.hidden = true; } // stops a playing video
-      if(view){ view.hidden = false; view.src = btn.getAttribute('data-pic'); }
+      if(view){ view.hidden = false; view.onload = function(){ view.classList.toggle('portrait', view.naturalHeight > view.naturalWidth * 1.05); }; view.src = btn.getAttribute('data-pic'); }
     }
   }
   for(var i = 0; i < thumbs.length; i++) thumbs[i].addEventListener('click', function(){ select(this, true); });
@@ -75,7 +75,7 @@
 
   if(view && lb){
     view.style.cursor = 'zoom-in';
-    view.addEventListener('click', function(){ lb.firstChild.src = view.src; lb.classList.add('on'); });
+    view.addEventListener('click', function(){ lb.firstChild.src = view.currentSrc || view.src; lb.classList.add('on'); });
     lb.addEventListener('click', function(){ lb.classList.remove('on'); });
     document.addEventListener('keydown', function(e){ if(e.key === 'Escape') lb.classList.remove('on'); });
   }

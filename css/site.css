@@ -114,6 +114,8 @@ a.card:hover{background:var(--card-hi);border-color:#3a3a43;transform:translateY
 .gwrap{display:grid;grid-template-columns:minmax(0,1fr) 330px;grid-template-areas:"media panel" "text panel";column-gap:32px;align-items:start}
 .gmedia{grid-area:media}.gtext{grid-area:text}.panel{grid-area:panel}
 .hero{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius);background:#0c0c0f}
+.hero.portrait{width:auto;max-width:100%;height:auto;max-height:min(80vh,700px);aspect-ratio:auto;object-fit:contain;display:block;margin:0 auto;background:none}
+@media (max-width:720px){.hero.hasv{width:auto;max-width:100%;height:auto;max-height:min(80vh,700px);aspect-ratio:auto;object-fit:contain;display:block;margin:0 auto;background:none}}
 .shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:12px 0 30px}
 .shots button{padding:0;border:2px solid transparent;border-radius:10px;overflow:hidden;cursor:pointer;background:none}
 .shots button:hover,.shots button.on{border-color:var(--accent)}
