@@ -14,7 +14,8 @@ const PXM = 40;                       // pixels per metre
 const GRAV = 300;                    // floaty on purpose: long flights
 const INK = '#2b1d4a';
 const WALL = 56;                      // thickness of the building facades on both sides
-const WALL_TOP = 9000;                // facades end at this altitude (px)
+const WALL_TOP = 4400;                // facades end at (about) this altitude (px); above it is open sky, then space
+const AIR_TOP = 4000;                 // trampolines, ropes, trees, balloons and birds exist only below this; higher up there is only coins and rockets
 
 const rand = (a, b) => a + Math.random() * (b - a);
 const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
@@ -44,7 +45,7 @@ function mip(im, wLog) {
   MIP.set(key, c);
   return c;
 }
-['stand', 'crouch', 'arrowup', 'arrowdown', 'tuck1', 'tuck2', 'tuck3', 'tuck4', 'ballet1', 'ballet2', 'splat', 'stretch', 'tangled', 'ground', 'dizzy', 'happy', 'scared'].forEach((n) => {
+['stand', 'crouch', 'arrowup', 'arrowdown', 'tuck1', 'tuck2', 'tuck3', 'tuck4', 'ballet1', 'ballet2', 'splat', 'stretch', 'ground', 'dizzy', 'happy', 'scared'].forEach((n) => {
   const im = new Image(); im.src = 'img/guy/' + n + '.png'; SPR[n] = im;
 });
 ['basic', 'spring', 'spiked', 'rocket'].forEach((n) => {
@@ -109,7 +110,7 @@ const STATION_ALT = 15000;        // px above the ground (~375 m)
 let items = [], parts = [], texts = [], rings = [], fx = [], genY = 500;
 let wt = 0;
 const clouds = [];
-for (let i = 0; i < 40; i++) clouds.push({ x: rand(0, W), alt: rand(250, 9000), s: rand(0.7, 1.4), im: 1 + ((Math.random() * 6) | 0) });
+for (let i = 0; i < 40; i++) clouds.push({ x: rand(0, W), alt: rand(250, 3200), s: rand(0.7, 1.4), im: 1 + ((Math.random() * 6) | 0) });
 const stars = [];
 for (let i = 0; i < 70; i++) stars.push({ x: rand(0, W), alt: rand(3500, 12000), r: rand(0.8, 2.2) });
 const keys = { l: 0, r: 0 };
@@ -144,7 +145,9 @@ function coinTrail(x0, alt, n, step, amp, phase) {
 
 function genAhead() {
   while (genY < G.maxAlt + 8000) {
-    const alt = genY, r = Math.random(), x = rand(WALL + 70, W - WALL - 70);
+    const alt = genY, x = rand(WALL + 70, W - WALL - 70);
+    let r = Math.random();
+    if (alt > AIR_TOP) r = r < 0.8 ? r * 0.725 : 0.8 + (r - 0.8) * 0.25;      // thin air and space: only coins and rockets
     if (r < 0.58) {
       const kind = Math.random();
       if (kind < 0.4) { const n = 8 + ((Math.random() * 8) | 0); coinTrail(x, alt, n, 50, 55, rand(0, TAU)); genY += n * 50; }
@@ -276,9 +279,9 @@ function updateFly(dt) {
   if (keys.l || keys.r) P.tgt = P.x + (keys.r - keys.l) * 200;
   P.vx = clamp((P.tgt - P.x) * 9, -620, 620);
   P.x += P.vx * dt;
-  const lim = -P.y < WALL_TOP ? WALL + 26 : 24;
-  if (P.x < lim) { P.x = lim; P.tgt = Math.max(P.tgt, lim); if (-P.y < WALL_TOP && P.vx < -80) wallHit(1); }
-  if (P.x > W - lim) { P.x = W - lim; P.tgt = Math.min(P.tgt, W - lim); if (-P.y < WALL_TOP && P.vx > 80) wallHit(-1); }
+  const lim = -P.y < wallTop() ? WALL + 26 : 24;
+  if (P.x < lim) { P.x = lim; P.tgt = Math.max(P.tgt, lim); if (-P.y < wallTop() && P.vx < -80) wallHit(1); }
+  if (P.x > W - lim) { P.x = W - lim; P.tgt = Math.min(P.tgt, W - lim); if (-P.y < wallTop() && P.vx > 80) wallHit(-1); }
   if (G.trick > 0) { G.trick -= dt; P.rot += G.trickSpin * 13 * dt; } else P.rot += (0 - ((P.rot + Math.PI) % TAU - Math.PI)) * Math.min(1, dt * 12);
   G.maxAlt = Math.max(G.maxAlt, -P.y);
   G.kT += dt;
@@ -292,7 +295,7 @@ function updateFly(dt) {
         const mul = S.shoe === 'spring' ? 1.15 : 1;
         P.vy = -Math.max(it.t === 'tramp' ? 1700 : it.t === 'tree' ? 1900 : 1400, Math.abs(P.vy) * 0.9) * mul * bounceFade();
         it.squash = 1; P.y = it.y - 6;
-        if (it.t === 'rope') trick('TWANG!', '#ffd23a', 'tangled'); else trick(it.t === 'tree' ? 'SPROING!' : ['SALTO!', 'TA-DA!'][(Math.random() * 2) | 0], it.t === 'tree' ? '#35c759' : '#4ba8ff', Math.random() < 0.5 ? 'tuck' : 'ballet');
+        if (it.t === 'rope') trick('TWANG!', '#ffd23a', 'hop'); else trick(it.t === 'tree' ? 'SPROING!' : ['SALTO!', 'TA-DA!'][(Math.random() * 2) | 0], it.t === 'tree' ? '#35c759' : '#4ba8ff', Math.random() < 0.5 ? 'tuck' : 'ballet');
         fxAdd('burst', P.x, it.y, 90, 0.25);
         burst(P.x, it.y, ['#fff', '#4ba8ff', '#ffd23a'], 10, 260, 7);
         Sound.boing();
@@ -651,9 +654,16 @@ function drawItems() {
   }
 }
 
+function wallTop() {
+  const L = SPR.facadeL;
+  if (!(L && L.complete && L.naturalWidth)) return WALL_TOP;
+  const th = L.naturalHeight * FAC_K;
+  return Math.floor(WALL_TOP / th) * th;
+}
+
 function drawBuildings() {
-  const topAlt = Math.min(WALL_TOP, altNow() + H + 300), bot = Math.max(0, altNow() - 300);
-  if (bot > WALL_TOP) return;
+  const wTop = wallTop(), topAlt = Math.min(wTop, altNow() + H + 300), bot = Math.max(0, altNow() - 300);
+  if (bot > wTop + 40) return;
   const L = SPR.facadeL, R = SPR.facadeR;
   if (L && L.complete && L.naturalWidth && R && R.complete && R.naturalWidth) {
     const th = L.naturalHeight * FAC_K;
@@ -663,8 +673,16 @@ function drawBuildings() {
       ctx.drawImage(mip(R, R.naturalWidth * FAC_K), W - R.naturalWidth * FAC_K, y, R.naturalWidth * FAC_K, th + 1);
     }
   } else {
-    ctx.fillStyle = '#e0a458'; ctx.fillRect(0, -WALL_TOP, WALL, WALL_TOP);
-    ctx.fillStyle = '#d2796a'; ctx.fillRect(W - WALL, -WALL_TOP, WALL, WALL_TOP);
+    ctx.fillStyle = '#e0a458'; ctx.fillRect(0, -wTop, WALL, wTop);
+    ctx.fillStyle = '#d2796a'; ctx.fillRect(W - WALL, -wTop, WALL, wTop);
+  }
+  // rooflines: the buildings end with a cornice instead of being cut off
+  if (topAlt >= wTop - 1) {
+    ctx.lineWidth = 4; ctx.strokeStyle = INK;
+    ctx.fillStyle = '#b5683a'; rr(-6, -wTop - 22, WALL + 14, 24, 5); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#a8453c'; rr(W - WALL - 8, -wTop - 22, WALL + 14, 24, 5); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#7a3f24'; rr(-6, -wTop - 36, WALL - 6, 16, 4); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#7a2e2a'; rr(W - WALL + 4, -wTop - 36, WALL - 6, 16, 4); ctx.fill(); ctx.stroke();
   }
   // height plaques
   for (let m = Math.floor(bot / PXM / 20) * 20; m * PXM < topAlt; m += 20) {
@@ -743,7 +761,7 @@ function spriteAt(name, x, y, k, rot, feet, sx, sy) {
 function trickSprite() {
   const kind = G.trickKind, age = 0.75 - G.trick;
   if (kind === 'splat' && age < 0.34) return { n: 'splat', rot: 0 };
-  if (kind === 'tangled' && age < 0.42) return { n: 'tangled', rot: 0 };
+  if (kind === 'hop') return { n: 'ballet2', rot: Math.sin(wt * 9) * 0.08 };      // pushed off the rope with a foot
   if (kind === 'stretch') return { n: 'stretch', rot: 0 };
   if (kind === 'ballet') return { n: (Math.floor(wt * 8) % 2) ? 'ballet1' : 'ballet2', rot: Math.sin(wt * 9) * 0.12 };
   const a = ((P.rot % TAU) + TAU) % TAU, q = Math.PI / 2;
