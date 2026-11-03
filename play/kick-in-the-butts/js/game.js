@@ -54,7 +54,7 @@ function mip(im, wLog) {
 ['sun', 'facadeL', 'facadeR', 'street', 'cloud1', 'cloud2', 'cloud3', 'cloud4', 'cloud5', 'cloud6'].forEach((n) => {
   const im = new Image(); im.src = 'img/env/' + n + '.png'; SPR[n] = im;
 });
-['tramp', 'springtree', 'balloon', 'bird1', 'bird2', 'rocket', 'coin', 'coinedge', 'burst', 'dust', 'stars', 'shirt', 'sock1', 'sock2', 'gauge', 'needle', 'station'].forEach((n) => {
+['tramp', 'springtree', 'balloon', 'bird1', 'bird2', 'rocket', 'coin0', 'coin1', 'coin2', 'coin3', 'coin4', 'burst', 'dust', 'stars', 'shirt', 'sock1', 'sock2', 'gauge', 'needle', 'station', 'god1', 'god2'].forEach((n) => {
   const im = new Image(); im.src = 'img/props/' + n + '.png'; SPR[n] = im;
 });
 // sky colours sampled from the generated sky picture, top (space) -> bottom (day)
@@ -73,10 +73,11 @@ let scale = 1, GS = 800;              // GS = screen y of the ground line while 
    Save data, shoes, upgrades
    ====================================================================== */
 const SHOES = {
-  basic:  { name: 'SNEAKERS',     mul: 1.0,  col: '#f2f2f2', need: 0, cost: 0,    desc: 'Plain and reliable.' },
-  spring: { name: 'SPRING SHOES', mul: 1.12, col: '#35c759', need: 1, cost: 250,  desc: '+12% power. Bounces once on landing.' },
-  spiked: { name: 'SPIKED BOOTS', mul: 1.22, col: '#c9cbe0', need: 2, cost: 600,  desc: '+22% power. Pops birds for coins.' },
-  rocket: { name: 'ROCKET BOOTS', mul: 1.35, col: '#ff4b3a', need: 3, cost: 1400, desc: '+35% power. Extra boost on kick-off.' }
+  // how: 'coins' = bought with coins; 'ads' = unlocked only by watching rewarded ads (need = number of ads) and far stronger
+  basic:  { name: 'SNEAKERS',     mul: 1.0,  col: '#f2f2f2', how: 'free',  cost: 0,   desc: 'Plain and reliable.' },
+  spring: { name: 'SPRING SHOES', mul: 1.12, col: '#35c759', how: 'coins', cost: 250, desc: '+12% power. Bounces once on landing.' },
+  spiked: { name: 'SPIKED BOOTS', mul: 1.22, col: '#c9cbe0', how: 'coins', cost: 700, desc: '+22% power. Pops birds for coins.' },
+  rocket: { name: 'ROCKET BOOTS', mul: 1.7,  col: '#ff4b3a', how: 'ads',   need: 3,   desc: '+70% power! Extra boost on kick-off.' }
 };
 const LEGMAX = 15;
 const legMul = () => 1 + 0.13 * (S.leg - 1);
@@ -106,6 +107,11 @@ const G = {
 // y is negative upwards (altitude = -y); the ground is y = 0
 const P = { x: W / 2, y: -80, vx: 0, vy: 0, rot: 0, tgt: W / 2 };
 const cam = { y: 0 };
+// grandpa sprites: the pupils are painted out of the pictures and drawn in code so they can follow the man (eye centres in sprite pixels, white radius, pupil radius)
+const GOD_EYES = { god1: { eyes: [[186, 198], [263, 198]], er: 17, pr: 6 }, god2: { eyes: [[184, 195], [268, 195]], er: 23, pr: 4.5 } };
+// grandpa sits just above the player's record (at least 1070 m), so he is always the next goal; once met he stays where he was found
+const HEAVEN_MIN_M = 1070;
+const heavenAlt = () => (S.metHeaven && S.heavenM ? S.heavenM : Math.max(HEAVEN_MIN_M, Math.round(S.best * 1.03))) * PXM;
 const STATION_ALT = 15000;        // px above the ground (~375 m)
 let items = [], parts = [], texts = [], rings = [], fx = [], genY = 500;
 let wt = 0;
@@ -207,6 +213,7 @@ function startAim() {
   G.cT = 0; G.kT = 0; G.maxAlt = 0; G.coinsRun = 0; G.ts = 1; G.slowT = 0; G.hold = false; G.stuckT = 0; G.trick = 0; G.bounces = 0; G.bn = 0;
   P.x = W / 2; P.y = -80; P.vx = P.vy = 0; P.rot = 0; P.tgt = P.x;
   items = []; parts = []; texts = []; rings = []; fx = []; genY = 500; G.legT = -1; G.hit = false;
+  items.push({ t: 'heaven', x: W / 2, y: -heavenAlt(), r: 120, got: false });                 // a grandpa sitting on a cloud, very surprised to see you
   items.push({ t: 'station', x: W / 2, y: -STATION_ALT, r: 80, vx: 38, got: false });      // the far goal: only a really great flight gets up here
   cam.y = 0;
   genAhead();
@@ -302,6 +309,7 @@ function updateFly(dt) {
       }
       continue;
     }
+    if (it.t === 'heaven' && !it.got && P.y > it.y && P.y - it.y < 2600) it.x += (clamp(P.x, 130, W - 130) - it.x) * Math.min(1, dt * 1.2);      // the cloud drifts over to meet the man, so he can't miss it
     if (it.t === 'station') {
       it.x += it.vx * dt;
       if (it.x < WALL + 110) it.vx = Math.abs(it.vx); else if (it.x > W - WALL - 110) it.vx = -Math.abs(it.vx);
@@ -340,6 +348,15 @@ function updateFly(dt) {
         fxAdd('burst', it.x, it.y, 130, 0.35);
         Sound.bonk();
       }
+    } else if (it.t === 'heaven') {
+      it.got = true; G.coinsRun += 500;
+      S.metHeaven = true; S.heavenM = Math.round(-it.y / PXM);
+      P.vy = 300; G.trick = 0.6; G.trickKind = 'stretch';
+      text(it.x, it.y - 150, 'GRANDPA?!', '#fff', 56);
+      text(it.x, it.y - 210, '+500', '#ffd23a', 46);
+      burst(it.x, it.y, ['#fff', '#fff4a8', '#ffd23a'], 40, 520, 8, 0);
+      fxAdd('burst', it.x, it.y, 300, 0.45);
+      G.flash = 1; Sound.perfect(); Sound.best();
     } else if (it.t === 'station') {
       it.got = true; G.coinsRun += 100;
       P.vy = Math.min(P.vy, -1500 * bounceFade());
@@ -597,9 +614,20 @@ function drawItems() {
     if (it.y < top || it.y > bot) continue;
     if (it.t === 'coin') {
       if (it.got) continue;
-      const c = Math.abs(Math.cos(wt * 4 + it.y * 0.02));
-      if (c < 0.2 && propAt('coinedge', it.x, it.y, 15, 36)) continue;      // edge-on frame
-      if (!propAt('coin', it.x, it.y, 36, 36, Math.max(0.22, c))) {
+      const ph = ((wt * 1.5 + it.y * 0.0045) % 1 + 1) % 1, fi = Math.floor(ph * 8), fr = fi < 5 ? fi : 8 - fi, im = SPR['coin' + fr];
+      if (im && im.complete && im.naturalWidth) {
+        const k = 40 / 310, w = im.naturalWidth * k, h = im.naturalHeight * k;
+        ctx.save(); ctx.translate(it.x, it.y); if (fi >= 5) ctx.scale(-1, 1);
+        ctx.drawImage(mip(im, w), -w / 2, -h / 2, w, h);
+        ctx.restore();
+        const gl = Math.sin(wt * 2.2 + it.y * 0.011 + it.x * 0.3);                         // a glint sweeps over the coin now and then
+        if (gl > 0.93 && fr < 3) {
+          const a = (gl - 0.93) / 0.07, r = 4 + 8 * a;
+          ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = '#fff'; ctx.translate(it.x - 8, it.y - 10); ctx.rotate(wt);
+          ctx.beginPath(); for (let q = 0; q < 8; q++) { const rr2 = q % 2 ? r * 0.25 : r, an = q * Math.PI / 4; ctx.lineTo(Math.cos(an) * rr2, Math.sin(an) * rr2); } ctx.closePath(); ctx.fill();
+          ctx.restore();
+        }
+      } else {
         ctx.fillStyle = '#ffc928'; ctx.strokeStyle = INK; ctx.lineWidth = 4;
         ctx.beginPath(); ctx.arc(it.x, it.y, 15, 0, TAU); ctx.fill(); ctx.stroke();
       }
@@ -612,6 +640,24 @@ function drawItems() {
       if (it.vx < 0 && !it.hit) ctx.scale(-1, 1);
       if (!propAt((Math.floor(wt * 8 + it.ph) % 2) ? 'bird1' : 'bird2', 0, 0, 84)) { ctx.fillStyle = '#ff6b6b'; ctx.beginPath(); ctx.ellipse(0, 0, 26, 18, 0, 0, TAU); ctx.fill(); }
       ctx.restore();
+    } else if (it.t === 'heaven') {
+      const bob = Math.sin(wt * 1.1) * 7;
+      const cl = SPR.cloud1, g = it.got ? (SPR.god2 || SPR.god1) : SPR.god1;
+      if (cl && cl.complete && cl.naturalWidth) { const cw = 380, ch = cw * cl.naturalHeight / cl.naturalWidth; ctx.drawImage(mip(cl, cw), it.x - cw / 2, it.y + 30 + bob - ch / 2, cw, ch); }
+      if (g && g.complete && g.naturalWidth) {
+        const gw = 250, gh = gw * g.naturalHeight / g.naturalWidth, gx = it.x - gw / 2, gy = it.y + 70 + bob - gh;
+        ctx.drawImage(mip(g, gw), gx, gy, gw, gh);
+        const E = GOD_EYES[g === SPR.god2 ? 'god2' : 'god1'], sc = gw / g.naturalWidth, shock = it.got;
+        E.eyes.forEach((e, n) => {
+          const ex = gx + e[0] * sc, ey = gy + e[1] * sc, dx = P.x - ex, dy = P.y - ey, d = Math.hypot(dx, dy) || 1;
+          const reach = (E.er - E.pr - 4) * sc * Math.min(1, d / 260);
+          const tx = dx / d * reach + (shock ? Math.sin(wt * 38 + n) * 2.5 : Math.sin(wt * 1.7 + n) * 0.8), ty = dy / d * reach + (shock ? Math.cos(wt * 33 + n) * 2.5 : 0);
+          it.pu = it.pu === undefined ? [0, 0] : it.pu;
+          it.pu[n * 2] = lerp(it.pu[n * 2] || 0, tx, 0.18); it.pu[n * 2 + 1] = lerp(it.pu[n * 2 + 1] || 0, ty, 0.18);
+          ctx.fillStyle = INK; ctx.beginPath(); ctx.arc(ex + it.pu[n * 2], ey + it.pu[n * 2 + 1], E.pr * sc * (shock ? 0.75 : 1), 0, TAU); ctx.fill();
+        });
+      }
+      else cartoonText('?!', it.x, it.y - 30 + bob, 80, '#fff');
     } else if (it.t === 'station') {
       const im = SPR.station;
       if (!(im && im.complete && im.naturalWidth)) continue;
@@ -872,7 +918,7 @@ function showResult() {
   el('resBest').textContent = S.best;
   el('resNew').classList.toggle('hidden', !rec);
   el('resCoins').textContent = '+' + G.earned;
-  el('resBreak').textContent = G.coinsRun + ' collected + ' + bonus + ' height bonus';
+  el('resBreak').textContent = G.coinsRun + ' collected + ' + bonus + ' height bonus' + (items.some((i) => i.t === 'heaven' && i.got) ? ' · YOU MET GRANDPA!' : '');
   el('btnDouble').classList.toggle('hidden', !Ads.canReward() || G.earned < 1);
   el('btnDouble').disabled = false;
   setScreens('result');
@@ -932,17 +978,19 @@ function renderShop() {
       if (S.shoe === id) { const t = document.createElement('div'); t.className = 'tag'; t.textContent = 'EQUIPPED'; acts.push(t); }
       else acts.push(btn('EQUIP', 'blue', () => { S.shoe = id; save(); renderShop(); }));
     } else {
-      acts.push(btn(coinHtml + sh.cost, 'blue', () => { if (S.coins >= sh.cost) { S.coins -= sh.cost; S.owned[id] = 1; S.shoe = id; save(); Sound.buy(); renderShop(); } }, S.coins < sh.cost));
-      if (adOK) {
+      if (sh.how === 'ads') {
         const done = S.adp[id] || 0;
-        acts.push(btn('AD ' + done + '/' + sh.need, 'green', () => Ads.watch('shoe-' + id, () => {
+        if (adOK) acts.push(btn('WATCH AD ' + done + '/' + sh.need, 'green', () => Ads.watch('shoe-' + id, () => {
           S.adp[id] = (S.adp[id] || 0) + 1;
           if (S.adp[id] >= sh.need) { S.owned[id] = 1; S.shoe = id; Sound.buy(); }
           save(); renderShop();
         })));
+        else acts.push(btn('AD ' + done + '/' + sh.need, 'small', () => {}, true));
+      } else {
+        acts.push(btn(coinHtml + sh.cost, 'blue', () => { if (S.coins >= sh.cost) { S.coins -= sh.cost; S.owned[id] = 1; S.shoe = id; save(); Sound.buy(); renderShop(); } }, S.coins < sh.cost));
       }
     }
-    row(sh.name, sh.desc, acts, 'img/leg/impact_' + id + '.png', !S.owned[id]);
+    row(sh.name, (sh.how === 'ads' && !S.owned[id] ? 'AD ONLY. ' : '') + sh.desc, acts, 'img/leg/impact_' + id + '.png', !S.owned[id]);
   });
 }
 
@@ -1074,5 +1122,5 @@ function frame(now) {
 }
 requestAnimationFrame(frame);
 
-window.__kick = { G, P, S, cam, startAim, act, get items() { return items; } };
+window.__kick = { G, P, S, cam, startAim, act, update, render, get items() { return items; } };
 })();

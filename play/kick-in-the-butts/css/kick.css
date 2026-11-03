@@ -90,3 +90,5 @@ i.coin { display: inline-block; width: calc(30 * var(--u)); height: calc(30 * va
 .row .info b { font-size: calc(24 * var(--u)); white-space: nowrap; }
 .row .info span { font-size: calc(15 * var(--u)); }
 .row .btn { min-width: calc(158 * var(--u)); }
+
+.btn.big-orange { font-size: calc(42 * var(--u)); }
