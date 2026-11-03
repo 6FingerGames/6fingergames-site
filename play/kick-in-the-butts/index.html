@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<!--seo-->
+<title>Play KICK IN THE BUTTS Free Online — Free Browser Game | 6 finger games</title>
+<meta name="description" content="Play KICK IN THE BUTTS free online. Time the power gauge, kick a goofy guy sky-high, bounce off trampolines and balloons, collect coins and upgrade your shoes. No download, free on PC and phone.">
+<meta name="keywords" content="free online game, free browser game, free game, free games online, play free, play online free, free to play, no download, no sign-up, free html5 game, free mobile game, launch game, kick game, funny game, physics game, casual game, arcade game, one-finger game, KICK IN THE BUTTS, 6 finger games, უფასო თამაში, უფასო ონლაინ თამაში, бесплатная игра, бесплатная онлайн игра, 免费游戏, 免费在线游戏">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://6fingergames.com/play/kick-in-the-butts/">
+<link rel="icon" type="image/png" href="/img/games/kick-in-the-butts/icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Play KICK IN THE BUTTS Free Online — Free Browser Game | 6 finger games">
+<meta property="og:description" content="Play KICK IN THE BUTTS free online. Time the power gauge, kick a goofy guy sky-high, bounce off trampolines and balloons, collect coins and upgrade your shoes. No download, free on PC and phone.">
+<meta property="og:url" content="https://6fingergames.com/play/kick-in-the-butts/">
+<meta property="og:image" content="https://6fingergames.com/img/games/kick-in-the-butts/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"KICK IN THE BUTTS","url":"https://6fingergames.com/play/kick-in-the-butts/","description":"Play KICK IN THE BUTTS free online. Time the power gauge, kick a goofy guy sky-high, bounce off trampolines and balloons, collect coins and upgrade your shoes. No download, free on PC and phone.","image":"https://6fingergames.com/img/games/kick-in-the-butts/hero.jpg","genre":"Arcade, launcher, physics","gamePlatform":"Web browser (PC, Mac, phone, tablet)","applicationCategory":"Game","inLanguage":["English"],"playMode":"SinglePlayer","author":{"@type":"Organization","name":"6 finger games","url":"https://6fingergames.com/","logo":"https://6fingergames.com/img/studio-logo.png","email":"3dstudio@mail.com","sameAs":["https://www.youtube.com/@6FingerGames","https://6fingergames.itch.io/"]},"publisher":{"@type":"Organization","name":"6 finger games","url":"https://6fingergames.com/","logo":"https://6fingergames.com/img/studio-logo.png","email":"3dstudio@mail.com","sameAs":["https://www.youtube.com/@6FingerGames","https://6fingergames.itch.io/"]},"keywords":"free online game, free browser game, free game, free games online, play free, play online free, free to play, no download, no sign-up, free html5 game, free mobile game, launch game, kick game, funny game, physics game, casual game, arcade game, one-finger game, KICK IN THE BUTTS, 6 finger games, უფასო თამაში, უფასო ონლაინ თამაში, бесплатная игра, бесплатная онлайн игра, 免费游戏, 免费在线游戏","screenshot":[],"operatingSystem":"Any (web browser)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://6fingergames.com/play/kick-in-the-butts/"}}</script>
+<!--/seo-->
+<meta name="theme-color" content="#7fd4ff">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/kick.css">
+</head>
+<body>
+<div id="stage">
+  <canvas id="c"></canvas>
+
+  <section id="menu" class="screen">
+    <h1 class="logo"><span class="l1">KICK</span><span class="l2">IN THE</span><span class="l3">BUTTS</span></h1>
+    <div class="menu-buttons">
+      <button class="btn primary" id="btnPlay">PLAY</button>
+      <button class="btn blue" id="btnShop">SHOP</button>
+      <button class="btn small snd-toggle" id="btnSoundMenu"></button>
+      <button class="btn small" id="btnAbout">ABOUT</button>
+    </div>
+    <div class="coin-line"><i class="coin"></i><b id="menuCoins">0</b> &nbsp; BEST <b id="menuBest">0</b> M</div>
+  </section>
+
+  <section id="shop" class="screen hidden">
+    <h2 class="title">SHOP</h2>
+    <div class="coin-line big"><i class="coin"></i><b id="shopCoins">0</b></div>
+    <div class="shop-list" id="shopList"></div>
+    <button class="btn small" id="btnShopBack">BACK</button>
+  </section>
+
+  <section id="result" class="screen dim hidden">
+    <h2 class="title" id="resTitle">NICE KICK!</h2>
+    <img id="resGuy" class="res-guy" src="img/guy/dizzy.png" alt="">
+    <div class="result">
+      <div class="big"><span id="resDist">0</span><small> M</small></div>
+      <div class="newbest hidden" id="resNew">NEW RECORD!</div>
+      <div class="lbl">BEST <b id="resBest">0</b> M</div>
+      <div class="earn"><i class="coin"></i> <b id="resCoins">+0</b></div>
+      <div class="lbl sub" id="resBreak"></div>
+    </div>
+    <div class="menu-buttons">
+      <button class="btn primary" id="btnAgain">KICK AGAIN</button>
+      <button class="btn green hidden" id="btnDouble">DOUBLE COINS &middot; WATCH AD</button>
+      <button class="btn blue" id="btnResShop">SHOP</button>
+      <button class="btn small" id="btnResMenu">MENU</button>
+    </div>
+  </section>
+
+  <div id="about" class="panel hidden">
+    <h2>ABOUT</h2>
+    <p><b>KICK IN THE BUTTS</b> &middot; v0.1</p>
+    <p id="aboutAuthor"></p>
+    <p id="aboutStudio"></p>
+    <p id="aboutEmail"></p>
+    <p id="aboutSite"></p>
+    <button class="btn small" id="btnAboutClose">CLOSE</button>
+  </div>
+
+  <section id="pause" class="screen dim hidden">
+    <h2 class="title">PAUSED</h2>
+    <button class="btn primary" id="btnResume">RESUME</button>
+  </section>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/lock.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/ads.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>
