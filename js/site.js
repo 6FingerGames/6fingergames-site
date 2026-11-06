@@ -134,7 +134,7 @@
       '<div class="msg" id="rmsg" aria-live="polite"></div>' +
       '<button class="btn primary" type="submit">Create account</button></form>' +
       '<div class="social"><button type="button" disabled>Google<small>soon</small></button><button type="button" disabled>GitHub<small>soon</small></button><button type="button" disabled>X<small>soon</small></button></div>' +
-      '<p class="mnote">We only use this to learn which games and languages our players want. We never sell it.</p>');
+      '<div class="promise"><b>Our promise</b><p>We do not collect this to sell it or give it to anyone. Never. It has one purpose only: to learn who we should make games for (girls, boys or anyone else) and which countries need their own language in our games.</p><p>We do not care about your real name or surname, your email, or anything private. All we want is that when you visit this site, it fits what you need. That is all.</p></div>');
     var f = document.getElementById('rf'), msg = document.getElementById('rmsg');
     f.nick.focus();
     f.addEventListener('submit', function(e){
