@@ -104,7 +104,7 @@
   function FG_SAVE_PROFILE(u){ save(u); if(!u.synced) sync(); }
   /* Sends ONLY the anonymous audience answers (no nickname, no email, no password) to our database.
      Setup: see _tools/supabase.sql. Fill url + key below (the key is the public 'anon' key, safe to show). */
-  var FG_BACKEND = { url:'', key:'' };
+  var FG_BACKEND = { url:'https://utahrvverfexwnoostyo.supabase.co', key:'sb_publishable_tNqXOuGI2orD92iBk0Y9Vw_5RiSdcCD' };
   var syncing = false;
   function sync(){
     var u = load();
