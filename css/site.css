@@ -232,7 +232,7 @@ a.card:hover{background:var(--card-hi);border-color:#3a3a43;transform:translateY
 .mlink:hover{color:var(--accent-hi)}
 /* ID card */
 .idcard{display:flex;gap:18px;align-items:flex-start;padding:4px 0 6px}
-.avatar{flex:none;width:96px;height:96px;border-radius:14px;border:2px solid var(--line);background:var(--bg2);display:grid;place-items:center;color:var(--accent)}
+.avatar{position:relative;overflow:hidden;padding:0;cursor:pointer;flex:none;width:92px;height:92px;border-radius:14px;border:2px solid var(--line);background:var(--bg2);display:grid;place-items:center;color:var(--accent)}
 .avatar svg{width:56px;height:56px}
 .idrows{flex:1;min-width:0}
 .idrow{display:flex;align-items:center;gap:10px;min-height:34px}
@@ -257,3 +257,10 @@ a.card:hover{background:var(--card-hi);border-color:#3a3a43;transform:translateY
 .soonrow{opacity:.45}.soonrow input{cursor:not-allowed}
 .gbtn{color:var(--text)!important;cursor:pointer!important;border-color:#3a3a43!important}
 .gbtn:hover{background:var(--card-hi)!important}
+
+.avatarwrap{flex:none;width:92px}
+.avatar img{width:92px;height:92px;display:block}
+.avedit{position:absolute;left:0;right:0;bottom:0;padding:3px 0;background:rgba(0,0,0,.65);color:#fff;font-size:11px;font-weight:700;opacity:0;transition:opacity .15s}
+.avatar:hover .avedit,.avatar:focus-visible .avedit{opacity:1}
+.avmsg{margin-top:6px;color:#ff7a7a;font-size:11.5px;line-height:1.3;width:140px}
+@media (max-width:480px){.avmsg{text-align:center;width:auto}}

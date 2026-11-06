@@ -179,17 +179,45 @@
     });
   }
 
+  // any picture, any size -> centred square crop, shrunk to AV x AV (stays on this device, never sent to the server)
+  var AV = 92;
+  function squareAvatar(file, done){
+    var url = URL.createObjectURL(file), im = new Image();
+    im.onload = function(){
+      try{
+        var side = Math.min(im.naturalWidth, im.naturalHeight), sx = (im.naturalWidth - side) / 2, sy = (im.naturalHeight - side) / 2;
+        var c = document.createElement('canvas'); c.width = c.height = AV;
+        var x = c.getContext('2d'); x.imageSmoothingQuality = 'high';
+        x.drawImage(im, sx, sy, side, side, 0, 0, AV, AV);
+        URL.revokeObjectURL(url);
+        done(c.toDataURL('image/jpeg', 0.85));
+      }catch(e){ URL.revokeObjectURL(url); done(null); }
+    };
+    im.onerror = function(){ URL.revokeObjectURL(url); done(null); };
+    im.src = url;
+  }
   var USER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c.6-4 3.7-6 7.5-6s6.9 2 7.5 6"/></svg>';
   function showCard(fresh){
     var u = load(); if(!u) return showForm();
     var rows = [['nick','Nickname',esc(u.nick),true], ['country','Country',esc(cname(u.country)),false], ['gender','Gender',esc(lab(GENDERS,u.gender)),true], ['age','Age',esc(lab(AGES,u.age)),false], ['lang','Language',esc(lname(u.lang)),false], ['mail','Mail','<span style=\"color:var(--dim)\">soon</span>',false]];
     open('<h2>' + (fresh ? 'Welcome, ' + esc(u.nick) + '!' : 'Your ID card') + '</h2><p class="msub">' + (fresh ? 'Your account is ready.' : 'Player ID') + '</p>' +
-      '<div class="idcard"><div class="avatar">' + USER + '</div><div class="idrows">' +
+      '<div class="idcard"><div class="avatarwrap"><button type="button" class="avatar" id="av" title="Change photo">' + (u.avatar ? '<img alt="" src="' + u.avatar + '">' : USER) + '<span class="avedit">Change</span></button><input type="file" id="avf" accept="image/png,image/jpeg,image/webp,image/gif" hidden><div class="avmsg" id="avm"></div></div><div class="idrows">' +
       rows.map(function(r){ return '<div class="idrow" data-k="'+r[0]+'"><span class="k">'+r[1]+'</span><span class="v">'+r[2]+'</span>' + (r[3] ? '<button type="button" class="ed">edit</button>' : (r[0]==='country' ? '<span class="ed off" title="Country cannot be changed">edit</span>' : '')) + '</div>'; }).join('') +
       '</div></div>' +
       '<div class="earned"><span class="lbl">Earned</span><span class="hscoin">HS</span><span class="amt">' + FG_HS_BALANCE() + '</span></div>' +
       '<div class="idactions"><button type="button" class="mlink" id="lo">Log out</button><button type="button" class="mlink" id="ok">Close</button></div>');
     document.getElementById('ok').onclick = close;
+    var avf = document.getElementById('avf'), avm = document.getElementById('avm');
+    document.getElementById('av').onclick = function(){ avf.click(); };
+    avf.onchange = function(){
+      var file = avf.files && avf.files[0]; if(!file) return;
+      if(!(file.type && ['image/png','image/jpeg','image/webp','image/gif'].indexOf(file.type) >= 0)){ avm.textContent = 'Please choose a PNG, JPG, WEBP or GIF picture.'; return; }
+      avm.textContent = '';
+      squareAvatar(file, function(data){
+        if(!data){ avm.textContent = 'Could not read this picture. Try another one.'; return; }
+        var cur = load(); if(!cur) return; cur.avatar = data; save(cur); showCard();
+      });
+    };
     document.getElementById('lo').onclick = function(){ try{ localStorage.removeItem(KEY); }catch(e){} refreshBtn(); close(); };
     [].forEach.call(modal.querySelectorAll('.idrow .ed:not(.off)'), function(b){
       b.onclick = function(){
