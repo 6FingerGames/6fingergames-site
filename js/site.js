@@ -87,17 +87,35 @@
 (function(){
   var KEY = 'fg_user';
   var GAMES = window.FG_GAMES || [];
+  var AGES = [['u13','Under 13'], ['13-17','13–17'], ['18-24','18–24'], ['25-34','25–34'], ['35+','35 and over']];
+  var DEVICES = [['pc','PC'], ['phone','Phone'], ['both','Both']];
+  var LANGS = 'en ka ru uk tr de fr es pt it pl ar fa hi zh ja ko id vi th nl cs ro hu el he az hy kk'.split(' ');
   var TYPES = [['casual','Casual'], ['regular','Regular player'], ['hardcore','Hardcore'], ['payer','Payer']];
   var GENDERS = [['male','Male'], ['female','Female'], ['other','Other'], ['none','Prefer not to say']];
   var CODES = 'AF AL DZ AR AM AU AT AZ BH BD BY BE BR BG CA CL CN CO HR CY CZ DK EG EE FI FR GE DE GR HK HU IS IN ID IR IQ IE IL IT JP JO KZ KE KW LV LB LT LU MY MX MD ME MA NL NZ NG NO PK PS PE PH PL PT QA RO RU SA RS SG SK SI ZA KR ES LK SE CH SY TW TH TR UA AE GB US UY UZ VE VN'.split(' ');
   var names = null; try{ names = new Intl.DisplayNames(['en'], {type:'region'}); }catch(e){}
+  function lname(c){ try{ return new Intl.DisplayNames(['en'], {type:'language'}).of(c); }catch(e){ return c; } }
   function cname(c){ try{ return names ? names.of(c) : c; }catch(e){ return c; } }
   function lab(list, v){ for(var i=0;i<list.length;i++) if(list[i][0]===v) return list[i][1]; return v || ''; }
   function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
   function load(){ try{ return JSON.parse(localStorage.getItem(KEY)); }catch(e){ return null; } }
   function save(u){ try{ localStorage.setItem(KEY, JSON.stringify(u)); }catch(e){} }
   // --- connect a backend here later ---
-  function FG_SAVE_PROFILE(u){ save(u); }
+  function FG_SAVE_PROFILE(u){ save(u); if(!u.synced) sync(); }
+  /* Sends ONLY the anonymous audience answers (no nickname, no email, no password) to our database.
+     Setup: see _tools/supabase.sql. Fill url + key below (the key is the public 'anon' key, safe to show). */
+  var FG_BACKEND = { url:'', key:'' };
+  var syncing = false;
+  function sync(){
+    var u = load();
+    if(!u || u.synced || syncing || !FG_BACKEND.url || !FG_BACKEND.key || !window.fetch) return;
+    syncing = true;
+    fetch(FG_BACKEND.url + '/rest/v1/profiles', { method:'POST',
+      headers:{ 'apikey':FG_BACKEND.key, 'Authorization':'Bearer ' + FG_BACKEND.key, 'Content-Type':'application/json', 'Prefer':'return=minimal' },
+      body:JSON.stringify({ country:u.country, gender:u.gender, age:u.age, lang:u.lang, device:u.device, ptype:u.type, games:u.games }) })
+    .then(function(r){ if(r.ok){ u.synced = true; save(u); } syncing = false; })
+    .catch(function(){ syncing = false; });
+  }
   function FG_HS_BALANCE(){ var n = 0; try{ n = parseInt(localStorage.getItem('fg_hs'), 10) || 0; }catch(e){} return n; }
 
   var btn = document.getElementById('regBtn');
@@ -122,50 +140,52 @@
 
   function showForm(){
     var cs = CODES.map(function(c){ return [c, cname(c)]; }).sort(function(a,b){ return a[1].localeCompare(b[1]); });
+    var ls = LANGS.map(function(c){ return [c, lname(c)]; }).sort(function(a,b){ return a[1].localeCompare(b[1]); });
+    function chips(name, list, checkFirst){ return '<div class="chips">' + list.map(function(t,i){ return '<label class="chip"><input type="radio" name="'+name+'" value="'+t[0]+'"'+(checkFirst && i===0?' checked':'')+'><span>'+t[1]+'</span></label>'; }).join('') + '</div>'; }
     open('<h2>Join 6 finger games</h2><p class="msub">Takes 20 seconds. Play, earn HS, keep your profile.</p>' +
       '<form id="rf" novalidate>' +
       '<label class="fld"><span>Nickname</span><input name="nick" maxlength="20" autocomplete="nickname" required></label>' +
       '<div class="row2"><label class="fld"><span>Country</span><select name="country"><option value="">Choose…</option>' + opts(cs) + '</select></label>' +
       '<label class="fld"><span>Gender</span><select name="gender"><option value="">Choose…</option>' + opts(GENDERS) + '</select></label></div>' +
+      '<div class="row2"><label class="fld"><span>Age</span><select name="age"><option value="">Choose…</option>' + opts(AGES) + '</select></label>' +
+      '<label class="fld"><span>Preferred language</span><select name="lang"><option value="">Choose…</option>' + opts(ls) + '</select></label></div>' +
+      '<div class="fldlabel">You play on</div>' + chips('device', DEVICES, true) +
       '<div class="fldlabel">Games you like</div><div class="chips">' + GAMES.map(function(g){ return '<label class="chip"><input type="checkbox" name="games" value="'+esc(g.id)+'"><span>'+esc(g.title)+'</span></label>'; }).join('') + '</div>' +
-      '<div class="fldlabel">Player type</div><div class="chips">' + TYPES.map(function(t,i){ return '<label class="chip"><input type="radio" name="type" value="'+t[0]+'"'+(i===0?' checked':'')+'><span>'+t[1]+'</span></label>'; }).join('') + '</div>' +
-      '<div class="row2"><label class="fld"><span>Password</span><input name="pass" type="password" autocomplete="new-password" minlength="6"></label>' +
-      '<label class="fld"><span>Email</span><input name="mail" type="email" autocomplete="email"></label></div>' +
+      '<div class="fldlabel">Player type</div>' + chips('type', TYPES, true) +
+      '<div class="row2 soonrow"><label class="fld"><span>Password <em>soon</em></span><input type="password" disabled placeholder="Not needed yet"></label>' +
+      '<label class="fld"><span>Email <em>soon</em></span><input type="email" disabled placeholder="Not needed yet"></label></div>' +
       '<div class="msg" id="rmsg" aria-live="polite"></div>' +
-      '<button class="btn primary" type="submit">Create account</button></form>' +
-      '<div class="social"><button type="button" disabled>Google<small>soon</small></button><button type="button" disabled>GitHub<small>soon</small></button><button type="button" disabled>X<small>soon</small></button></div>' +
+      '<button class="btn primary" type="submit">Create profile</button></form>' +
+      '<div class="social"><button type="button" id="gbtn" class="gbtn">Continue with Google</button><button type="button" disabled>GitHub<small>soon</small></button><button type="button" disabled>X<small>soon</small></button></div>' +
       '<div class="promise"><b>Our promise</b><p>We do not collect this to sell it or give it to anyone. Never. It has one purpose only: to learn who we should make games for (girls, boys or anyone else) and which countries need their own language in our games.</p><p>We do not care about your real name or surname, your email, or anything private. All we want is that when you visit this site, it fits what you need. That is all.</p></div>');
     var f = document.getElementById('rf'), msg = document.getElementById('rmsg');
     f.nick.focus();
+    document.getElementById('gbtn').onclick = function(){ msg.style.color = 'var(--amber)'; msg.textContent = 'Google sign-in is almost ready. For now, create a profile with the form.'; };
+    f.age.addEventListener('change', function(){ msg.style.color = ''; msg.textContent = f.age.value === 'u13' ? 'Sorry, profiles are for players aged 13 and over. You can still play every game!' : ''; });
     f.addEventListener('submit', function(e){
       e.preventDefault();
-      var nick = f.nick.value.trim(), mail = f.mail.value.trim(), pass = f.pass.value;
+      msg.style.color = '';
+      var nick = f.nick.value.trim();
       if(nick.length < 2) return msg.textContent = 'Nickname: at least 2 characters.';
       if(!f.country.value) return msg.textContent = 'Please choose your country.';
       if(!f.gender.value) return msg.textContent = 'Please choose a gender (or "Prefer not to say").';
-      if(pass.length < 6) return msg.textContent = 'Password: at least 6 characters.';
-      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail)) return msg.textContent = 'Please enter a valid email.';
+      if(!f.age.value) return msg.textContent = 'Please choose your age group.';
+      if(f.age.value === 'u13') return msg.textContent = 'Sorry, profiles are for players aged 13 and over. You can still play every game!';
+      if(!f.lang.value) return msg.textContent = 'Please choose your preferred language.';
       var games = [].map.call(f.querySelectorAll('input[name=games]:checked'), function(i){ return i.value; });
-      var type = f.querySelector('input[name=type]:checked').value;
-      hash(pass).then(function(h){
-        FG_SAVE_PROFILE({ nick:nick, country:f.country.value, gender:f.gender.value, games:games, type:type, mail:mail, pass:h, created:new Date().toISOString() });
-        refreshBtn(); showCard(true);
-      });
+      var pick = function(n){ return f.querySelector('input[name='+n+']:checked').value; };
+      FG_SAVE_PROFILE({ nick:nick, country:f.country.value, gender:f.gender.value, age:f.age.value, lang:f.lang.value, device:pick('device'), games:games, type:pick('type'), created:new Date().toISOString(), synced:false });
+      refreshBtn(); showCard(true);
     });
-  }
-  function hash(s){
-    try{
-      return crypto.subtle.digest('SHA-256', new TextEncoder().encode('6fg:' + s)).then(function(b){ return [].map.call(new Uint8Array(b), function(x){ return ('0'+x.toString(16)).slice(-2); }).join(''); });
-    }catch(e){ return Promise.resolve(''); }
   }
 
   var USER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c.6-4 3.7-6 7.5-6s6.9 2 7.5 6"/></svg>';
   function showCard(fresh){
     var u = load(); if(!u) return showForm();
-    var rows = [['nick','Nickname',esc(u.nick),true], ['country','Country',esc(cname(u.country)),false], ['gender','Gender',esc(lab(GENDERS,u.gender)),true], ['mail','Mail',esc(u.mail),true]];
+    var rows = [['nick','Nickname',esc(u.nick),true], ['country','Country',esc(cname(u.country)),false], ['gender','Gender',esc(lab(GENDERS,u.gender)),true], ['age','Age',esc(lab(AGES,u.age)),false], ['lang','Language',esc(lname(u.lang)),false], ['mail','Mail','<span style=\"color:var(--dim)\">soon</span>',false]];
     open('<h2>' + (fresh ? 'Welcome, ' + esc(u.nick) + '!' : 'Your ID card') + '</h2><p class="msub">' + (fresh ? 'Your account is ready.' : 'Player ID') + '</p>' +
       '<div class="idcard"><div class="avatar">' + USER + '</div><div class="idrows">' +
-      rows.map(function(r){ return '<div class="idrow" data-k="'+r[0]+'"><span class="k">'+r[1]+'</span><span class="v">'+r[2]+'</span>' + (r[3] ? '<button type="button" class="ed">edit</button>' : '<span class="ed off" title="Country cannot be changed">edit</span>') + '</div>'; }).join('') +
+      rows.map(function(r){ return '<div class="idrow" data-k="'+r[0]+'"><span class="k">'+r[1]+'</span><span class="v">'+r[2]+'</span>' + (r[3] ? '<button type="button" class="ed">edit</button>' : (r[0]==='country' ? '<span class="ed off" title="Country cannot be changed">edit</span>' : '')) + '</div>'; }).join('') +
       '</div></div>' +
       '<div class="earned"><span class="lbl">Earned</span><span class="hscoin">HS</span><span class="amt">' + FG_HS_BALANCE() + '</span></div>' +
       '<div class="idactions"><button type="button" class="mlink" id="lo">Log out</button><button type="button" class="mlink" id="ok">Close</button></div>');
@@ -187,5 +207,5 @@
       };
     });
   }
-  refreshBtn();
+  refreshBtn(); sync();
 })();
