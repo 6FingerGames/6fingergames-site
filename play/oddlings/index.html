@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!--seo-->
+<title>Play ODDLINGS Free Online — Free Browser Game | 6 finger games</title>
+<meta name="description" content="ODDLINGS is a calm, free idle game in your browser: hatch eggs, merge twin creatures into stronger ones and fill a 40-creature album. Your pets keep earning coins while you are away.">
+<meta name="keywords" content="oddlings, idle game, merge game, creature collector, egg hatching game, collecting game, free browser game, 6 finger games">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://6fingergames.com/play/oddlings/">
+<link rel="icon" type="image/png" href="/img/games/oddlings/icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Play ODDLINGS Free Online — Free Browser Game | 6 finger games">
+<meta property="og:description" content="ODDLINGS is a calm, free idle game in your browser: hatch eggs, merge twin creatures into stronger ones and fill a 40-creature album. Your pets keep earning coins while you are away.">
+<meta property="og:url" content="https://6fingergames.com/play/oddlings/">
+<meta property="og:image" content="https://6fingergames.com/img/games/oddlings/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"ODDLINGS","url":"https://6fingergames.com/play/oddlings/","description":"ODDLINGS is a calm, free idle game in your browser: hatch eggs, merge twin creatures into stronger ones and fill a 40-creature album. Your pets keep earning coins while you are away.","image":"https://6fingergames.com/img/games/oddlings/hero.jpg","genre":"Idle, merge, collection","gamePlatform":"Web browser (PC, Mac, phone, tablet)","applicationCategory":"Game","inLanguage":["English"],"playMode":"SinglePlayer","author":{"@type":"Organization","name":"6 finger games","url":"https://6fingergames.com/","logo":"https://6fingergames.com/img/studio-logo.png","email":"3dstudio@mail.com","sameAs":["https://www.youtube.com/@6FingerGames","https://6fingergames.itch.io/"]},"publisher":{"@type":"Organization","name":"6 finger games","url":"https://6fingergames.com/","logo":"https://6fingergames.com/img/studio-logo.png","email":"3dstudio@mail.com","sameAs":["https://www.youtube.com/@6FingerGames","https://6fingergames.itch.io/"]},"keywords":"oddlings, idle game, merge game, creature collector, egg hatching game, collecting game, free browser game, 6 finger games","screenshot":[],"operatingSystem":"Any (web browser)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://6fingergames.com/play/oddlings/"}}</script>
+<!--/seo-->
+<meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'none'">
+<meta name="theme-color" content="#0a0c16">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style id="calmcss">
+:root{--bg:#0c0e18;--surf:#ffffff0a;--surf2:#ffffff14;--line:#ffffff1c;--txt:#eceff8;--mut:#8d95ad;--gold:#e8b85a;--teal:#4fd1b0;--ok:#4fd1b0;--ink:#0c0e18;--red:#e5646e}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+html,body{margin:0;height:100%;touch-action:manipulation;background:#0a0c16;overscroll-behavior:none;font-family:'Outfit','Fredoka',system-ui,sans-serif;font-weight:500;color:var(--txt)}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
+.hidden{display:none!important}
+.mi{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.22em}
+.mi svg,.ni svg{width:100%;height:100%;display:block}
+
+#app{position:relative;height:100dvh;max-width:480px;margin:0 auto;display:flex;flex-direction:column;padding:env(safe-area-inset-top) 12px 0;overflow:hidden;
+ background:radial-gradient(130% 55% at 50% -12%,#2b3160 0,#0000 62%),linear-gradient(#0e1120,#0a0c16)}
+
+/* HUD */
+#top{display:flex;align-items:center;gap:10px;padding:14px 2px 6px}
+.pill{flex:1;display:flex;align-items:center;gap:10px}
+.pill .ni{width:30px;height:30px;flex:none}
+.pill b{display:inline-block;transform-origin:left center;font-size:30px;line-height:1;font-weight:700;letter-spacing:-.5px;color:var(--txt)}
+.round{width:40px;height:40px;border-radius:12px;background:var(--surf2);border:1px solid var(--line);color:var(--mut);display:grid;place-items:center;flex:none}
+.round svg{width:20px;height:20px}
+.round:active{background:var(--surf)}
+#chips{display:flex;gap:8px;align-items:center;min-height:30px;padding:0 0 10px}
+.chip{display:flex;align-items:center;gap:6px;padding:3px 11px 3px 8px;border-radius:999px;border:1px solid var(--line);background:var(--surf);font-size:13px;white-space:nowrap}
+.chip .mi{width:15px;height:15px;vertical-align:0}
+.chip b{font-weight:600}
+.chip.boost{border-color:#e8b85a77;background:#e8b85a1c;color:var(--gold)}
+.chip.boost .mi{color:var(--gold)}
+#hint{flex:1;text-align:right;font-size:12px;line-height:1.15;color:var(--mut)}
+
+/* habitat */
+#board{flex:0 1 auto;min-height:0;display:flex;flex-direction:column;justify-content:flex-start;gap:10px;padding:12px;border:1px solid var(--line);border-radius:22px;
+ background:radial-gradient(100% 60% at 50% 0,#ffffff0f,#0000),#ffffff06}
+#goal{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:14px;background:var(--surf);border:1px solid var(--line);cursor:pointer}
+#goal .gt{flex:1;min-width:0}
+#goal .gl{display:flex;justify-content:space-between;font-size:12.5px;color:var(--mut);margin-bottom:6px}
+#goal .gl b{color:var(--txt);font-weight:600}
+#goal .gl em{font-style:normal;color:var(--teal);font-weight:600}
+#goal .gb{height:5px;border-radius:3px;background:#ffffff16;overflow:hidden}
+#goal .gb i{display:block;height:100%;background:linear-gradient(90deg,#c99534,#f3cd78);border-radius:3px}
+#goal .ni{width:22px;height:22px;color:var(--mut);flex:none}
+#grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%;margin:0 auto}
+.cell{position:relative;aspect-ratio:1;border-radius:16px;touch-action:none;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(#ffffff10,#ffffff06);border:1px solid #ffffff12}
+.cell::before{content:'';position:absolute;left:22%;right:22%;bottom:13%;height:8%;border-radius:50%;background:#0000004d;filter:blur(1px)}
+.cell.empty{background:#00000030;border:1px dashed #ffffff14}
+.cell.empty::before{display:none}
+.cell.sel{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.cell.target{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal);background:#4fd1b022}
+.cell.src{opacity:.3}
+.cell.locked{flex-direction:column;gap:2px;background:#ffffff05;color:var(--mut);cursor:pointer}
+.cell.locked::before{display:none}
+.cell.locked svg{width:26%;height:26%;color:#ffffff55}
+.cell.locked b{font-size:12.5px;color:var(--gold);font-weight:600;opacity:.85}
+.cell.next{border-color:#e8b85a66;animation:breathe 2.4s ease-in-out infinite}
+.cr{width:88%;height:88%;pointer-events:none;animation:bob 2.4s ease-in-out infinite;transform-origin:50% 100%}
+.cr svg,.cr img{width:100%;height:100%;display:block;object-fit:contain;filter:drop-shadow(0 3px 3px #0006)}
+.cr svg{overflow:visible}
+.lv{position:absolute;bottom:2px;left:0;right:0;text-align:center;font-size:10px;letter-spacing:1px;color:var(--gold);pointer-events:none;line-height:1}
+.cell.l2{border-color:#6fb7ff88}
+.cell.l3{border-color:#b58cffaa}
+.cell.l4{border-color:#ffb85acc;box-shadow:inset 0 0 14px #ffb85a22}
+.cell.l5{border-color:#f0c869;box-shadow:inset 0 0 18px #f0c86940,0 0 12px #f0c86930;animation:breathe 2.6s ease-in-out infinite}
+.cell.l6{border-color:#ff7ab6;box-shadow:inset 0 0 16px #ff7ab633}
+.cell.l8{border-color:#fff2b0;box-shadow:inset 0 0 20px #fff2b070,0 0 14px #ffd23f60;animation:breathe 1.8s ease-in-out infinite}
+.cell.l7{border-color:#ffe08a;box-shadow:inset 0 0 18px #ffe08a50,0 0 12px #ff7ab640;animation:breathe 2.2s ease-in-out infinite}
+.ph{display:grid;place-items:center;width:100%;height:100%;font-size:28px;color:var(--mut)}
+.xp{position:absolute;top:5px;left:12%;right:12%;height:4px;border-radius:2px;background:#ffffff22;pointer-events:none;overflow:hidden}
+.xp i{display:block;height:100%;background:var(--teal);box-shadow:0 0 6px var(--teal)}
+.upi{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:var(--ok);background:#4fd1b022;border:1.5px solid #4fd1b066}
+.upi svg{width:20px;height:20px}
+.cell.mergeable::after{content:'';position:absolute;inset:-1px;border-radius:16px;border:1.5px solid var(--teal);animation:pulse 1.2s ease-in-out infinite;pointer-events:none}
+.cell.pop{animation:popc .45s ease-out}
+@keyframes bob{0%,100%{transform:translateY(0) scale(1,1)}50%{transform:translateY(-3%) scale(1.02,.975)}}
+@keyframes pulse{0%,100%{opacity:.25}50%{opacity:1}}
+@keyframes popc{0%{transform:scale(.8)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
+@keyframes breathe{0%,100%{opacity:1}50%{opacity:.7}}
+#info{min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 6px 5px 14px;background:var(--surf2);border:1px solid var(--line);border-radius:14px;font-size:14px}
+#info .nm{font-weight:600;font-size:16px}
+#info .hintx{color:var(--mut);font-size:13px;line-height:1.15;margin:0 auto;text-align:center}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:600;color:#1a1303;padding:8px 16px;border-radius:12px;background:linear-gradient(#f3cd78,#d9a443);box-shadow:inset 0 1px 0 #fff6,0 4px 14px #e8b85a26;line-height:1.1;letter-spacing:.2px}
+.btn:active{transform:scale(.97);filter:brightness(.94)}
+.btn.green{background:linear-gradient(#6fe0c5,#3fb996);color:#04201a;box-shadow:inset 0 1px 0 #fff5,0 4px 14px #4fd1b026}
+.btn.red{background:#e5646e1c;color:#ff9aa2;border:1px solid #e5646e55;box-shadow:none}
+.btn.sm{padding:5px 12px;font-size:13px;border-radius:10px}
+.btn.dim{background:var(--surf2);color:var(--mut);border:1px solid var(--line);box-shadow:none}
+.btn[disabled]{opacity:.45;pointer-events:none}
+.btn .mi{width:1.05em;height:1.05em}
+.btn .pi{width:13px;height:13px;flex:none}
+.btn .pi svg{width:100%;height:100%;display:block}
+
+#spare{flex:1 1 0;min-height:0}
+/* incubators */
+#incs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.inc{position:relative;height:92px;border-radius:16px;background:var(--surf);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding-top:7px;cursor:pointer}
+.inc .egg{width:38px;height:44px;transition:transform .1s;filter:drop-shadow(0 4px 4px #0006)}
+.inc .egg svg{width:100%;height:100%;display:block}
+.inc .egg.plus{opacity:.35;width:26px;height:26px;margin-top:9px;color:var(--txt);filter:none}
+.inc .tm{font-size:12px;color:var(--mut);margin-top:3px;line-height:1.1;font-weight:500}
+.inc .bar{position:absolute;left:10px;right:10px;bottom:8px;height:4px;border-radius:3px;background:#ffffff16}
+.inc .bar i{display:block;height:100%;border-radius:3px;background:var(--gold);width:0}
+.inc.ready{border-color:var(--gold);background:#e8b85a14;animation:readyglow 1.4s ease-in-out infinite}
+.inc.ready .egg{animation:shake .7s ease-in-out infinite}
+.inc.ready .tm{color:var(--gold);font-weight:600}
+.inc.shake .egg{animation:shake .25s}
+.inc .skip{position:absolute;top:5px;right:5px;z-index:2;display:flex;align-items:center;gap:3px;padding:1px 6px 1px 4px;border-radius:999px;border:1px solid var(--line);background:#0c0e18cc;font-size:9.5px;font-weight:600;color:var(--gold);letter-spacing:.4px}
+.inc .skip svg{width:9px;height:9px}
+.inc.locked{justify-content:center;padding-top:0;gap:1px;color:var(--mut)}
+.inc.locked svg{width:24px;height:24px;color:#ffffff55}
+.inc.locked b{font-size:13px;color:var(--gold);font-weight:600}
+.inc.locked span{font-size:10.5px;color:var(--mut)}
+@keyframes readyglow{0%,100%{box-shadow:0 0 0 0 #e8b85a00}50%{box-shadow:0 0 16px 1px #e8b85a55}}
+@keyframes shake{0%,100%{transform:rotate(0)}25%{transform:rotate(-9deg)}75%{transform:rotate(9deg)}}
+
+/* tab bar */
+#nav{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:12px -12px 0;padding:6px 8px calc(8px + env(safe-area-inset-bottom));background:#090b14;border-top:1px solid var(--line)}
+#nav button{position:relative;height:54px;color:var(--mut);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border-radius:12px}
+#nav button:active{background:var(--surf);color:var(--txt)}
+#nav .ni{width:23px;height:23px;display:block}
+#nav span.l{font-size:11px;font-weight:500;letter-spacing:.3px;line-height:1}
+.dot{position:absolute;top:6px;left:calc(50% + 8px);width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 2px #090b14;font-size:0;display:none}
+.dot.on{display:block}
+
+/* sheets */
+#sheet{position:fixed;inset:0;z-index:50;background:#05060cc0;backdrop-filter:blur(3px);display:flex;align-items:flex-end;justify-content:center}
+#sheetCard{position:relative;width:100%;max-width:480px;max-height:88dvh;overflow:auto;background:#141829;border-radius:24px 24px 0 0;border:1px solid var(--line);border-bottom:0;padding:20px 16px calc(20px + env(safe-area-inset-bottom));animation:up .22s ease-out;color:var(--txt)}
+@keyframes up{from{transform:translateY(40px);opacity:0}}
+.x{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:10px;background:var(--surf2);border:1px solid var(--line);color:var(--mut);display:grid;place-items:center;z-index:3}
+.x svg{width:16px;height:16px}
+h2{margin:0 0 4px;max-width:calc(100% - 50px);font-size:21px;font-weight:600;letter-spacing:-.2px;color:var(--txt)}
+.sub{color:var(--mut);font-size:13px;margin:0 0 14px;line-height:1.3}
+.card{display:flex;align-items:center;gap:12px;background:var(--surf);border:1px solid var(--line);border-radius:16px;padding:10px 12px;margin-bottom:8px}
+.card .em{width:44px;height:50px;flex:none;display:grid;place-items:center}
+.card .em svg{width:100%;height:100%;display:block}
+.card .tx{flex:1;font-size:12.5px;color:var(--mut);line-height:1.3}
+.card .tx b{display:block;font-size:16px;color:var(--txt);font-weight:600}
+.od{display:inline-flex;align-items:center;gap:4px;margin:3px 10px 0 0;font-size:11.5px;color:var(--mut);line-height:1.3}
+.od::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--c)}
+.pb{height:5px;border-radius:3px;background:#ffffff16;margin-top:6px;overflow:hidden}
+.pb i{display:block;height:100%;background:var(--gold);border-radius:3px}
+.alb{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:10px}
+.tile{aspect-ratio:1;border-radius:14px;background:var(--surf);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:10px;position:relative;padding:3px}
+.tile svg,.tile img{width:78%;height:78%;object-fit:contain}
+.tile.un{background:#00000030}
+.tile.un svg,.tile.un img{filter:brightness(0) opacity(.3)}
+.tile .q{position:absolute;font-size:18px;color:#ffffff40;font-weight:600}
+.tile span{color:var(--gold);letter-spacing:1px;line-height:1;font-size:9px}
+.rh{display:flex;align-items:center;gap:8px;margin:12px 2px 8px;font-size:11.5px;font-weight:600;letter-spacing:.14em;color:var(--mut)}
+.rh::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--c)}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:14px}
+.day{border-radius:12px;background:var(--surf);border:1px solid var(--line);text-align:center;padding:6px 0 4px;font-size:10.5px;color:var(--mut)}
+.day b{display:block;height:24px;margin-top:3px}
+.day b svg{height:100%;width:auto;display:inline-block}
+.day.now{border-color:var(--gold);background:#e8b85a18;color:var(--txt)}
+.day.past{opacity:.45}
+.reveal{text-align:center}
+.reveal h2{margin:0 auto 4px;max-width:none}
+.reveal .sub{text-align:center}
+.reveal .stage{position:relative;width:210px;height:210px;margin:10px auto 2px}
+.reveal .stage::before{content:'';position:absolute;inset:-30px;border-radius:50%;background:radial-gradient(circle,var(--c,#e8b85a66) 0,#0000 66%);animation:breathe 3s ease-in-out infinite}
+.reveal .big{position:relative;width:100%;height:100%;animation:popc .6s ease-out}
+.reveal .big svg,.reveal .big img{width:100%;height:100%;display:block;object-fit:contain;filter:drop-shadow(0 6px 8px #0007)}
+.reveal .rar{display:inline-block;padding:2px 14px;border:1px solid var(--c);border-radius:999px;color:var(--c);font-weight:600;font-size:11.5px;letter-spacing:.14em}
+.reveal .nm{font-size:32px;font-weight:700;line-height:1.1;color:var(--txt);letter-spacing:-.3px;margin-top:4px}
+.newtag{display:inline-block;background:var(--gold);color:#1a1303;border-radius:999px;padding:1px 12px;font-weight:700;font-size:12px;letter-spacing:.1em;margin:6px 0}
+.bignum{font-size:40px;font-weight:700;color:var(--gold);line-height:1.2;margin:6px 0;letter-spacing:-.5px}
+.row{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.row .btn{font-size:16px;padding:10px 22px}
+#toast{position:fixed;left:50%;bottom:110px;transform:translateX(-50%);background:#1c2136;border:1px solid var(--line);color:var(--txt);padding:8px 16px;border-radius:12px;font-size:14px;z-index:100;opacity:0;transition:opacity .2s;pointer-events:none;text-align:center;max-width:90%;box-shadow:0 10px 30px #000a}
+#toast.on{opacity:1}
+.fx{position:fixed;pointer-events:none;z-index:90;font-weight:700;text-shadow:0 2px 8px #000c}
+#ghost{position:fixed;z-index:80;pointer-events:none;width:84px;height:84px;margin:-42px 0 0 -42px;transform:scale(1.12);filter:drop-shadow(0 10px 8px #0008)}
+#ghost img,#ghost svg{width:100%;height:100%;display:block;object-fit:contain}
+</style>
+<script>try{if(localStorage.getItem("oddlings_theme")==="candy"){document.write('<link rel="stylesheet" id="candycss" href="candy.css">');}}catch(e){}</script>
+<script>try{var c=document.getElementById("candycss");if(c){if(c.sheet&&c.sheet.cssRules.length>20){document.getElementById("calmcss").disabled=true;var f=document.createElement("link");f.rel="stylesheet";f.id="fredoka";f.href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap";document.head.appendChild(f);}else{c.remove();localStorage.setItem("oddlings_theme","calm");}}}catch(e){}</script>
+</head>
+<body>
+<!-- shared gradients for the inline icons (kept outside any hidden element so they always resolve) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6d98e"/><stop offset="1" stop-color="#d49b32"/></linearGradient>
+  <radialGradient id="eg0" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#fffaf0"/><stop offset=".6" stop-color="#eedfbd"/><stop offset="1" stop-color="#c9b58a"/></radialGradient>
+  <radialGradient id="eg1" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#e4f8ff"/><stop offset=".55" stop-color="#8fd3f0"/><stop offset="1" stop-color="#3f86b8"/></radialGradient>
+  <radialGradient id="eg2" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#fff0b8"/><stop offset=".55" stop-color="#eebb48"/><stop offset="1" stop-color="#a8731c"/></radialGradient>
+</defs></svg>
+<noscript><p style="color:#eceff8;font:16px system-ui;padding:24px">Oddlings needs JavaScript to run.</p></noscript>
+<div id="app">
+  <header id="top">
+    <div class="pill"><span class="ni" data-ic="coin"></span><b id="coins">0</b></div>
+    <button class="round" id="btnTheme" aria-label="Change style" data-ic="palette"></button>
+    <button class="round" id="btnSound" aria-label="Sound"></button>
+  </header>
+  <div id="chips">
+    <span class="chip"><span class="mi" data-ic="coin"></span><b id="rate">0/s</b></span>
+    <span class="chip boost hidden" id="boost"></span>
+    <div id="hint"></div>
+  </div>
+  <main id="board">
+    <div id="goal" data-act="go" data-go="album"></div>
+    <div id="grid"></div>
+    <div id="info"></div>
+  </main>
+  <div id="spare"></div>
+  <section id="incs"></section>
+  <nav id="nav">
+    <button data-act="go" data-go="eggs"><span class="ni" data-ic="eggline"></span><span class="l">Shop</span></button>
+    <button data-act="go" data-go="album"><span class="ni" data-ic="book"></span><span class="l">Album</span></button>
+    <button data-act="go" data-go="daily"><span class="ni" data-ic="gift"></span><span class="l">Daily</span><i class="dot" id="dotDaily">!</i></button>
+    <button data-act="go" data-go="boost"><span class="ni" data-ic="bolt"></span><span class="l">Boost</span><i class="dot" id="dotBoost">!</i></button>
+  </nav>
+</div>
+<div id="sheet" class="hidden"><div id="sheetCard"><button class="x" data-act="close" aria-label="Close" data-ic="x"></button><div id="sheetBody"></div></div></div>
+<div id="toast"></div>
+<div id="ghost" class="hidden"></div>
+
+<script src="ads.js"></script>
+<script>if (typeof Ads === "undefined") window.Ads = { configure() {}, available: () => false, mode: () => "none", reward: async () => ({ ok: false, reason: "unavailable" }) };   /* ads.js blocked or missing: the game must still run */
+if (!Element.prototype.animate) Element.prototype.animate = function () { const o = {}; setTimeout(() => o.onfinish && o.onfinish(), 60); return o; };   /* very old browsers */</script>
+<script>
+'use strict';
+/* ================= DATA ================= */
+const MAXL = 8, NSP = 40, NSLOT = 16, OFFLINE_MAX = 4 * 3600, OFFLINE_RATE = 0.5;
+const RAR = [
+  { n: 'COMMON', c: '#9ad27a' }, { n: 'UNCOMMON', c: '#5ec8e8' }, { n: 'RARE', c: '#b07cff' },
+  { n: 'EPIC', c: '#ff9a3c' }, { n: 'MYTHIC', c: '#ff4f9a' }
+];
+const NAMES = [
+  'Pib','Moss','Grub','Dots','Nib','Puddle','Fuzz','Bean',
+  'Wobble','Snorf','Zigzag','Pudge','Twiggy','Mumble','Cricket','Noodle',
+  'Glimmer','Thistle','Quill','Bramble','Marble','Sprocket','Lantern','Tumble',
+  'Voltix','Nebula','Riptide','Cinder','Frostbit','Gloom','Mirage','Eclipse',
+  'Solaris','Void King','Chronos','Aurora','Leviathan','Phoenyx','Omega','Stardrake'
+];
+const EGGS = [
+  { n: 'Wooden Egg', base: 30,    time: 8,   secs: 15,  w: [85, 14, 1, 0, 0] },
+  { n: 'Silver Egg', base: 600,   time: 45,  secs: 150, w: [15, 55, 27, 3, 0] },
+  { n: 'Golden Egg', base: 15000, time: 180, secs: 900, w: [0, 12, 45, 33, 10] }
+];
+const BASE = [1, 5, 25, 125, 625];
+const baseInc = s => BASE[(s / 8) | 0] * (1 + (s % 8) * 0.2);
+const crInc = c => baseInc(c.s) * Math.pow(3, c.l - 1);
+const need = l => Math.pow(2, l - 1);                      // a Lv l pet is worth 2^(l-1) Lv1 pets
+const perkCost = n => PERK_BASE * Math.pow(PERK_GROW, n);
+const stars = l => l <= 5 ? '★'.repeat(l) : '★' + l;
+const slotCost = k => 400 * Math.pow(5, k - 8);          // k = index of slot being unlocked (8..15)
+const INC_COST = 25000;
+const SELL_MUL = 10;                  // selling pays 10 s of the pet's income (always less than a new egg costs)
+const TAP_MUL = 1.5;                  // petting a creature pays 1.5 s of its income
+const DUP_BIAS = 0.3;                  // chance that an egg hatches a species you already have (of the rolled rarity) -> merging stays alive
+const PERK_MAX = 24, PERK_MUL = 1.2, PERK_BASE = 500000, PERK_GROW = 3;   // habitat upgrades: endless coin sink, +20% income each
+const FREE_EGG_COOLDOWN = 8 * 60000;  // free (ad) silver egg every 8 minutes
+const BOOST_STEP = 3 * 60000, BOOST_MAX = 15 * 60000;
+
+/* ================= HELPERS ================= */
+const $ = id => document.getElementById(id);
+function fmt(n) {
+  n = Math.floor(n);
+  if (!(n < 1e24)) return '999Qi+';                      // NaN, Infinity or an edited save: keep the header readable
+  if (n < 1000) return String(n);
+  const u = ['', 'K', 'M', 'B', 'T', 'Qa', 'Qi'];
+  let i = 0, v = n;
+  while (v >= 1000 && i < u.length - 1) { v /= 1000; i++; }
+  return (v < 10 ? v.toFixed(2) : v < 100 ? v.toFixed(1) : Math.floor(v)) + u[i];
+}
+function fmtRate(n) { return n < 10 ? n.toFixed(1) : fmt(n); }
+function fmtTime(ms) {
+  const s = Math.max(0, Math.ceil(ms / 1000));
+  return s >= 60 ? Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0') : s + 's';
+}
+const today = () => new Date().toLocaleDateString('en-CA');
+const yesterday = () => { const d = new Date(); d.setDate(d.getDate() - 1); return d.toLocaleDateString('en-CA'); };
+
+/* ================= CREATURE ART ================= */
+// 40 baked transparent WebP sprites: art/p00.webp ... p39.webp (made from the AI sheets by _src/bake.js)
+function creatureImg(i, lazy) {
+  return `<img src="art/p${String(i).padStart(2, '0')}.webp" width="256" height="256" alt="" draggable="false" decoding="async" onerror="this.outerHTML='<span class=ph>?</span>'"${lazy ? ' loading="lazy"' : ''}>`;
+}
+
+/* ================= ICONS + THEMES =================
+ * Two looks share one game: "calm" (default, thin line icons) and "candy" (the first, chunkier look).
+ * The icon sets live here; the matching stylesheet for candy is candy.css (loaded on demand). */
+const L = p => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+const ICON_CALM = {
+  coin: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.5" fill="url(#cg)"/><circle cx="12" cy="12" r="7.6" fill="none" stroke="#a9741a" stroke-width="1.3" opacity=".7"/><path d="M12 7.6l1.4 3 3.2.4-2.4 2.2.7 3.2L12 14.8 9.1 16.4l.7-3.2-2.4-2.2 3.2-.4z" fill="#fff4d2" opacity=".95"/></svg>`,
+  bolt: L('<path d="M13 2.5L5.5 13.5h6L10.5 21.5l8-11.5h-6z"/>'),
+  book: L('<path d="M3 5.5C6 4 9 4 12 6c3-2 6-2 9-.5V19c-3-1.5-6-1.5-9 .5-3-2-6-2-9-.5z"/><path d="M12 6v13.5"/>'),
+  gift: L('<rect x="3.5" y="9.5" width="17" height="11" rx="2"/><path d="M2.5 9.5h19v3.5h-19zM12 9.5v11"/><path d="M12 9.5c-1.5-4.5-6-4-5-1.5.8 2 5 1.5 5 1.5zM12 9.5c1.5-4.5 6-4 5-1.5-.8 2-5 1.5-5 1.5z"/>'),
+  eggline: L('<path d="M12 2.8C7.8 2.8 4.8 9 4.8 14c0 4 3.2 7.2 7.2 7.2s7.2-3.2 7.2-7.2c0-5-3-11.2-7.2-11.2z"/>'),
+  lock: L('<rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>'),
+  sound: L('<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/>'),
+  mute: L('<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/>'),
+  play: `<svg viewBox="0 0 24 24"><path d="M6.5 4v16l13.5-8z" fill="currentColor"/></svg>`,
+  x: L('<path d="M6 6l12 12M18 6L6 18"/>'),
+  plus: L('<path d="M12 5v14M5 12h14"/>'),
+  palette: L('<path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-.9 2-1.8 0-.6-.3-1-.6-1.4-.3-.4-.5-.8-.5-1.3 0-1 .8-1.7 1.8-1.7H17a4 4 0 0 0 4-4C21 6.6 17 3 12 3z"/><circle cx="7.5" cy="11" r="1.1"/><circle cx="10" cy="7.2" r="1.1"/><circle cx="14.5" cy="7.2" r="1.1"/>')
+};
+const CINK = '#2b1a55';
+const ICON_CANDY = {
+  coin: `<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="17.5" fill="#ffc21a" stroke="${CINK}" stroke-width="3"/><circle cx="20" cy="20" r="11.5" fill="#ffd95a" stroke="#e08a00" stroke-width="2.5"/><path d="M20 12.5l2.4 5 5.4.7-4 3.8 1 5.4-4.8-2.6-4.8 2.6 1-5.4-4-3.8 5.4-.7z" fill="#fff6bf" stroke="#e08a00" stroke-width="1"/><path d="M8.5 15a12.5 12.5 0 0 1 7-6.5" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" opacity=".85"/></svg>`,
+  bolt: `<svg viewBox="0 0 40 40"><path d="M23 3L8 23h9l-3 14 17-22h-10z" fill="#ffe14d" stroke="${CINK}" stroke-width="3" stroke-linejoin="round"/><path d="M21 9l-7 11" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".85"/></svg>`,
+  book: `<svg viewBox="0 0 40 40"><path d="M4 9c6-3 12-3 16 1 4-4 10-4 16-1v24c-6-3-12-3-16 1-4-4-10-4-16-1z" fill="#fff4d6" stroke="${CINK}" stroke-width="3" stroke-linejoin="round"/><path d="M20 10v24" stroke="${CINK}" stroke-width="3"/><path d="M9 14c3-1 6-1 8 .5M9 20c3-1 6-1 8 .5M23 14.5c2-1.5 5-1.5 8-.5M23 20.5c2-1.5 5-1.5 8-.5" stroke="#e8798f" stroke-width="2" stroke-linecap="round" fill="none"/></svg>`,
+  gift: `<svg viewBox="0 0 40 40"><rect x="5" y="17" width="30" height="19" rx="3" fill="#ff7aa8" stroke="${CINK}" stroke-width="3"/><rect x="3" y="11" width="34" height="9" rx="3" fill="#ff9cc4" stroke="${CINK}" stroke-width="3"/><rect x="17" y="11" width="6" height="25" fill="#ffe14d" stroke="${CINK}" stroke-width="2.5"/><path d="M20 11c-5-8-12-6-9-2 2 3 9 2 9 2zM20 11c5-8 12-6 9-2-2 3-9 2-9 2z" fill="#ffe14d" stroke="${CINK}" stroke-width="2.5" stroke-linejoin="round"/></svg>`,
+  lock: `<svg viewBox="0 0 40 40"><path d="M12 18v-5a8 8 0 0 1 16 0v5" fill="none" stroke="${CINK}" stroke-width="7" stroke-linecap="round"/><path d="M12 18v-5a8 8 0 0 1 16 0v5" fill="none" stroke="#e3e7f0" stroke-width="3" stroke-linecap="round"/><rect x="7" y="17" width="26" height="19" rx="5" fill="#ffc21a" stroke="${CINK}" stroke-width="3"/><circle cx="20" cy="25.5" r="3" fill="${CINK}"/><rect x="18.8" y="26" width="2.4" height="6" rx="1" fill="${CINK}"/></svg>`,
+  sound: `<svg viewBox="0 0 40 40"><path d="M5 15h7l9-7v24l-9-7H5z" fill="#fff" stroke="${CINK}" stroke-width="3" stroke-linejoin="round"/><path d="M27 14c3 3 3 9 0 12M31 9c6 6 6 16 0 22" stroke="${CINK}" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`,
+  mute: `<svg viewBox="0 0 40 40"><path d="M5 15h7l9-7v24l-9-7H5z" fill="#fff" stroke="${CINK}" stroke-width="3" stroke-linejoin="round"/><path d="M27 15l9 10M36 15l-9 10" stroke="${CINK}" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>`,
+  play: `<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="17" fill="#fff" stroke="${CINK}" stroke-width="3"/><path d="M16 12l13 8-13 8z" fill="#ff7a1a" stroke="${CINK}" stroke-width="2.5" stroke-linejoin="round"/></svg>`,
+  x: `<svg viewBox="0 0 40 40"><path d="M11 11l18 18M29 11L11 29" stroke="${CINK}" stroke-width="9" stroke-linecap="round"/><path d="M11 11l18 18M29 11L11 29" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg>`,
+  plus: `<svg viewBox="0 0 40 40"><path d="M20 8v24M8 20h24" stroke="${CINK}" stroke-width="10" stroke-linecap="round"/><path d="M20 8v24M8 20h24" stroke="#fff" stroke-width="6" stroke-linecap="round"/></svg>`,
+  palette: `<svg viewBox="0 0 40 40"><path d="M20 5C11 5 4 12 4 21c0 8 6 14 14 14 3 0 4-2 4-3.5 0-1-.6-1.8-1-2.5-.5-.8-.6-1.4-.4-2.2.4-1.3 1.6-2 3-2H30c3.3 0 6-2.7 6-6C36 10 29 5 20 5z" fill="#ffe9a0" stroke="${CINK}" stroke-width="3" stroke-linejoin="round"/><circle cx="12" cy="19" r="2.8" fill="#ff5d6c"/><circle cx="17" cy="11.5" r="2.8" fill="#4cb8ff"/><circle cx="26" cy="11.5" r="2.8" fill="#4ad66d"/><circle cx="30.5" cy="19" r="2.8" fill="#ff7bbf"/></svg>`
+};
+function eggCalm(t) {
+  const P = 'M32 4C19 4 9 26 9 44c0 15 10 24 23 24s23-9 23-24C55 26 45 4 32 4z';
+  let b;
+  if (t === 0) b = `<path d="${P}" fill="url(#eg0)"/><circle cx="25" cy="40" r="2.4" fill="#b99a66" opacity=".55"/><circle cx="40" cy="31" r="2" fill="#b99a66" opacity=".55"/><circle cx="37" cy="50" r="2.6" fill="#b99a66" opacity=".5"/><circle cx="21" cy="53" r="1.7" fill="#b99a66" opacity=".5"/>`;
+  else if (t === 1) b = `<path d="${P}" fill="url(#eg1)"/><path d="M32 24l9 11-9 14-9-14z" fill="#ffffff" opacity=".28"/><path d="M23 35h18M32 24v25" stroke="#fff" stroke-width="1" opacity=".5"/>`;
+  else b = `<path d="${P}" fill="url(#eg2)"/><path d="M10 40c14 6 30 6 44 0" stroke="#fff3c4" stroke-width="1.6" fill="none" opacity=".6"/><path d="M32 25l3 6.5 7 .9-5.2 4.8 1.4 7-6.2-3.4-6.2 3.4 1.4-7-5.2-4.8 7-.9z" fill="#fff6d0" opacity=".85"/>`;
+  return `<svg viewBox="0 0 64 72">${b}<ellipse cx="22" cy="21" rx="3.4" ry="8" fill="#fff" opacity=".55" transform="rotate(22 22 21)"/></svg>`;
+}
+function eggCandy(t) {
+  const P = 'M32 4C19 4 9 26 9 44c0 15 10 24 23 24s23-9 23-24C55 26 45 4 32 4z';
+  let b;
+  if (t === 0) b = `<path d="${P}" fill="#fff0cc" stroke="${CINK}" stroke-width="3"/><path d="M12 48c4 12 12 17 20 17s17-5 20-17c-8 6-32 6-40 0z" fill="#f2d79b"/><circle cx="24" cy="38" r="3" fill="#c98f5a"/><circle cx="40" cy="30" r="2.5" fill="#c98f5a"/><circle cx="36" cy="49" r="3.2" fill="#c98f5a"/><circle cx="20" cy="52" r="2" fill="#c98f5a"/><circle cx="45" cy="45" r="2" fill="#c98f5a"/><ellipse cx="22" cy="22" rx="3.5" ry="8" fill="#fff" opacity=".7" transform="rotate(22 22 22)"/>`;
+  else if (t === 1) b = `<path d="${P}" fill="#a6e8ff" stroke="${CINK}" stroke-width="3"/><path d="M12 48c4 12 12 17 20 17s17-5 20-17c-8 6-32 6-40 0z" fill="#6cc9ee"/><path d="M32 22l10 12-10 15-10-15z" fill="#e6fbff" stroke="${CINK}" stroke-width="2.2" stroke-linejoin="round"/><path d="M22 34h20M32 22v27" stroke="#8fdcf5" stroke-width="1.8"/><ellipse cx="22" cy="20" rx="3.5" ry="8" fill="#fff" opacity=".8" transform="rotate(22 22 20)"/>`;
+  else b = `<path d="${P}" fill="#ffd23f" stroke="${CINK}" stroke-width="3"/><path d="M12 48c4 12 12 17 20 17s17-5 20-17c-8 6-32 6-40 0z" fill="#f2a900"/><path d="M10 38c14 6 30 6 44 0" stroke="#ff8a1a" stroke-width="4" fill="none"/><path d="M32 24l3.6 7.4 8 1.1-5.8 5.6 1.4 8-7.2-3.9-7.2 3.9 1.4-8-5.8-5.6 8-1.1z" fill="#fff6bf" stroke="${CINK}" stroke-width="2" stroke-linejoin="round"/><ellipse cx="22" cy="20" rx="3.5" ry="8" fill="#fff" opacity=".8" transform="rotate(22 22 20)"/>`;
+  return `<svg viewBox="0 0 64 72">${b}</svg>`;
+}
+ICON_CANDY.eggline = eggCandy(0);
+
+const THEME_KEY = 'oddlings_theme';
+let theme = 'calm';
+{ const c = document.getElementById('candycss'); try { if (c && c.sheet && c.sheet.cssRules.length > 20 && document.getElementById('calmcss').disabled) theme = 'candy'; } catch (e) {} }
+let ICON = theme === 'candy' ? ICON_CANDY : ICON_CALM;
+function eggSVG(t) { return theme === 'candy' ? eggCandy(t) : eggCalm(t); }
+let COIN = `<span class="mi">${ICON.coin}</span>`;
+let AD = `<span class="pi">${ICON.play}</span>`;
+function fillIcons() {
+  document.querySelectorAll('[data-ic]').forEach(el => {
+    const k = el.dataset.ic;
+    el.innerHTML = /^egg\d$/.test(k) ? eggSVG(+k.slice(3)) : ICON[k];
+  });
+}
+function setSnd() { $('btnSound').innerHTML = S.mute ? ICON.mute : ICON.sound; }
+// Switch the whole look. The candy stylesheet is fetched only when someone asks for it.
+// Rules: calm is never switched off before candy is really loaded; a click while loading is ignored;
+// if loading fails or takes too long everything rolls back to calm.
+let themeBusy = false;
+const candyReady = c => { try { return !!(c && c.sheet && c.sheet.cssRules.length > 20); } catch (e) { return false; } };   // a real, non-empty stylesheet
+function setTheme(t) {
+  if (t === theme || themeBusy) return;
+  const calm = $('calmcss');
+  const apply = () => {
+    const c = $('candycss');
+    if (t === 'candy' && !candyReady(c)) { fail(); return; }
+    themeBusy = false; theme = t;
+    try { localStorage.setItem(THEME_KEY, t); } catch (e) {}
+    ICON = t === 'candy' ? ICON_CANDY : ICON_CALM;
+    COIN = `<span class="mi">${ICON.coin}</span>`; AD = `<span class="pi">${ICON.play}</span>`;
+    calm.disabled = t === 'candy';
+    if (c) c.disabled = t !== 'candy';
+    fillIcons(); setSnd(); render(); refreshSheet();
+    toast(t === 'candy' ? 'Candy style' : 'Calm style');
+  };
+  const fail = () => {
+    themeBusy = false;
+    const c = $('candycss'); if (c) c.remove();                // never keep a half-loaded sheet around
+    calm.disabled = false;
+    toast('Could not load that style');
+  };
+  themeBusy = true;
+  if (t === 'candy') {
+    const old = $('candycss');
+    if (candyReady(old)) { apply(); return; }            // loaded before: just switch
+    if (old) old.remove();
+    const l = document.createElement('link'); l.rel = 'stylesheet'; l.id = 'candycss'; l.href = 'candy.css';
+    l.onload = apply; l.onerror = fail;
+    document.head.appendChild(l);
+    if (!$('fredoka')) { const f = document.createElement('link'); f.rel = 'stylesheet'; f.id = 'fredoka'; f.href = 'https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap'; document.head.appendChild(f); }
+    setTimeout(() => { if (themeBusy && !l.sheet) fail(); }, 8000);
+  } else apply();
+}
+
+/* ================= STATE ================= */
+const KEY = 'oddlings_v1';
+let S;
+function fresh() {
+  return {
+    coins: 30, hatched: 0,
+    slots: Array(NSLOT).fill(null), unlocked: 8,
+    eggs: [{ t: 0, end: Date.now() + 3000 }, null, null], incs: 2,
+    disc: {}, lastSeen: Date.now(), boostUntil: 0, freeEggAt: 0,
+    daily: { last: '', streak: 0 }, q: null, mute: false, perk: 0
+  };
+}
+// Rebuild the state from untrusted storage: only known fields, only valid types/ranges.
+// (A broken or edited save must never crash the render loop or inject markup.)
+function clean(raw) {
+  const F = fresh(), now = Date.now();
+  if (!raw || typeof raw !== 'object') return F;
+  const num = (v, d, lo, hi) => (typeof v === 'number' && isFinite(v)) ? Math.min(hi, Math.max(lo, v)) : d;
+  const int = (v, d, lo, hi) => Math.floor(num(v, d, lo, hi));
+  const C = {};
+  C.coins = num(raw.coins, F.coins, 0, 1e300);
+  C.hatched = int(raw.hatched, 0, 0, 1e9);
+  C.unlocked = int(raw.unlocked, 8, 8, NSLOT);
+  C.incs = int(raw.incs, 2, 2, 3);
+  C.slots = Array.from({ length: NSLOT }, (_, k) => {
+    const c = Array.isArray(raw.slots) ? raw.slots[k] : null;
+    if (k >= C.unlocked || !c || !Number.isInteger(c.s) || c.s < 0 || c.s >= NSP) return null;
+    const l = int(c.l, 1, 1, MAXL);
+    return { s: c.s, l, x: l >= MAXL ? 0 : int(c.x, 0, 0, need(l) - 1) };
+  });
+  C.eggs = [0, 1, 2].map(i => {
+    const e = Array.isArray(raw.eggs) ? raw.eggs[i] : null;
+    if (i >= C.incs || !e || !Number.isInteger(e.t) || e.t < 0 || e.t >= EGGS.length) return null;
+    return { t: e.t, end: num(e.end, 0, 0, now + EGGS[e.t].time * 1000) };
+  });
+  C.disc = {};
+  if (raw.disc && typeof raw.disc === 'object') for (const k of Object.keys(raw.disc)) {
+    const i = Number(k), v = raw.disc[k];
+    if (Number.isInteger(i) && i >= 0 && i < NSP && Number.isInteger(v)) C.disc[i] = Math.min(MAXL, Math.max(1, v));
+  }
+  C.slots.forEach(c => { if (c) C.disc[c.s] = Math.max(C.disc[c.s] || 0, c.l); });   // a pet on the board is always in the album (also repairs damaged saves)
+  C.lastSeen = num(raw.lastSeen, now, 0, now);                       // never in the future (clock changes)
+  C.boostUntil = num(raw.boostUntil, 0, 0, now + 15 * 60000);
+  C.freeEggAt = num(raw.freeEggAt, 0, 0, now + FREE_EGG_COOLDOWN);
+  const d = raw.daily && typeof raw.daily === 'object' ? raw.daily : {};
+  const isDay = v => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v);
+  C.daily = { last: isDay(d.last) ? d.last : '', streak: int(d.streak, 0, 0, 7) };
+  C.q = null;
+  if (raw.q && isDay(raw.q.date) && Array.isArray(raw.q.items)) {
+    C.q = { date: raw.q.date, items: Object.keys(QDEF).map(k => {
+      const o = raw.q.items.find(x => x && x.k === k) || {};
+      return { k, have: int(o.have, 0, 0, QDEF[k].need), done: o.done === true };
+    }) };
+  }
+  C.mute = raw.mute === true;
+  C.perk = int(raw.perk, 0, 0, PERK_MAX);
+  return C;
+}
+function load() {
+  try { const r = localStorage.getItem(KEY); if (r) { S = clean(JSON.parse(r)); return; } } catch (e) {}
+  S = fresh();
+}
+function save() {
+  if (document.hidden) return;
+  S.lastSeen = Date.now();
+  try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {}
+}
+
+/* ================= ECONOMY ================= */
+function collectionMult() {
+  const d = Object.keys(S.disc).length, m = Object.values(S.disc).filter(v => v >= MAXL).length;
+  return 1 + 0.03 * d + 0.1 * m;
+}
+function perkMult() { return Math.pow(PERK_MUL, S.perk); }
+function totalMult() { return collectionMult() * perkMult(); }
+function boostMult() { return Date.now() < S.boostUntil ? 2 : 1; }
+function incomeBase() { let t = 0; for (let k = 0; k < S.unlocked; k++) if (S.slots[k]) t += crInc(S.slots[k]); return t * totalMult(); }
+function income() { return incomeBase() * boostMult(); }
+// price = max(base inflating with hatches, N seconds of current income) -> always a meaningful coin sink
+const eggCost = t => Math.floor(Math.max(EGGS[t].base * (1 + S.hatched * 0.04), incomeBase() * EGGS[t].secs));
+
+/* ================= EFFECTS ================= */
+let actx = null, adMuted = false;
+function audio() { if (!actx) { try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {} } if (actx && actx.state === 'suspended') actx.resume(); }
+function tone(f, d, type, v, slide, when) {
+  if (S.mute || adMuted || !actx) return;
+  const t = actx.currentTime + (when || 0), o = actx.createOscillator(), g = actx.createGain();
+  o.type = type || 'sine'; o.frequency.setValueAtTime(f, t);
+  if (slide) o.frequency.exponentialRampToValueAtTime(Math.max(30, f * slide), t + d);
+  g.gain.setValueAtTime(v || 0.12, t); g.gain.exponentialRampToValueAtTime(0.0001, t + d);
+  o.connect(g).connect(actx.destination); o.start(t); o.stop(t + d + 0.02);
+}
+function sfx(k) {
+  if (k === 'coin') tone(900, 0.08, 'triangle', 0.08, 1.4);
+  else if (k === 'pop') { tone(300, 0.12, 'sine', 0.15, 2); }
+  else if (k === 'merge') { [523, 659, 784, 1047].forEach((f, i) => tone(f, 0.15, 'triangle', 0.13, 1, i * 0.07)); }
+  else if (k === 'hatch') { [392, 523, 659, 784, 1047].forEach((f, i) => tone(f, 0.2, 'triangle', 0.13, 1, i * 0.08)); }
+  else if (k === 'ready') { [988, 1319, 988, 1319].forEach((f, i) => tone(f, 0.14, 'sine', 0.14, 1, i * 0.12)); }
+  else if (k === 'err') tone(160, 0.18, 'square', 0.07, 0.7);
+  else if (k === 'buy') { tone(600, 0.08, 'square', 0.07); tone(900, 0.1, 'square', 0.07, 1, 0.07); }
+}
+let toastT;
+function toast(msg) { const t = $('toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 2200); }
+function floatText(x, y, txt, color) {
+  const d = document.createElement('div'); d.className = 'fx'; d.textContent = txt;
+  d.style.cssText = `left:${x}px;top:${y}px;color:${color || '#ffe27a'};font-size:24px;transform:translate(-50%,-50%)`;
+  document.body.appendChild(d);
+  d.animate([{ transform: 'translate(-50%,-50%)', opacity: 1 }, { transform: 'translate(-50%,-90px)', opacity: 0 }], { duration: 900, easing: 'ease-out' }).onfinish = () => d.remove();
+}
+function burst(x, y, color, n) {
+  for (let i = 0; i < n; i++) {
+    const d = document.createElement('div'); d.className = 'fx';
+    const a = Math.random() * 6.283, v = 40 + Math.random() * 70, sz = 5 + Math.random() * 6;
+    d.style.cssText = `left:${x}px;top:${y}px;width:${sz}px;height:${sz}px;border-radius:50%;background:${color}`;
+    document.body.appendChild(d);
+    d.animate([{ transform: 'translate(0,0) scale(1)', opacity: 1 }, { transform: `translate(${Math.cos(a) * v}px,${Math.sin(a) * v + 20}px) scale(.2)`, opacity: 0 }], { duration: 600 + Math.random() * 300, easing: 'ease-out' }).onfinish = () => d.remove();
+  }
+}
+const centerOf = el => { const r = el.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; };
+
+// Coins earned by tapping fly to the counter; the counter only "receives" them on arrival and pops.
+let flying = 0;                                  // coins still in the air (already in S.coins, not yet shown)
+function flyCoins(x, y, g) {
+  flying += g;
+  const r = $('coins').getBoundingClientRect(), tx = r.left + Math.min(r.width, 70) / 2, ty = r.top + r.height / 2;
+  const dx = tx - x, dy = ty - y;
+  const d = document.createElement('div'); d.className = 'fx'; d.textContent = '+' + fmt(g);
+  d.style.cssText = `left:${x}px;top:${y}px;color:#ffd27a;font-size:26px;transform:translate(-50%,-50%)`;
+  document.body.appendChild(d);
+  let done = false;
+  const arrive = () => { if (done) return; done = true; d.remove(); flying = Math.max(0, flying - g); if (flying < 1e-6) flying = 0; hud(true); pulseCoins(); };
+  // slow and readable: pop up and hang for a moment (you can read the number), then glide to the counter
+  d.animate([
+    { transform: 'translate(-50%,-50%) scale(.6)', opacity: 0, offset: 0 },
+    { transform: 'translate(-50%,-50%) translateY(-26px) scale(1.3)', opacity: 1, offset: 0.16 },
+    { transform: 'translate(-50%,-50%) translateY(-34px) scale(1.2)', opacity: 1, offset: 0.4 },
+    { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(.7)`, opacity: 0.95, offset: 1 }
+  ], { duration: 1500, easing: 'cubic-bezier(.4,.1,.5,1)' }).onfinish = arrive;
+  setTimeout(arrive, 2000);                      // safety: a hidden tab may never finish the animation
+}
+function pulseCoins() {
+  const o = { duration: 260, easing: 'ease-out' };
+  $('coins').animate([{ transform: 'scale(1)' }, { transform: 'scale(1.28)' }, { transform: 'scale(1)' }], o);
+  const ic = document.querySelector('.pill .ni'); if (ic) ic.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.3) rotate(-10deg)' }, { transform: 'scale(1)' }], o);
+}
+
+/* ================= REWARDS =================
+ * Every grant that comes from a (voluntary) rewarded ad lives here, in ONE place.
+ * (Later the same place can talk to the site-wide HARD STEEL COIN wallet.)
+ */
+const Rewards = {
+  offline2x: g => { S.coins += g; floatText(innerWidth / 2, innerHeight / 2, '+' + fmt(g), '#4fd1b0'); },
+  boost:     () => { const base = Math.max(Date.now(), S.boostUntil); S.boostUntil = Math.min(base + BOOST_STEP, Date.now() + BOOST_MAX); },
+  freeEgg:   () => { S.freeEggAt = Date.now() + FREE_EGG_COOLDOWN; giveEgg(1); },
+  skipEgg:   i => { if (S.eggs[i]) S.eggs[i].end = 0; }
+};
+async function watch(placement, grant, okMsg) {
+  audio();
+  const r = await Ads.reward(placement);
+  if (r.ok) { grant(); sfx('buy'); if (okMsg) toast(okMsg); save(); render(); refreshSheet(); }
+  else if (r.reason === 'busy') { /* ignore double tap */ }
+  else toast(r.reason === 'dismissed' ? 'Ad closed early - no reward.' : 'No ad available right now. Try again in a bit.');
+  return r.ok;
+}
+Ads.configure({ onStart: () => { adMuted = true; }, onEnd: () => { adMuted = false; } });   // game sound off while an ad plays (never touches the saved setting)
+
+function giveEgg(t) {
+  const i = S.eggs.findIndex((e, k) => k < S.incs && !e);
+  if (i < 0) { const c = eggCost(t); S.coins += c; toast('No free incubator - got ' + fmt(c) + ' coins instead'); return; }
+  S.eggs[i] = { t, end: 0 };
+}
+
+/* ================= GAME LOGIC ================= */
+// Add progress (in Lv1 units) to a pet; it levels up as far as the units allow.
+function feed(c, n) {
+  let up = 0; c.x = (c.x || 0) + n;
+  while (c.l < MAXL && c.x >= need(c.l)) { c.x -= need(c.l); c.l++; up++; S.disc[c.s] = Math.max(S.disc[c.s] || 0, c.l); quest('merge'); }
+  if (c.l >= MAXL) c.x = 0;
+  return up;
+}
+// which pet a new copy of species s feeds when the habitat is full: the one closest to its next level
+function feedTarget(s) {
+  let j = -1, best = Infinity;
+  for (let k = 0; k < S.unlocked; k++) { const c = S.slots[k]; if (c && c.s === s && c.l < MAXL) { const rem = need(c.l) - (c.x || 0); if (rem < best) { best = rem; j = k; } } }
+  return j;
+}
+function rollSpecies(t) {
+  const w = EGGS[t].w, sum = w.reduce((a, b) => a + b, 0);
+  let x = Math.random() * sum, r = 0;
+  for (; r < 4; r++) { if (x < w[r]) break; x -= w[r]; }   // r can never leave 0..4
+  const pick = () => r * 8 + Math.floor(Math.random() * 8);
+  if (Math.random() < DUP_BIAS) {                          // favour a species already on the habitat (not at MAX): keeps merging alive
+    const cand = []; for (let k = 0; k < S.unlocked; k++) { const c = S.slots[k]; if (c && ((c.s / 8) | 0) === r && c.l < MAXL) cand.push(c.s); }
+    if (cand.length) return cand[Math.floor(Math.random() * cand.length)];
+  }
+  let s = pick();
+  if (S.disc[s] && Math.random() < 0.4) s = pick();      // soft pity: favour new species
+  return s;
+}
+function buyEgg(t) {
+  if (!EGGS[t]) return;
+  const i = S.eggs.findIndex((e, k) => k < S.incs && !e);
+  if (i < 0) { toast('All incubators are busy'); sfx('err'); return; }
+  const c = eggCost(t);
+  if (S.coins < c) { toast('Not enough coins'); sfx('err'); return; }
+  S.coins -= c; S.eggs[i] = { t, end: Date.now() + EGGS[t].time * 1000 };
+  sfx('buy'); save(); render(); refreshSheet();
+}
+function freeSlot() { for (let k = 0; k < S.unlocked; k++) if (!S.slots[k]) return k; return -1; }
+// Hatching must NEVER be blocked. With a full habitat the new pet still counts for the album, and then:
+//   1) if the species is already on the habitat (below MAX) the new pet feeds it (+1 Lv1 unit, may level up and chain-merge),
+//   2) otherwise the player chooses: release it for coins, or replace the weakest pet.
+function hatch(i) {
+  const e = S.eggs[i]; if (!e) return;
+  const s = rollSpecies(e.t), isNew = !(s in S.disc);
+  S.eggs[i] = null; S.hatched++; quest('hatch');
+  S.disc[s] = Math.max(S.disc[s] || 0, 1);
+  const f = freeSlot();
+  if (f >= 0) { S.slots[f] = { s, l: 1 }; sfx('hatch'); save(); render(); showReveal(s, isNew); return; }
+  const j = feedTarget(s);
+  if (j >= 0) {
+    const c = S.slots[j], up = feed(c, 1); cascadeMerge(j);
+    sel = j; sfx(up ? 'merge' : 'pop'); save(); render(); showReveal(s, isNew);
+    toast(up ? 'Habitat full - it merged into your ' + NAMES[s] + '!' : 'Habitat full - it fed your ' + NAMES[s] + ' (' + c.x + '/' + need(c.l) + ')');
+    return;
+  }
+  sfx('hatch'); save(); render(); showFullChoice(s, isNew);
+}
+function cascadeMerge(j) {                      // keep merging while an equal pet of the same species exists
+  for (;;) {
+    const c = S.slots[j]; if (!c || c.l >= MAXL) break;
+    const k = S.slots.findIndex((o, x) => x !== j && x < S.unlocked && o && o.s === c.s && o.l === c.l);
+    if (k < 0) break;
+    const o = S.slots[k]; S.slots[k] = null; feed(c, need(c.l) + (o.x || 0));
+  }
+}
+function weakestIdx() {
+  let w = -1, v = Infinity;
+  for (let k = 0; k < S.unlocked; k++) if (S.slots[k]) { const x = crInc(S.slots[k]); if (x < v) { v = x; w = k; } }
+  return w;
+}
+let pendingNew = null;                          // a hatched pet waiting for the player's release/replace choice
+function resolveNew(mode) {
+  const p = pendingNew; if (!p) return;
+  pendingNew = null;
+  const w = weakestIdx();
+  if (mode === 'replace' && w >= 0 && baseInc(p.s) > crInc(S.slots[w])) {
+    const old = S.slots[w], v = Math.floor(crInc(old) * SELL_MUL);
+    S.coins += v; S.slots[w] = { s: p.s, l: 1 }; sel = w;
+    toast(NAMES[p.s] + ' joined, ' + NAMES[old.s] + ' sold for ' + fmt(v));
+  } else {
+    const v = Math.floor(baseInc(p.s) * SELL_MUL);
+    S.coins += v; toast(NAMES[p.s] + ' released for ' + fmt(v) + ' (it stays in your album)');
+  }
+  sfx('coin'); save(); render();
+}
+function showFullChoice(s, isNew) {
+  const r = (s / 8) | 0;
+  openSheet(() => {
+    const w = weakestIdx(), old = w >= 0 ? S.slots[w] : null, canSwap = !!old && baseInc(s) > crInc(old);
+    setSheet(`<div class="reveal"><div class="rar" style="--c:${RAR[r].c}">${RAR[r].n}</div><div class="stage" style="--c:${RAR[r].c}77"><div class="big">${creatureImg(s)}</div></div><div class="nm">${NAMES[s]}</div>${isNew ? '<div class="newtag">NEW!</div>' : ''}<div class="sub" style="margin:4px 0 0">Your habitat is full. It is already in your album.</div><div class="row">${canSwap ? `<button class="btn green" data-act="replaceWeak">Replace ${NAMES[old.s]} Lv${old.l}</button>` : ''}<button class="btn ${canSwap ? 'dim' : ''}" data-act="releaseNew">Release ${COIN}${fmt(baseInc(s) * SELL_MUL)}</button></div></div>`);
+  });
+  pendingNew = { s };                           // set after openSheet (opening a sheet settles any older choice)
+  burst(innerWidth / 2, innerHeight * 0.45, RAR[r].c, 24);
+}
+function unlockSlot(k) {
+  if (k !== S.unlocked) { toast('Unlock the previous slot first'); sfx('err'); return; }
+  const c = slotCost(k);
+  if (S.coins < c) { toast('Need ' + fmt(c) + ' coins'); sfx('err'); return; }
+  S.coins -= c; S.unlocked++; sfx('buy'); save(); render();
+}
+function unlockInc() {
+  if (S.incs >= 3) return;
+  if (S.coins < INC_COST) { toast('Need ' + fmt(INC_COST) + ' coins'); sfx('err'); return; }
+  S.coins -= INC_COST; S.incs = 3; sfx('buy'); save(); render();
+}
+let sel = -1, sellArm = -1, sellT = 0;
+const petCd = new WeakMap();           // per-creature tap cooldown (not saved)
+function drop(from, to) {
+  const a = S.slots[from], b = S.slots[to];
+  if (!a || from === to || to < 0 || to >= S.unlocked) { render(); return; }   // render clears the drag highlight
+  if (!b) { S.slots[to] = a; S.slots[from] = null; sel = to; sfx('pop'); }
+  else if (b.s === a.s && a.l < MAXL && b.l < MAXL) {          // same species: the stronger pet absorbs the other
+    const hi = a.l > b.l ? a : b, lo = hi === a ? b : a, was = hi.l;
+    const m = { s: hi.s, l: hi.l, x: hi.x || 0 };
+    feed(m, need(lo.l) + (lo.x || 0));
+    S.slots[to] = m; S.slots[from] = null; sel = to; cascadeMerge(to);
+    sfx(m.l > was ? 'merge' : 'pop'); save(); render();
+    const el = $('grid').children[to]; el.classList.add('pop');
+    const [x, y] = centerOf(el); burst(x, y, '#ffd54a', m.l > was ? 16 : 6);
+    if (m.l >= MAXL && was < MAXL) { toast(NAMES[a.s] + ' reached MAX level! +10% income'); floatText(x, y - 20, 'MAX!', '#ff5fa8'); }
+    return;
+  } else {
+    S.slots[to] = a; S.slots[from] = b; sel = to; sfx('pop');
+    if (b.s === a.s) toast('Already at MAX level');      // same species but one is MAX: say why
+  }
+  save(); render();
+}
+function sell(k) {
+  const c = S.slots[k]; if (!c) return;
+  const v = Math.floor(crInc(c) * SELL_MUL);
+  S.coins += v; S.slots[k] = null; sel = -1; sellArm = -1; sfx('coin'); save(); render();
+  toast('Sold ' + NAMES[c.s] + ' for ' + fmt(v));
+}
+function petTap(k, cell) {
+  const c = S.slots[k]; if (!c) return;
+  const now = Date.now();
+  if ((petCd.get(c) || 0) + 700 > now) return;
+  petCd.set(c, now);
+  const g = Math.max(1, crInc(c) * TAP_MUL * totalMult());
+  S.coins += g; quest('pet'); sfx('coin');
+  const [x, y] = centerOf(cell); flyCoins(x, y - 10, g); burst(x, y, '#ffe27a', 5);
+  const cr = cell.querySelector('.cr'); if (cr) cr.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.25,.8)' }, { transform: 'scale(1)' }], { duration: 260 });
+}
+
+/* ================= QUESTS & DAILY ================= */
+const QDEF = { hatch: { txt: 'Hatch 3 eggs', need: 3 }, merge: { txt: 'Merge 5 times', need: 5 }, pet: { txt: 'Pet creatures 25 times', need: 25 } };
+function ensureQuests() {
+  if (S.q && S.q.date === today()) return;
+  S.q = { date: today(), items: Object.keys(QDEF).map(k => ({ k, have: 0, done: false })) };   // only progress is stored, texts come from QDEF
+}
+function quest(k) { ensureQuests(); S.q.items.forEach(q => { if (q.k === k && q.have < QDEF[q.k].need) q.have++; }); }
+const questReward = () => Math.max(300, Math.floor(incomeBase() * 180));
+function dailyState() {
+  const t = today();
+  if (S.daily.last === t) return { can: false, day: S.daily.streak };
+  const nextStreak = S.daily.last === yesterday() ? (S.daily.streak % 7) + 1 : 1;
+  return { can: true, day: nextStreak };
+}
+const dailyReward = d => d === 7 ? { egg: 2, coins: Math.max(2000, Math.floor(incomeBase() * 900)) } : { coins: Math.max(100 * d, Math.floor(incomeBase() * 120 * d)) };
+function anyClaimable() {
+  ensureQuests();
+  return dailyState().can || S.q.items.some(q => !q.done && q.have >= QDEF[q.k].need);
+}
+
+/* ================= RENDER ================= */
+// Safety net: no pets, no eggs and not enough coins for the cheapest egg = nothing could ever earn again.
+function rescue() {
+  if (S.slots.some(Boolean) || S.eggs.some(Boolean) || S.coins >= eggCost(0)) return false;
+  S.eggs[0] = { t: 0, end: 0 };
+  toast('A lonely egg rolled in - hatch it!');
+  return true;
+}
+let incNow = 0;                         // cached income/s (recomputed on every render and 4x a second)
+function render() {
+  rescue();
+  if (sellArm !== sel) sellArm = -1;
+  // grid
+  const g = $('grid'); let h = '';
+  const pairs = {}; for (let k = 0; k < S.unlocked; k++) { const c = S.slots[k]; if (c && c.l < MAXL) pairs[c.s] = (pairs[c.s] || 0) + 1; }
+  for (let k = 0; k < NSLOT; k++) {
+    if (k >= S.unlocked) {
+      h += `<div class="cell locked ${k === S.unlocked ? 'next' : ''}" data-i="${k}" data-act="unlockSlot" data-k="${k}">${ICON.lock}<b>${fmt(slotCost(k))}</b></div>`; continue;
+    }
+    const c = S.slots[k];
+    if (!c) { h += `<div class="cell empty" data-i="${k}"></div>`; continue; }
+    const m = c.l < MAXL && pairs[c.s] >= 2;
+    h += `<div class="cell l${c.l} ${m ? 'mergeable' : ''} ${k === sel ? 'sel' : ''}" data-i="${k}"><div class="cr" style="animation-delay:-${(k * 0.37) % 2.2}s">${creatureImg(c.s)}</div><div class="lv">${stars(c.l)}</div>${c.x ? `<div class="xp"><i style="width:${c.x / need(c.l) * 100}%"></i></div>` : ''}</div>`;
+  }
+  g.innerHTML = h;
+  // info
+  const c = sel >= 0 ? S.slots[sel] : null, inf = $('info');
+  if (c) inf.innerHTML = `<span><span class="nm" style="color:${RAR[(c.s / 8) | 0].c}">${NAMES[c.s]}</span> <span style="color:var(--mut)">Lv${c.l}${c.l >= MAXL ? ' MAX' : c.x ? ' (' + c.x + '/' + need(c.l) + ')' : ''} · ${fmtRate(crInc(c) * totalMult())}/s</span></span><button class="btn red sm" data-act="sell" data-k="${sel}">${sellArm === sel ? 'Tap again to sell' : 'Sell ' + fmt(crInc(c) * SELL_MUL)} ${COIN}</button>`;
+  else inf.innerHTML = `<span class="hintx">Drag two of the same pet together to merge them!</span>`;
+  incNow = income(); renderInc(); hud(true); dots(); goal();
+}
+function renderInc() {
+  let h = '';
+  for (let i = 0; i < 3; i++) {
+    if (i >= S.incs) { h += `<div class="inc locked" data-act="unlockInc">${ICON.lock}<b>${fmt(INC_COST)}</b><span>3rd nest</span></div>`; continue; }
+    const e = S.eggs[i];
+    if (!e) h += `<div class="inc" data-act="go" data-go="eggs"><div class="egg plus">${ICON.plus}</div><span class="tm">Add egg</span></div>`;
+    else h += `<div class="inc" data-i="${i}" data-act="egg"><div class="egg">${eggSVG(e.t)}</div><span class="tm"></span><div class="bar"><i></i></div>${Ads.available() ? `<button class="skip" data-act="adSkip" data-i="${i}">${ICON.play}SKIP</button>` : ''}</div>`;
+  }
+  $('incs').innerHTML = h;
+  tickInc();
+}
+function tickInc() {
+  const now = Date.now();
+  // the device clock jumped back (wrong time, then synced): no timer may be further away than its own full duration
+  S.eggs.forEach(e => { if (e) { const cap = now + EGGS[e.t].time * 1000; if (e.end > cap) e.end = cap; } });
+  if (S.boostUntil > now + BOOST_MAX) S.boostUntil = now + BOOST_MAX;
+  if (S.freeEggAt > now + FREE_EGG_COOLDOWN) S.freeEggAt = now + FREE_EGG_COOLDOWN;
+  document.querySelectorAll('#incs .inc[data-i]').forEach(el => {
+    const i = +el.dataset.i, e = S.eggs[i]; if (!e) return;
+    const left = e.end - now, tot = EGGS[e.t].time * 1000, ready = left <= 0;
+    el.classList.toggle('ready', ready);
+    if (ready && !e.pinged) { e.pinged = true; if (tickInc.armed) { sfx('ready'); toast('An egg is ready to hatch!'); } }   // once per egg
+    el.querySelector('.tm').textContent = ready ? 'TAP TO HATCH!' : fmtTime(left);
+    el.querySelector('.bar i').style.width = (ready ? 100 : 100 - left / tot * 100) + '%';
+    const sk = el.querySelector('.skip'); if (sk) sk.style.display = ready ? 'none' : '';
+  });
+}
+let lastCoins = '', lastRate = '', lastBoost = '';
+function hud(force) {
+  const c = fmt(Math.max(0, S.coins - flying)); if (c !== lastCoins || force) { $('coins').textContent = c; lastCoins = c; }
+  const r = fmtRate(incNow) + '/s'; if (r !== lastRate || force) { $('rate').textContent = r; lastRate = r; }
+  const b = $('boost'), left = S.boostUntil - Date.now();
+  const bt = left > 0 ? 'x2 ' + fmtTime(left) : '';
+  if (bt !== lastBoost || force) {
+    lastBoost = bt;
+    if (bt) { b.classList.remove('hidden'); b.innerHTML = `<span class="mi">${ICON.bolt}</span><b>${bt}</b>`; } else b.classList.add('hidden');
+  }
+}
+function goal() {
+  const d = Object.keys(S.disc).length, b = Math.round((collectionMult() - 1) * 100);
+  $('goal').innerHTML = `<span class="ni">${ICON.book}</span><div class="gt"><div class="gl"><span>Collection <b>${d}/${NSP}</b></span><em>+${b}% income</em></div><div class="gb"><i style="width:${d / NSP * 100}%"></i></div></div>`;
+}
+function dots() {
+  $('dotDaily').classList.toggle('on', anyClaimable());
+  $('dotBoost').classList.toggle('on', Ads.available() && Date.now() >= S.freeEggAt);
+  const hint = $('hint');
+  const anyCr = S.slots.some(Boolean), anyEgg = S.eggs.some(Boolean);
+  hint.textContent = !anyCr && S.eggs.some(e => e) ? 'Tap your egg to hatch it!' :
+    !anyCr && !anyEgg ? 'Add an egg to a nest' :
+    (S.hatched <= 2 ? 'Tap a pet for bonus coins!' : '');
+}
+
+/* ================= SHEETS ================= */
+let curSheet = null;
+function openSheet(fn) { if (pendingNew) resolveNew('release'); curSheet = fn; $('sheet').classList.remove('hidden'); fn(); }
+function closeSheet() { curSheet = null; pendingOffline = 0; $('sheet').classList.add('hidden'); if (pendingNew) resolveNew('release'); }   // closing without a choice = release
+function setSheet(h) { $('sheetBody').innerHTML = h; $('sheetCard').scrollTop = 0; }
+function refreshSheet() { if (curSheet) { const st = $('sheetCard').scrollTop; curSheet(); $('sheetCard').scrollTop = st; } }
+
+function sheetEggs() {
+  let h = `<h2>Shop</h2><div class="sub">Hatch pets. Each pet earns coins every second.</div>`;
+  EGGS.forEach((e, t) => {
+    const odds = e.w.map((w, r) => w ? `<span class="od" style="--c:${RAR[r].c}">${RAR[r].n[0] + RAR[r].n.slice(1).toLowerCase()} ${w}%</span>` : '')
+    .filter(Boolean).join('');
+    h += `<div class="card"><div class="em">${eggSVG(t)}</div><div class="tx"><b>${e.n}</b>Hatches in ${fmtTime(e.time * 1000)}<br>${odds}</div><button class="btn ${S.coins < eggCost(t) ? 'dim' : 'green'}" data-act="buy" data-t="${t}">${COIN}${fmt(eggCost(t))}</button></div>`;
+  });
+  const pc = perkCost(S.perk), maxed = S.perk >= PERK_MAX;
+  h += `<h2 style="margin-top:14px">Habitat upgrade</h2><div class="card"><div class="em"><span class="upi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M6 12l6-6 6 6"/></svg></span></div><div class="tx"><b>Better care <span style="color:var(--mut)">Lv ${S.perk}/${PERK_MAX}</span></b>+${Math.round((PERK_MUL - 1) * 100)}% income per level. Now x${perkMult().toFixed(2)}</div>${maxed ? '<span style="color:var(--ok);font-weight:700">MAX</span>' : `<button class="btn ${S.coins < pc ? 'dim' : 'green'}" data-act="buyPerk">${COIN}${fmt(pc)}</button>`}</div>`;
+  setSheet(h);
+}
+function buyPerk() {
+  if (S.perk >= PERK_MAX) return;
+  const c = perkCost(S.perk);
+  if (S.coins < c) { toast('Not enough coins'); sfx('err'); return; }
+  S.coins -= c; S.perk++; sfx('buy'); toast('Better care - income x' + perkMult().toFixed(2)); save(); render(); refreshSheet();
+}
+function sheetAlbum() {
+  const d = Object.keys(S.disc).length;
+  let h = `<h2>Album ${d}/${NSP}</h2><div class="sub">Every new pet: +3% income. Every MAX-level pet: +10%.<br>Your bonus now: <b style="color:var(--ok)">+${Math.round((collectionMult() - 1) * 100)}%</b></div>`;
+  for (let r = 0; r < 5; r++) {
+    h += `<div class="rh" style="--c:${RAR[r].c}">${RAR[r].n}</div><div class="alb">`;
+    for (let k = 0; k < 8; k++) {
+      const i = r * 8 + k, v = S.disc[i];
+      h += v ? `<div class="tile" style="border-color:${RAR[r].c}99">${creatureImg(i, true)}<span>${stars(v)}</span></div>` : `<div class="tile un">${creatureImg(i, true)}<div class="q">?</div></div>`;
+    }
+    h += `</div>`;
+  }
+  setSheet(h);
+}
+function sheetDaily() {
+  ensureQuests();
+  const st = dailyState(); let h = `<h2>Daily gift</h2><div class="days">`;
+  for (let d = 1; d <= 7; d++) {
+    const cls = st.can ? (d === st.day ? 'now' : d < st.day ? 'past' : '') : (d <= st.day ? 'past' : '');
+    h += `<div class="day ${cls}">Day ${d}<b>${d === 7 ? eggSVG(2) : ICON.coin}</b></div>`;
+  }
+  h += `</div>`;
+  const rw = dailyReward(st.day);
+  h += st.can ? `<div class="row" style="margin:0 0 6px"><button class="btn green" data-act="claimDaily">Claim ${COIN}${fmt(rw.coins)}${rw.egg !== undefined ? ' + Golden Egg' : ''}</button></div>` : `<div class="sub">Come back tomorrow to keep your streak!</div>`;
+  h += `<h2 style="margin-top:14px">Today's quests</h2>`;
+  S.q.items.forEach((q, i) => {
+    const D = QDEF[q.k], can = !q.done && q.have >= D.need;
+    h += `<div class="card"><div class="tx"><b>${D.txt}</b>${Math.min(q.have, D.need)} / ${D.need}<div class="pb"><i style="width:${Math.min(100, q.have / D.need * 100)}%"></i></div></div>${q.done ? '<span style="color:var(--ok);font-weight:700">DONE</span>' : `<button class="btn ${can ? 'green' : 'dim'}" data-act="claimQ" data-i="${i}" ${can ? '' : 'disabled'}>${COIN}${fmt(questReward())}</button>`}</div>`;
+  });
+  setSheet(h);
+}
+function sheetBoost() {
+  const ready = Date.now() >= S.freeEggAt, ad = Ads.available();
+  let h = `<h2>Boosts</h2><div class="sub">Totally optional. Watch a short ad and get a reward.${ad ? '' : '<br><b>Ads are not available right now.</b>'}</div>`;
+  h += `<div class="card"><div class="em">${ICON.bolt}</div><div class="tx"><b>Double income</b>x2 coins for 3 minutes (stacks up to 15)</div><button class="btn" data-act="adBoost" ${ad ? '' : 'disabled'}>${AD}WATCH</button></div>`;
+  h += `<div class="card"><div class="em">${eggSVG(1)}</div><div class="tx"><b>Free Silver Egg</b>${ready ? 'Ready to hatch instantly' : 'Next one in ' + fmtTime(S.freeEggAt - Date.now())}</div><button class="btn" data-act="adEgg" ${ready && ad ? '' : 'disabled'}>${AD}WATCH</button></div>`;
+  h += `<div class="sub" style="margin-top:12px">Tip: the blue SKIP tag on a hatching egg finishes it right away.</div>`;
+  setSheet(h);
+}
+function showReveal(s, isNew) {
+  const r = (s / 8) | 0;
+  openSheet(() => setSheet(`<div class="reveal"><div class="rar" style="--c:${RAR[r].c}">${RAR[r].n}</div><div class="stage" style="--c:${RAR[r].c}77"><div class="big">${creatureImg(s)}</div></div><div class="nm">${NAMES[s]}</div>${isNew ? '<div class="newtag">NEW!</div>' : ''}<div class="sub" style="margin:4px 0 0">Earns ${fmtRate(baseInc(s))} coins/s</div><div class="row"><button class="btn green" data-act="close">Nice!</button></div></div>`));
+  const [x, y] = [innerWidth / 2, innerHeight * 0.45]; burst(x, y, RAR[r].c, 30); if (isNew) burst(x, y, '#fff', 14);
+}
+let pendingOffline = 0;
+function checkOffline() {
+  const dt = Math.min((Date.now() - S.lastSeen) / 1000, OFFLINE_MAX);
+  if (!(dt > 1)) return;                                 // also ignores a clock that moved backwards
+  const earn = Math.floor(incomeBase() * dt * OFFLINE_RATE);
+  S.lastSeen = Date.now();
+  if (earn < 1) return;
+  S.coins += earn;
+  if (dt < 30) { save(); return; }                       // short absence: credit quietly, no popup
+  pendingOffline = earn;
+  openSheet(() => setSheet(`<div class="reveal"><h2>Welcome back!</h2><div class="sub">Your pets kept working for ${fmtTime(dt * 1000)}</div><div class="bignum">+${fmt(earn)} ${COIN}</div><div class="row"><button class="btn green" data-act="close">Collect</button>${Ads.available() ? `<button class="btn" data-act="adOffline">${AD}x2 (+${fmt(earn)})</button>` : ''}</div></div>`));
+  save(); render();
+}
+
+/* ================= INPUT ================= */
+document.addEventListener('click', async ev => {
+  const el = ev.target.closest('[data-act]'); if (!el) { if (ev.target === $('sheet')) closeSheet(); return; }
+  audio();
+  const a = el.dataset.act;
+  if (a === 'close') closeSheet();
+  else if (a === 'go') { const f = Object.prototype.hasOwnProperty.call({ eggs: 1, album: 1, daily: 1, boost: 1 }, el.dataset.go) ? { eggs: sheetEggs, album: sheetAlbum, daily: sheetDaily, boost: sheetBoost }[el.dataset.go] : null; if (typeof f === 'function') openSheet(f); }
+  else if (a === 'buy') buyEgg(+el.dataset.t);
+  else if (a === 'buyPerk') buyPerk();
+  else if (a === 'sell') {
+    const k = +el.dataset.k;
+    if (sellArm === k) sell(k);                          // second tap confirms
+    else { sellArm = k; clearTimeout(sellT); sellT = setTimeout(() => { sellArm = -1; render(); }, 3000); render(); }
+  }
+  else if (a === 'releaseNew') { resolveNew('release'); closeSheet(); }
+  else if (a === 'replaceWeak') { resolveNew('replace'); closeSheet(); }
+  else if (a === 'unlockInc') unlockInc();
+  else if (a === 'unlockSlot') unlockSlot(+el.dataset.k);   // on click (not on touch-start): a stray touch must not spend coins
+  else if (a === 'egg') {
+    ev.stopPropagation();
+    const i = +el.dataset.i, e = S.eggs[i]; if (!e) return;
+    if (e.end <= Date.now()) hatch(i);
+    else { e.end -= Math.max(500, EGGS[e.t].time * 10); el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); sfx('pop'); tickInc(); }
+  }
+  else if (a === 'adSkip') { ev.stopPropagation(); watch('skip_egg', () => Rewards.skipEgg(+el.dataset.i), 'Egg is ready!'); }
+  else if (a === 'adBoost') watch('boost', Rewards.boost, 'x2 income!');
+  else if (a === 'adEgg') {
+    if (S.eggs.findIndex((e, k) => k < S.incs && !e) < 0) { toast('Free an incubator first'); sfx('err'); }   // don't burn an ad on a reward that can't be placed
+    else watch('free_egg', Rewards.freeEgg, 'Free egg is ready in the incubator!');
+  }
+  else if (a === 'adOffline') {
+    const p = pendingOffline; if (!p) return;
+    pendingOffline = 0;                                  // blocks a second tap while the ad runs
+    const ok = await watch('offline_x2', () => Rewards.offline2x(p), 'Doubled!');
+    if (ok) closeSheet(); else pendingOffline = p;
+  }
+  else if (a === 'claimDaily') {
+    const st = dailyState(); if (!st.can) return;
+    const rw = dailyReward(st.day); S.coins += rw.coins; if (rw.egg !== undefined) giveEgg(rw.egg);
+    S.daily = { last: today(), streak: st.day }; sfx('hatch'); save(); render(); refreshSheet();
+  }
+  else if (a === 'claimQ') {
+    const q = S.q.items[+el.dataset.i]; if (!q || q.done || q.have < QDEF[q.k].need) return;
+    q.done = true; const r = questReward(); S.coins += r; sfx('buy'); save(); render(); refreshSheet();
+  }
+});
+$('btnTheme').onclick = () => setTheme(theme === 'candy' ? 'calm' : 'candy');
+$('btnSound').onclick = () => { audio(); S.mute = !S.mute; setSnd(); save(); };
+
+// drag & drop / tap on the habitat
+let drag = null;
+function clearDragUI() {
+  $('ghost').classList.add('hidden');
+  document.querySelectorAll('.cell.target,.cell.src').forEach(c => c.classList.remove('target', 'src'));
+}
+addEventListener('blur', () => { if (drag) { drag = null; clearDragUI(); render(); } });   // mouse released outside the window
+$('grid').addEventListener('pointerdown', e => {
+  audio();
+  const cell = e.target.closest('.cell'); if (!cell) return;
+  const k = +cell.dataset.i;
+  if (k >= S.unlocked) return;
+  if (drag) { if (drag.id !== e.pointerId) return; drag = null; clearDragUI(); }   // 2nd finger: ignored; same pointer again: the old drag lost its "up" event, drop it
+  if (!S.slots[k]) { sel = -1; render(); return; }
+  drag = { id: e.pointerId, k, sx: e.clientX, sy: e.clientY, moved: false, cell };
+});
+addEventListener('pointermove', e => {
+  if (!drag || e.pointerId !== drag.id) return;
+  if (!S.slots[drag.k]) { drag = null; clearDragUI(); render(); return; }   // the pet vanished mid-drag (e.g. sold with a second finger)
+  if (!drag.moved && Math.hypot(e.clientX - drag.sx, e.clientY - drag.sy) > 9) {
+    drag.moved = true; drag.cell.classList.add('src');
+    const gh = $('ghost'); gh.innerHTML = creatureImg(S.slots[drag.k].s); gh.classList.remove('hidden');
+  }
+  if (!drag.moved) return;
+  const gh = $('ghost'); gh.style.left = e.clientX + 'px'; gh.style.top = e.clientY + 'px';
+  document.querySelectorAll('.cell.target').forEach(c => c.classList.remove('target'));
+  const t = document.elementFromPoint(e.clientX, e.clientY), c = t && t.closest && t.closest('.cell');
+  if (c && +c.dataset.i < S.unlocked && c !== drag.cell) c.classList.add('target');
+});
+function endDrag(e, cancel) {
+  if (!drag || e.pointerId !== drag.id) return;
+  const d = drag; drag = null;
+  $('ghost').classList.add('hidden');
+  document.querySelectorAll('.cell.target').forEach(c => c.classList.remove('target'));
+  if (cancel) { render(); return; }
+  if (!d.moved) { sel = d.k; render(); petTap(d.k, $('grid').children[d.k]); return; }
+  const t = document.elementFromPoint(e.clientX, e.clientY), c = t && t.closest && t.closest('.cell');
+  if (c && +c.dataset.i < S.unlocked) drop(d.k, +c.dataset.i); else render();
+}
+addEventListener('pointerup', e => endDrag(e, false));
+addEventListener('pointercancel', e => endDrag(e, true));
+
+/* ================= MAIN LOOP ================= */
+let lastT = performance.now(), acc = 0;
+function loop(now) {
+  if (!Number.isFinite(now)) { requestAnimationFrame(loop); return; }   // a broken timestamp must not poison lastT (coins would stop forever)
+  const dt = Math.max(0, Math.min((now - lastT) / 1000, 1)); lastT = now;   // never negative: a frame timestamp can be older than lastT
+  S.coins += incNow * dt;
+  hud(false); acc += dt;
+  if (acc > 0.25) { acc = 0; incNow = income(); tickInc(); }   // income is cached: no per-frame recomputation
+  requestAnimationFrame(loop);
+}
+setInterval(() => { if (rescue()) render(); save(); dots(); if (curSheet === sheetBoost) refreshSheet(); }, 5000);
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) { S.lastSeen = Date.now(); try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+  else { flying = 0; checkOffline(); lastT = performance.now(); }
+});
+// Same game open in a second tab/window: whoever saved last wins, the other one adopts it (no stale tab may overwrite newer progress).
+addEventListener('storage', e => {
+  if (e.key !== KEY || !e.newValue) return;
+  try {
+    const raw = JSON.parse(e.newValue); if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return;
+    const n = clean(raw);
+    if (drag) { drag = null; clearDragUI(); }
+    S = n; sel = -1; sellArm = -1; flying = 0; ensureQuests(); render(); refreshSheet();
+  } catch (err) {}
+});
+addEventListener('pagehide', () => { S.lastSeen = Date.now(); try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} });
+
+load(); ensureQuests();
+fillIcons(); setSnd();
+render(); checkOffline(); tickInc.armed = true;
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
