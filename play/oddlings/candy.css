@@ -186,3 +186,27 @@ h2{margin:0 auto 12px;width:fit-content;max-width:calc(100% - 100px);padding:4px
 .ph{display:grid;place-items:center;width:100%;height:100%;font-size:28px;color:#fff}
 
 .rt{position:absolute;right:5px;top:15px;font-size:11px;font-weight:700;color:#fff;text-shadow:0 2px 0 #0006;pointer-events:none;line-height:1}
+
+.inc .egg.plus.hop{opacity:1;animation:hop 1.2s ease-in-out infinite}
+.cell.locked.hop svg,.cell.locked.hop b,.inc.locked.hop svg,.inc.locked.hop b{animation:hop 1.2s ease-in-out infinite}
+nav button:has(.dot.on) .ni{animation:hop 1.4s ease-in-out infinite}
+.cell.tapme{outline:3px solid #4cf0c8;animation:ring 1.3s ease-in-out infinite}
+.choicehelp{font-size:13px;color:#fff;opacity:.85;line-height:1.45;margin:10px 4px 0;text-align:left}
+#hintPath{stroke:#4cf0c8;stroke-width:5;filter:drop-shadow(0 2px 0 #0007)}
+
+@keyframes hop{0%,100%{transform:translateY(0)}30%{transform:translateY(-10px)}50%{transform:translateY(0)}65%{transform:translateY(-4px)}80%{transform:translateY(0)}}
+@keyframes dash{to{stroke-dashoffset:-22}}
+@keyframes ring{0%,100%{outline-offset:2px;outline-color:#4cf0c8}50%{outline-offset:7px;outline-color:#4cf0c800}}
+#hintSvg{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:30;overflow:visible}
+#hintPath{fill:none;stroke-linecap:round;stroke-dasharray:2 9;animation:dash .7s linear infinite}
+#hintTxt{font:700 15px Fredoka,Outfit,system-ui,sans-serif;fill:#fff;text-anchor:middle;paint-order:stroke;stroke:#1a1030;stroke-width:5px;stroke-linejoin:round}
+
+#nav button{overflow:hidden;height:72px}
+#nav .ni{width:36px;height:36px}
+#nav span.l{font-size:14px}
+@keyframes gleam{0%,60%{background-position:160% 0}100%{background-position:-60% 0}}
+@keyframes glowp{0%,100%{filter:brightness(1)}50%{filter:brightness(1.25)}}
+#nav button:nth-child(1)::after,#nav button:nth-child(4)::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(110deg,transparent 38%,#fff9 50%,transparent 62%);background-size:260% 100%;background-position:160% 0;animation:gleam 6s ease-in-out infinite}
+#nav button:nth-child(4)::after{animation-delay:3s}
+#nav button:has(.dot.on){animation:glowp 1.6s ease-in-out infinite}
+#nav .dot{width:14px;height:14px}

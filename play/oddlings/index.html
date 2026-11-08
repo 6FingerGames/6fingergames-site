@@ -89,6 +89,18 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 .cell.l7{border-color:#ffe08a;box-shadow:inset 0 0 18px #ffe08a50,0 0 12px #ff7ab640;animation:breathe 2.2s ease-in-out infinite}
 .ph{display:grid;place-items:center;width:100%;height:100%;font-size:28px;color:var(--mut)}
 .rt{position:absolute;right:6px;top:15px;font-size:9.5px;font-weight:600;color:var(--teal);opacity:.9;pointer-events:none;line-height:1;text-shadow:0 1px 2px #000a}
+@keyframes hop{0%,100%{transform:translateY(0)}30%{transform:translateY(-10px)}50%{transform:translateY(0)}65%{transform:translateY(-4px)}80%{transform:translateY(0)}}
+@keyframes dash{to{stroke-dashoffset:-22}}
+@keyframes ring{0%,100%{outline-offset:2px;outline-color:#4fd1b0aa}50%{outline-offset:6px;outline-color:#4fd1b000}}
+.inc .egg.plus.hop{opacity:1;color:var(--teal);animation:hop 1.2s ease-in-out infinite}
+.cell.locked.hop svg,.cell.locked.hop b,.inc.locked.hop svg,.inc.locked.hop b{animation:hop 1.2s ease-in-out infinite}
+nav .dot.on ~ .ni,nav button:has(.dot.on) .ni{animation:hop 1.4s ease-in-out infinite}
+.cell.tapme{outline:2px solid #4fd1b0aa;animation:ring 1.3s ease-in-out infinite}
+#hintSvg{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:30;overflow:visible}
+#hintPath{fill:none;stroke:#4fd1b0;stroke-width:4;stroke-linecap:round;stroke-dasharray:2 9;animation:dash .7s linear infinite;filter:drop-shadow(0 0 4px #4fd1b0aa)}
+#hintTxt{font:700 13px Outfit,system-ui,sans-serif;fill:#fff;text-anchor:middle;paint-order:stroke;stroke:#0c0e18;stroke-width:4px;stroke-linejoin:round}
+.choicehelp{font-size:12px;color:var(--mut);line-height:1.45;margin:10px 4px 0;text-align:left}
+.choicehelp b{color:var(--txt)}
 .xp{position:absolute;top:5px;left:12%;right:12%;height:4px;border-radius:2px;background:#ffffff22;pointer-events:none;overflow:hidden}
 .xp i{display:block;height:100%;background:var(--teal);box-shadow:0 0 6px var(--teal)}
 .upi{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:var(--ok);background:#4fd1b022;border:1.5px solid #4fd1b066}
@@ -140,10 +152,19 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 
 /* tab bar */
 #nav{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:12px -12px 0;padding:6px 8px calc(8px + env(safe-area-inset-bottom));background:#090b14;border-top:1px solid var(--line)}
-#nav button{position:relative;height:54px;color:var(--mut);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border-radius:12px}
+#nav button{position:relative;overflow:hidden;height:68px;color:var(--mut);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border-radius:12px}
 #nav button:active{background:var(--surf);color:var(--txt)}
-#nav .ni{width:23px;height:23px;display:block}
-#nav span.l{font-size:11px;font-weight:500;letter-spacing:.3px;line-height:1}
+#nav .ni{width:32px;height:32px;display:block}
+#nav span.l{font-size:13.5px;font-weight:600;letter-spacing:.3px;line-height:1}
+#nav button{color:#c3c9dc}
+#nav button:nth-child(1),#nav button:nth-child(4){color:#f0d9a0}
+@keyframes gleam{0%,60%{background-position:160% 0}100%{background-position:-60% 0}}
+@keyframes glowp{0%,100%{box-shadow:0 0 0 0 #e8b85a00}50%{box-shadow:0 0 14px 1px #e8b85a66}}
+#nav button:nth-child(1)::after,#nav button:nth-child(4)::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(110deg,transparent 38%,#ffffff40 50%,transparent 62%);background-size:260% 100%;background-position:160% 0;animation:gleam 6s ease-in-out infinite}
+#nav button:nth-child(4)::after{animation-delay:3s}
+#nav button:has(.dot.on){animation:glowp 1.8s ease-in-out infinite}
+#nav button:has(.dot.on)::after{animation-duration:2.6s}
+#nav .dot{width:12px;height:12px;top:7px}
 .dot{position:absolute;top:6px;left:calc(50% + 8px);width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 2px #090b14;font-size:0;display:none}
 .dot.on{display:block}
 
@@ -229,7 +250,7 @@ h2{margin:0 0 4px;max-width:calc(100% - 50px);font-size:21px;font-weight:600;let
   <div id="spare"></div>
   <section id="incs"></section>
   <nav id="nav">
-    <button data-act="go" data-go="eggs"><span class="ni" data-ic="eggline"></span><span class="l">Shop</span></button>
+    <button data-act="go" data-go="eggs"><span class="ni" data-ic="eggline"></span><span class="l">Shop</span><i class="dot" id="dotShop">!</i></button>
     <button data-act="go" data-go="album"><span class="ni" data-ic="book"></span><span class="l">Album</span></button>
     <button data-act="go" data-go="daily"><span class="ni" data-ic="gift"></span><span class="l">Daily</span><i class="dot" id="dotDaily">!</i></button>
     <button data-act="go" data-go="boost"><span class="ni" data-ic="bolt"></span><span class="l">Boost</span><i class="dot" id="dotBoost">!</i></button>
@@ -238,6 +259,7 @@ h2{margin:0 0 4px;max-width:calc(100% - 50px);font-size:21px;font-weight:600;let
 <div id="sheet" class="hidden"><div id="sheetCard"><button class="x" data-act="close" aria-label="Close" data-ic="x"></button><div id="sheetBody"></div></div></div>
 <div id="toast"></div>
 <div id="ghost" class="hidden"></div>
+<svg id="hintSvg" class="hidden" aria-hidden="true"><defs><marker id="ah" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto"><path d="M0 0L10 5L0 10z" fill="#4fd1b0"/></marker></defs><path id="hintPath" marker-end="url(#ah)"/><circle id="hintDot" r="7" fill="#fff"><animateMotion dur="1.3s" repeatCount="indefinite" path="M0,0"/></circle><text id="hintTxt"></text></svg>
 
 <script src="ads.js"></script>
 <script>if (typeof Ads === "undefined") window.Ads = { configure() {}, available: () => false, mode: () => "none", reward: async () => ({ ok: false, reason: "unavailable" }) };   /* ads.js blocked or missing: the game must still run */
@@ -629,7 +651,7 @@ function hatch(i) {
   const j = feedTarget(s);
   if (j >= 0) {
     const c = S.slots[j], up = feed(c, 1); cascadeMerge(j);
-    sel = j; sfx(up ? 'merge' : 'pop'); save(); render(); showReveal(s, isNew);
+    sel = j; sfx(up ? 'merge' : 'pop'); save(); render(); showReveal(s, isNew); if (c.x) tip('bar', 'The thin bar on a pet shows progress to its next star');
     toast(up ? 'Habitat full - it merged into your ' + NAMES[s] + '!' : 'Habitat full - it fed your ' + NAMES[s] + ' (' + c.x + '/' + need(c.l) + ')');
     return;
   }
@@ -667,7 +689,7 @@ function showFullChoice(s, isNew) {
   const r = (s / 8) | 0;
   openSheet(() => {
     const w = weakestIdx(), old = w >= 0 ? S.slots[w] : null, canSwap = !!old && baseInc(s) > crInc(old);
-    setSheet(`<div class="reveal"><div class="rar" style="--c:${RAR[r].c}">${RAR[r].n}</div><div class="stage" style="--c:${RAR[r].c}77"><div class="big">${creatureImg(s)}</div></div><div class="nm">${NAMES[s]}</div>${isNew ? '<div class="newtag">NEW!</div>' : ''}<div class="sub" style="margin:4px 0 0">Your habitat is full. It is already in your album.</div><div class="row">${canSwap ? `<button class="btn green" data-act="replaceWeak">Replace ${NAMES[old.s]} Lv${old.l}</button>` : ''}<button class="btn ${canSwap ? 'dim' : ''}" data-act="releaseNew">Release ${COIN}${fmt(baseInc(s) * SELL_MUL)}</button></div></div>`);
+    setSheet(`<div class="reveal"><div class="rar" style="--c:${RAR[r].c}">${RAR[r].n}</div><div class="stage" style="--c:${RAR[r].c}77"><div class="big">${creatureImg(s)}</div></div><div class="nm">${NAMES[s]}</div>${isNew ? '<div class="newtag">NEW!</div>' : ''}<div class="sub" style="margin:4px 0 0">Your habitat is full. It is already in your album.</div><div class="row">${canSwap ? `<button class="btn green" data-act="replaceWeak">Replace ${NAMES[old.s]} Lv${old.l}</button>` : ''}<button class="btn ${canSwap ? 'dim' : ''}" data-act="releaseNew">Release ${COIN}${fmt(baseInc(s) * SELL_MUL)}</button></div><div class="choicehelp">${canSwap ? `<b>Replace</b> sells your weakest pet (${NAMES[old.s]}) and puts this one in its place.<br>` : ''}<b>Release</b> sells this new pet for coins. It stays in your album either way.</div></div>`);
   });
   pendingNew = { s };                           // set after openSheet (opening a sheet settles any older choice)
   burst(innerWidth / 2, innerHeight * 0.45, RAR[r].c, 24);
@@ -694,7 +716,7 @@ function drop(from, to) {
     const m = { s: hi.s, l: hi.l, x: hi.x || 0 };
     feed(m, need(lo.l) + (lo.x || 0));
     S.slots[to] = m; S.slots[from] = null; sel = to; cascadeMerge(to);
-    sfx(m.l > was ? 'merge' : 'pop'); save(); render();
+    sfx(m.l > was ? 'merge' : 'pop'); save(); render(); if (m.x) tip('bar', 'The thin bar on a pet shows progress to its next star');
     const el = $('grid').children[to]; el.classList.add('pop');
     const [x, y] = centerOf(el); burst(x, y, '#ffd54a', m.l > was ? 16 : 6);
     if (m.l >= MAXL && was < MAXL) { toast(NAMES[a.s] + ' reached MAX level! +10% income'); floatText(x, y - 20, 'MAX!', '#ff5fa8'); }
@@ -717,7 +739,7 @@ function petTap(k, cell) {
   if ((petCd.get(c) || 0) + 700 > now) return;
   petCd.set(c, now);
   const g = Math.max(1, crInc(c) * TAP_MUL * totalMult());
-  S.coins += g; quest('pet'); sfx('coin');
+  S.coins += g; quest('pet'); sfx('coin'); const tm = document.querySelector('.cell.tapme'); if (tm) tm.classList.remove('tapme');   // the beginner hint has done its job
   const [x, y] = centerOf(cell); flyCoins(x, y - 10, g); burst(x, y, '#ffe27a', 5);
   const cr = cell.querySelector('.cr'); if (cr) cr.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.25,.8)' }, { transform: 'scale(1)' }], { duration: 260 });
 }
@@ -757,6 +779,7 @@ function render() {
   // grid
   const g = $('grid'); let h = '';
   const pairs = {}; for (let k = 0; k < S.unlocked; k++) { const c = S.slots[k]; if (c && c.l < MAXL) pairs[c.s] = (pairs[c.s] || 0) + 1; }
+  const pq = S.q && S.q.items.find(q => q.k === 'pet'), tapMe = (S.hatched <= 3 && pq && pq.have === 0) ? S.slots.findIndex((c, k) => c && k < S.unlocked) : -1;   // beginners: the first pet pulses until it is tapped once
   for (let k = 0; k < NSLOT; k++) {
     if (k >= S.unlocked) {
       h += `<div class="cell locked ${k === S.unlocked ? 'next' : ''}" data-i="${k}" data-act="unlockSlot" data-k="${k}">${ICON.lock}<b>${fmt(slotCost(k))}</b></div>`; continue;
@@ -764,7 +787,7 @@ function render() {
     const c = S.slots[k];
     if (!c) { h += `<div class="cell empty" data-i="${k}"></div>`; continue; }
     const m = c.l < MAXL && pairs[c.s] >= 2;
-    h += `<div class="cell l${c.l} ${m ? 'mergeable' : ''} ${k === sel ? 'sel' : ''}" data-i="${k}"><div class="cr" style="animation-delay:-${(k * 0.37) % 2.2}s">${creatureImg(c.s)}</div><div class="lv">${stars(c.l)}</div><div class="rt">${fmtRate(crInc(c) * totalMult())}</div>${c.x ? `<div class="xp"><i style="width:${c.x / need(c.l) * 100}%"></i></div>` : ''}</div>`;
+    h += `<div class="cell l${c.l} ${m ? 'mergeable' : ''} ${k === sel ? 'sel' : ''} ${k === tapMe ? 'tapme' : ''}" data-i="${k}"><div class="cr" style="animation-delay:-${(k * 0.37) % 2.2}s">${creatureImg(c.s)}</div><div class="lv">${stars(c.l)}</div><div class="rt">${fmtRate(crInc(c) * totalMult())}</div>${c.x ? `<div class="xp"><i style="width:${c.x / need(c.l) * 100}%"></i></div>` : ''}</div>`;
   }
   g.innerHTML = h;
   // info
@@ -790,6 +813,11 @@ function tickInc() {
   S.eggs.forEach(e => { if (e) { const cap = now + EGGS[e.t].time * 1000; if (e.end > cap) e.end = cap; } });
   if (S.boostUntil > now + BOOST_MAX) S.boostUntil = now + BOOST_MAX;
   if (S.freeEggAt > now + FREE_EGG_COOLDOWN) S.freeEggAt = now + FREE_EGG_COOLDOWN;
+  { const canEgg = S.coins >= eggCost(0);                // jump where something can be done right now
+    document.querySelectorAll('#incs .egg.plus').forEach(e => e.classList.toggle('hop', canEgg));
+    const nx = document.querySelector('.cell.locked.next'); if (nx) nx.classList.toggle('hop', S.coins >= slotCost(S.unlocked));
+    const li = document.querySelector('#incs .inc.locked'); if (li) li.classList.toggle('hop', S.coins >= INC_COST);
+    const ds = $('dotShop'); if (ds) ds.classList.toggle('on', S.perk < PERK_MAX && S.coins >= perkCost(S.perk)); }
   document.querySelectorAll('#incs .inc[data-i]').forEach(el => {
     const i = +el.dataset.i, e = S.eggs[i]; if (!e) return;
     const left = e.end - now, tot = EGGS[e.t].time * 1000, ready = left <= 0;
@@ -997,6 +1025,41 @@ function endDrag(e, cancel) {
 addEventListener('pointerup', e => endDrag(e, false));
 addEventListener('pointercancel', e => endDrag(e, true));
 
+/* ================= COACH: hints that show what can be done ================= */
+let lastInput = Date.now();
+['pointerdown', 'keydown', 'click'].forEach(t => addEventListener(t, () => { lastInput = Date.now(); coach(); }, true));
+function findPair() {                                    // same species, none at MAX; equal levels first (no income lost)
+  let best = null;
+  for (let a = 0; a < S.unlocked; a++) for (let b = a + 1; b < S.unlocked; b++) {
+    const A = S.slots[a], B = S.slots[b];
+    if (!A || !B || A.s !== B.s || A.l >= MAXL || B.l >= MAXL) continue;
+    if (A.l === B.l) return [a, b];
+    if (!best) best = [a, b];
+  }
+  return best;
+}
+const hintState = { sig: '' };
+function coach() {
+  const svg = $('hintSvg'); if (!svg) return;
+  let pair = null;
+  const wait = S.hatched <= 12 ? 1200 : 3500;            // newcomers get help sooner
+  if (!drag && curSheet === null && !pendingNew && Date.now() - lastInput >= wait) pair = findPair();
+  if (!pair) { if (hintState.sig) { svg.classList.add('hidden'); hintState.sig = ''; } return; }
+  const cells = $('grid').children, ea = cells[pair[0]], eb = cells[pair[1]]; if (!ea || !eb) return;
+  const [x1, y1] = centerOf(ea), [x2, y2] = centerOf(eb);
+  const sig = [pair.join('-'), Math.round(x1), Math.round(y1), Math.round(x2), Math.round(y2), S.hatched <= 20].join();
+  if (sig === hintState.sig) return;
+  hintState.sig = sig;
+  const dx = x2 - x1, dy = y2 - y1, len = Math.hypot(dx, dy) || 1, ux = dx / len, uy = dy / len, r = ea.getBoundingClientRect().width * 0.3;
+  const sx = x1 + ux * r, sy = y1 + uy * r, ex = x2 - ux * r, ey = y2 - uy * r, cx = (x1 + x2) / 2 - uy * len * 0.16, cy = (y1 + y2) / 2 + ux * len * 0.16;
+  const d = 'M' + sx + ',' + sy + ' Q' + cx + ',' + cy + ' ' + ex + ',' + ey;
+  $('hintPath').setAttribute('d', d); $('hintDot').firstElementChild.setAttribute('path', d);
+  const t = $('hintTxt'); t.textContent = S.hatched <= 20 ? 'Drag to merge' : ''; t.setAttribute('x', cx); t.setAttribute('y', cy - 12);
+  svg.classList.remove('hidden');
+}
+// one-time explanations (kept outside the save on purpose)
+function tip(id, msg) { try { const k = 'oddlings_tips', t = JSON.parse(localStorage.getItem(k) || '{}'); if (t[id]) return; t[id] = 1; localStorage.setItem(k, JSON.stringify(t)); toast(msg); } catch (e) {} }
+
 /* ================= MAIN LOOP ================= */
 let lastT = performance.now(), acc = 0;
 function loop(now) {
@@ -1004,7 +1067,7 @@ function loop(now) {
   const dt = Math.max(0, Math.min((now - lastT) / 1000, 1)); lastT = now;   // never negative: a frame timestamp can be older than lastT
   S.coins += incNow * dt;
   hud(false); acc += dt;
-  if (acc > 0.25) { acc = 0; incNow = income(); tickInc(); }   // income is cached: no per-frame recomputation
+  if (acc > 0.25) { acc = 0; incNow = income(); tickInc(); coach(); }   // income is cached: no per-frame recomputation
   requestAnimationFrame(loop);
 }
 setInterval(() => { if (rescue()) render(); save(); dots(); if (curSheet === sheetBoost) refreshSheet(); }, 5000);
