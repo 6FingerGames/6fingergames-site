@@ -234,6 +234,7 @@ h2{margin:0 0 4px;max-width:calc(100% - 50px);font-size:21px;font-weight:600;let
 <div id="app">
   <header id="top">
     <div class="pill"><span class="ni" data-ic="coin"></span><b id="coins">0</b></div>
+    <a class="round" id="btnHome" href="/online/" aria-label="More games" title="More games" style="display:none;color:inherit"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7"/><path d="M6 10v9h12v-9"/><path d="M10 19v-5h4v5"/></svg></a>
     <button class="round" id="btnTheme" aria-label="Change style" data-ic="palette"></button>
     <button class="round" id="btnSound" aria-label="Sound"></button>
   </header>
@@ -1087,6 +1088,7 @@ addEventListener('storage', e => {
 });
 addEventListener('pagehide', () => { S.lastSeen = Date.now(); try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} });
 
+if (location.pathname.indexOf('/play/') === 0) $('btnHome').style.display = 'grid';      // on 6fingergames.com: a way back to the game list
 load(); ensureQuests();
 fillIcons(); setSnd();
 render(); checkOffline(); tickInc.armed = true;
