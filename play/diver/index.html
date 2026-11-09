@@ -21,15 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;700&family=Noto+Serif+Georgian:wght@900&display=swap" rel="stylesheet">
-<!-- Google H5 Games Ads (Ad Placement API) with this AdSense publisher ID. Remove
-     data-adbreak-test="on" before release; test mode serves Google's test ads only. -->
-<script async data-ad-client="ca-pub-5964766767830645" data-adbreak-test="on"
-  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
-<script>
-  window.adsbygoogle = window.adsbygoogle || [];
-  window.adBreak = window.adConfig = function (o) { window.adsbygoogle.push(o); };
-  window.adConfig({ preloadAdBreaks: "on", sound: "on" });
-</script>
+<script src="fgads.js"></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body {
@@ -1174,37 +1166,19 @@
     deathT = 0; surfaceDeadT = 0; bodySurfaced = false; holding = false;
   }
 
-  // ---------- Rewarded ads (Google H5 Games Ads) ----------
-  // At game over a "reward" placement is requested. When an ad is ready the API calls beforeReward,
-  // and only then is Continue offered; the revive is granted only after the ad was watched (adViewed).
-  // Without the ad API at all (e.g. the script is blocked) Continue revives straight away.
-  let rewardShow = null;      // the API's showAdFn while a rewarded ad is ready
-  function hasAds() { return typeof window.adBreak === "function"; }
-  function offerRewardedAd() {
-    rewardShow = null;
-    if (!hasAds()) return;
-    let rewarded = false;
-    window.adBreak({
-      type: "reward",
-      name: "continue-dive",
-      beforeAd: () => { if (master) master.gain.value = 0; },
-      afterAd: () => { if (master) master.gain.value = 0.42; },
-      beforeReward: (showAdFn) => { rewardShow = showAdFn; },
-      adViewed: () => { rewarded = true; },
-      adDismissed: () => {},
-      adBreakDone: () => {
-        rewardShow = null;
-        adBusy = false;
-        if (rewarded) revive();
-      }
-    });
-  }
-  function continueReady() { return !hasAds() || !!rewardShow; }
+  // ---------- Rewarded ad (shared FGAds module) ----------
+  // The ad starts ONLY when the player presses Continue, and the revive is granted ONLY if the ad
+  // was really watched. If no ad can be served the Continue button is hidden - never a free revive.
+  FGAds.init({
+    onStart: () => { if (master) master.gain.value = 0; },
+    onEnd: () => { if (master) master.gain.value = 0.42; }
+  });
+  function offerRewardedAd() {}
+  function continueReady() { return FGAds.available(); }
   function startContinue() {
     if (adBusy || !continueReady()) return;
-    if (!hasAds()) { revive(); return; }
     adBusy = true;
-    rewardShow();
+    FGAds.reward("continue-dive").then((r) => { adBusy = false; if (r.ok && state === STATE.OVER) revive(); });
   }
 
   // ---------- Render ----------

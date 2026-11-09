@@ -210,7 +210,7 @@ function text(x, y, txt, col, size) { texts.push({ x, y, txt, col: col || '#fff'
    ====================================================================== */
 function startAim() {
   G.state = 'aim'; G.ph = 0; G.power = 0;
-  G.cT = 0; G.kT = 0; G.maxAlt = 0; G.coinsRun = 0; G.ts = 1; G.slowT = 0; G.hold = false; G.stuckT = 0; G.trick = 0; G.bounces = 0; G.bn = 0;
+  G.cT = 0; G.kT = 0; G.maxAlt = 0; G.coinsRun = 0; G.ts = 1; G.slowT = 0; G.hold = false; G.stuckT = 0; G.trick = 0; G.bounces = 0; G.bn = 0; G.relaunched = false;
   P.x = W / 2; P.y = -80; P.vx = P.vy = 0; P.rot = 0; P.tgt = P.x;
   items = []; parts = []; texts = []; rings = []; fx = []; genY = 500; G.legT = -1; G.hit = false;
   items.push({ t: 'heaven', x: W / 2, y: -heavenAlt(), r: 120, got: false });                 // a grandpa sitting on a cloud, very surprised to see you
@@ -422,7 +422,11 @@ function update(dt) {
       break;
     case 'stuck':
       G.stuckT += dt;
-      if (G.stuckT > 1.4) showResult();
+      if (G.stuckT > 1.4) {
+        // far flight and the player chose nothing yet: OFFER (never force) a rocket relaunch for a rewarded ad
+        if (!G.relaunched && G.maxAlt / PXM >= 40 && Ads.canReward()) { G.stuckT = -1e9; setScreens('cont'); }
+        else showResult();
+      }
       break;
   }
 
@@ -887,6 +891,7 @@ function setScreens(mode) {
   show('menu', mode === 'menu');
   show('shop', mode === 'shop');
   show('result', mode === 'result');
+  show('cont', mode === 'cont');
   show('pause', mode === 'paused');
   el('about').classList.add('hidden');
   if (mode === 'menu') { el('menuCoins').textContent = S.coins; el('menuBest').textContent = S.best; }
@@ -1026,6 +1031,17 @@ bind('btnAgain', () => Ads.beforeRun(startAim));
 bind('btnResShop', () => { G.state = 'shop'; renderShop(); setScreens('shop'); });
 bind('btnResMenu', toMenu);
 bind('btnResume', resumeGame);
+// reward offer after a far flight: watch an ad -> rocket relaunch from the ground, the run goes on
+bind('btnCont', () => {
+  el('btnCont').disabled = true;
+  Ads.watch('rocket-relaunch', () => {
+    G.relaunched = true; G.stuckT = 0; G.bn = 0; G.hold = false;
+    P.y = -60; P.vy = -3400; P.vx = 0; P.tgt = P.x; G.state = 'fly'; G.slowT = 0;
+    G.shake = 20; Sound.rocket(); setScreens('play');
+    el('btnCont').disabled = false;
+  }, () => { el('btnCont').disabled = false; });
+});
+bind('btnContNo', () => showResult());
 bind('btnDouble', () => {
   el('btnDouble').disabled = true;
   Ads.watch('double-coins', () => {

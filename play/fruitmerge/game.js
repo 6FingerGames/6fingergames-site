@@ -139,7 +139,7 @@ function dangerStep(dt) {
   if (danger > 1.6) gameOver();
 }
 function canRevive() {
-  if (reviveUsed || runTime < 45 || Date.now() - lastReviveOffer < 300000) return false;
+  if (!FGAds.available() || reviveUsed || runTime < 45 || Date.now() - lastReviveOffer < 300000) return false;
   const alive = world.bodies.filter(b => b.alive);
   const remaining = alive.filter(b => b.level < 4);
   if (remaining.length === alive.length) return false;
@@ -297,24 +297,11 @@ window.addEventListener("keydown", e => {
 $("play").onclick = start;
 $("retry").onclick = start;
 $("resume").onclick = () => setState("play");
-function playRewardedAd() {
-  // Local, clearly labelled test ad. A real network can replace this Promise.
-  return new Promise((resolve, reject) => {
-    let left = 3;
-    $("adCountdown").textContent = left;
-    const timer = setInterval(() => {
-      if (state !== "ad") { clearInterval(timer); reject(new Error("Ad closed")); return; }
-      left--;
-      if (left <= 0) { clearInterval(timer); resolve(); return; }
-      $("adCountdown").textContent = left;
-    }, 1000);
-  });
-}
+// rewarded ad: starts ONLY from this button; the revive is granted only if the ad was really watched
 $("watchAd").onclick = async () => {
   if (state !== "revive") return;
-  setState("ad");
-  try { await playRewardedAd(); reviveRun(); }
-  catch { if (state === "ad") setState("revive"); }
+  const r = await FGAds.reward("revive");
+  if (r.ok && state === "revive") reviveRun();
 };
 $("declineRevive").onclick = () => { if (state === "revive") finishGameOver(); };
 $("pause").onclick = () => { if (state === "play") setState("paused"); else if (state === "paused") setState("play"); };
@@ -359,6 +346,7 @@ function fit() {
   $("wrap").style.width = W * s + "px"; $("wrap").style.height = H * s + "px";
 }
 window.addEventListener("resize", fit);
+FGAds.init();
 fit(); applyLang(); setState("menu");
 requestAnimationFrame(frame);
 

@@ -328,11 +328,13 @@
   <div id="grade" class="grad-gold">S</div>
   <div id="record"></div>
   <div id="finalStats"></div>
+  <button class="btn" id="reviveBtn" data-i18n="reviveAd" style="display:none">Watch ad: continue</button>
   <button class="btn" id="retryBtn" data-i18n="retry">Retry</button>
   <button class="btn ghost" id="menuBtn" data-i18n="menu">Menu</button>
   <div class="langs" id="langsOver"></div>
 </div>
 
+<script src="fgads.js"></script>
 <script>
 (function(){
 "use strict";
@@ -352,7 +354,7 @@ const I18N = {
       "მოერიდე მცურავ იასამნისფერ ხვრელებს. თუ როი რომელიმეს შეეხო, ის შუქს შეჭამს და თავიდან მოგიწევს შეგროვება. წითელი წრეები როის აგდებს, ამიტომ ნათებები მათში ნუ გაატარებ. დროის ამოწურვა თამაშს ამთავრებს.",
       "შორს რომ წახვიდე, მანათობელ ხვრელს თანაბარი რიტმით კვებავდე. ზედიზედ მიტანა კომბოს ზრდის და სანამ კომბო ძალაშია, ყოველი ნათება მეტს ფასობს. თუ ჩაბარებებს შორის დიდხანს დაიცდი, ისევ ჩვეულებრივ ფასს უბრუნდება. SPACE, ან ტელეფონზე იმპულსის ღილაკი, ცოტა ხნით უფრო შორს სწვდება და იქიდან მოაქვს ნათებები, რომლებსაც სხვანაირად ვერ დაიჭერ. გამოიყენე, როცა ველი მიმოფანტულია, მერე როი საფრთხეებს შემოუარე და ნუ გაატარებ მათში. დონის გავლა დარჩენილი დროით შემდეგ დონეზე წინსვლას გაძლევს. ბოლო წამებში დასრულება მეტ ბონუსს იძლევა, მაგრამ მხოლოდ მაშინ, თუ მართლა მოასწრებ."
     ],
-    play:"თამაში", retry:"თავიდან", menu:"მენიუ",
+    play:"თამაში", retry:"თავიდან", reviveAd:"რეკლამა: გაგრძელება", menu:"მენიუ",
     level:"დონე", delivered:"მიტანილი", time:"დრო", score:"ქულა", best:"საუკეთესო",
     timeup:"დრო ამოიწურა", hint:"SPACE / ღილაკი = იმპულსი",
     levelClear:"დონე გავლილია!", pulse:"იმპულსი",
@@ -372,7 +374,7 @@ const I18N = {
       "Держись подальше от дрейфующих фиолетовых дыр. Если рой коснётся одной из них, она съест эти огоньки, и их придётся собирать заново. Красные круги отталкивают рой, так что не веди огоньки сквозь них. Когда время кончается, забег заканчивается.",
       "Чтобы зайти дальше, корми светящуюся дыру ровным ритмом. Сдачи подряд поднимают комбо, и пока оно держится, каждый огонёк стоит дороже. Если между сдачами ждать слишком долго, цена снова станет обычной. Пробел, или кнопка импульса на телефоне, ненадолго тянет дальше и забирает огоньки, до которых иначе не дотянуться. Пользуйся этим, когда поле рассеяно, а потом обходи опасности, а не проходи сквозь них. Пройденный уровень с оставшимся временем даёт запас на следующий. Финиш в последние секунды даёт больший бонус, но только если ты правда успеешь."
     ],
-    play:"Играть", retry:"Заново", menu:"Меню",
+    play:"Играть", retry:"Заново", reviveAd:"Реклама: продолжить", menu:"Меню",
     level:"Уровень", delivered:"Доставлено", time:"Время", score:"Счёт", best:"Рекорд",
     timeup:"Время вышло", hint:"ПРОБЕЛ / кнопка = импульс",
     levelClear:"Уровень пройден!", pulse:"Импульс",
@@ -392,7 +394,7 @@ const I18N = {
       "Stay away from the drifting purple holes. If your swarm touches one, it eats those lights and you have to gather them again. The red circles shove the swarm away, so don't drag your lights through them either. Running out of time ends the run.",
       "To go further, keep feeding the glowing hole in a steady rhythm. Deliveries close together raise a combo, and each light is worth more while that combo holds. If you wait too long between drops, it falls back to normal. Space, or the Pulse button on a phone, briefly reaches farther out and pulls in lights you couldn't grab otherwise. Use it when the field is scattered, then walk the swarm around the hazards instead of through them. Clearing a level with time still on the clock gives you a head start on the next one. Finishing in the last few seconds pays a bigger bonus, but only if you actually make it."
     ],
-    play:"Play", retry:"Retry", menu:"Menu",
+    play:"Play", retry:"Retry", reviveAd:"Watch ad: continue", menu:"Menu",
     level:"Level", delivered:"Delivered", time:"Time", score:"Score", best:"Best",
     timeup:"Time's up", hint:"SPACE / button = pulse",
     levelClear:"Level clear!", pulse:"Pulse",
@@ -412,7 +414,7 @@ const I18N = {
       "躲开漂浮的紫色黑洞。虫群碰上一个，它就会吃掉那些光，你得重新收集。红圈会把虫群推开，所以不要从它们中间穿过去。时间耗尽，这一局就结束。",
       "想走得更远，就用稳定的节奏给发光黑洞送光。连续送达会提高连击，连击还在时每一颗光都更值钱。两次送达隔太久，分数就回到普通。空格，或手机上的脉冲按钮，会短暂拉得更远，吸来平时够不着的光。场面散开时用它，然后绕开危险，不要直穿过去。关卡结束时还剩时间，下一关就更从容。最后几秒完成会有更大奖励，但前提是你真的来得及。"
     ],
-    play:"开始", retry:"重试", menu:"菜单",
+    play:"开始", retry:"重试", reviveAd:"看广告继续", menu:"菜单",
     level:"关卡", delivered:"已送达", time:"时间", score:"分数", best:"最佳",
     timeup:"时间到", hint:"空格 / 按钮 = 脉冲",
     levelClear:"通关！", pulse:"脉冲",
@@ -1943,7 +1945,7 @@ function resetLevel(){
 
 function startGame(){
   level=Math.max(1, Math.round(GOD.startLevel)); score=0; combo=1; comboTimer=0; deathFade=0;
-  lives=3; savedTotal=0; lostTotal=0; bodies=[]; fx=[]; wrecks=[]; debris=[];
+  swarmRevived=false; lives=3; savedTotal=0; lostTotal=0; bodies=[]; fx=[]; wrecks=[]; debris=[];
   clearing=false; clearT=0; newRecord=false; bursts=[]; rings=[];
   comboWrapEl.classList.remove('show'); recordEl.classList.remove('show');
   resetLevel();
@@ -1957,6 +1959,7 @@ function startGame(){
 
 function nextLevel(){ level++; resetLevel(); }
 
+let swarmRevived=false;
 function gameOver(){
   state=STATE.OVER;
   deathFade=0.0001; // begin quiet fade
@@ -1981,6 +1984,7 @@ function gameOver(){
       spawnRing(W/2,H*0.42,45,260,4,0.8);
       fanfare(784);
     } else { recordEl.classList.remove('show'); }
+    document.getElementById('reviveBtn').style.display = (!swarmRevived && level>=2 && FGAds.available()) ? '' : 'none';
     over.classList.remove('hidden');
   }, 1100);
 }
@@ -2032,11 +2036,24 @@ function buildLangs(box){
     box.appendChild(b);
   });
 }
+FGAds.init();
 buildLangs(document.getElementById('langs'));
 buildLangs(document.getElementById('langsOver'));
 
 document.getElementById('playBtn').addEventListener('click', startGame);
 document.getElementById('retryBtn').addEventListener('click', startGame);
+// optional rewarded continue: the ad starts only from this button; granted only if it was really watched
+document.getElementById('reviveBtn').addEventListener('click', async ()=>{
+  if(state!==STATE.OVER || swarmRevived) return;
+  const r = await FGAds.reward('swarm-continue');
+  if(!r.ok || state!==STATE.OVER) return;
+  swarmRevived=true; lives=1; deathFade=0; newRecord=false;
+  recordEl.classList.remove('show');
+  resetLevel(); state=STATE.PLAY;
+  over.classList.add('hidden'); hud.classList.add('on');
+  pulseBtn.classList.toggle('on', IS_TOUCH);
+  toast(T().level+' '+level);
+});
 let menuView='main', soonKind='games';
 function showMenu(view){
   menuView=view;
