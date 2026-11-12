@@ -116,6 +116,9 @@
     .then(function(r){ if(r.ok){ u.synced = true; save(u); } syncing = false; })
     .catch(function(){ syncing = false; });
   }
+  /* Ad counters: written by the games (FGAds core) into localStorage 'fg_ads' = {watched, skipped}. Display only for now;
+     coins for watched ads must be credited by a server-validated wallet later (see FG_AD_EVENT in fgads-core.js). */
+  function FG_AD_STATS(){ var d = {}; try{ d = JSON.parse(localStorage.getItem('fg_ads') || '{}'); }catch(e){} return { watched: parseInt(d.watched, 10) || 0, skipped: parseInt(d.skipped, 10) || 0 }; }
   function FG_HS_BALANCE(){ var n = 0; try{ n = parseInt(localStorage.getItem('fg_hs'), 10) || 0; }catch(e){} return n; }
 
   var btn = document.getElementById('regBtn');
@@ -152,15 +155,11 @@
       '<div class="fldlabel">You play on</div>' + chips('device', DEVICES, true) +
       '<div class="fldlabel">Games you like</div><div class="chips">' + GAMES.map(function(g){ return '<label class="chip"><input type="checkbox" name="games" value="'+esc(g.id)+'"><span>'+esc(g.title)+'</span></label>'; }).join('') + '</div>' +
       '<div class="fldlabel">Player type</div>' + chips('type', TYPES, true) +
-      '<div class="row2 soonrow"><label class="fld"><span>Password <em>soon</em></span><input type="password" disabled placeholder="Not needed yet"></label>' +
-      '<label class="fld"><span>Email <em>soon</em></span><input type="email" disabled placeholder="Not needed yet"></label></div>' +
       '<div class="msg" id="rmsg" aria-live="polite"></div>' +
       '<button class="btn primary" type="submit">Create profile</button></form>' +
-      '<div class="social"><button type="button" id="gbtn" class="gbtn">Continue with Google</button><button type="button" disabled>GitHub<small>soon</small></button><button type="button" disabled>X<small>soon</small></button></div>' +
       '<div class="promise"><b>Our promise</b><p>We do not collect this to sell it or give it to anyone. Never. It has one purpose only: to learn who we should make games for (girls, boys or anyone else) and which countries need their own language in our games.</p><p>We do not care about your real name or surname, your email, or anything private. All we want is that when you visit this site, it fits what you need. That is all.</p></div>');
     var f = document.getElementById('rf'), msg = document.getElementById('rmsg');
     f.nick.focus();
-    document.getElementById('gbtn').onclick = function(){ msg.style.color = 'var(--amber)'; msg.textContent = 'Google sign-in is almost ready. For now, create a profile with the form.'; };
     f.age.addEventListener('change', function(){ msg.style.color = ''; msg.textContent = f.age.value === 'u13' ? 'Sorry, profiles are for players aged 13 and over. You can still play every game!' : ''; });
     f.addEventListener('submit', function(e){
       e.preventDefault();
@@ -205,6 +204,7 @@
       rows.map(function(r){ return '<div class="idrow" data-k="'+r[0]+'"><span class="k">'+r[1]+'</span><span class="v">'+r[2]+'</span>' + (r[3] ? '<button type="button" class="ed">edit</button>' : (r[0]==='country' ? '<span class="ed off" title="Country cannot be changed">edit</span>' : '')) + '</div>'; }).join('') +
       '</div></div>' +
       '<div class="earned"><span class="lbl">Earned</span><span class="hscoin">HS</span><span class="amt">' + FG_HS_BALANCE() + '</span></div>' +
+      '<div class="adstats"><span class="adok"><b>' + FG_AD_STATS().watched + '</b> ads watched</span><span class="adno"><b>' + FG_AD_STATS().skipped + '</b> ads skipped</span></div>' +
       '<div class="idactions"><button type="button" class="mlink" id="lo">Log out</button><button type="button" class="mlink" id="ok">Close</button></div>');
     document.getElementById('ok').onclick = close;
     var avf = document.getElementById('avf'), avm = document.getElementById('avm');

@@ -93,7 +93,32 @@ const S = (() => {
   o.shoe = SHOES[o.shoe] && o.owned[o.shoe] ? o.shoe : 'basic';
   return o;
 })();
-const save = () => Store.set('save', JSON.stringify(S));
+// Saving never takes anything away that another window of the game already saved: what you own, your leg level and the ad progress only ever go up.
+// (A second tab that still held the old state used to overwrite a purchase made in the first one.)
+function mergeSaved(o) {
+  if (!o || typeof o !== 'object') return;
+  if (o.owned) for (const k in o.owned) if (o.owned[k] && SHOES[k]) S.owned[k] = 1;
+  if ((o.leg | 0) > S.leg) S.leg = clamp(o.leg | 0, 1, LEGMAX);
+  if (o.adp) for (const k in o.adp) S.adp[k] = Math.max(S.adp[k] | 0, o.adp[k] | 0);
+  S.best = Math.max(S.best | 0, o.best | 0); S.plays = Math.max(S.plays | 0, o.plays | 0);
+}
+function warnNoSave() {
+  if (document.getElementById('noSaveWarn')) return;
+  const d = document.createElement('div'); d.id = 'noSaveWarn';
+  d.style.cssText = 'position:fixed;left:50%;top:10px;transform:translateX(-50%);z-index:99998;max-width:90vw;padding:10px 16px;border-radius:12px;background:#b3261e;color:#fff;font:700 14px/1.3 system-ui,Arial,sans-serif;text-align:center';
+  d.textContent = 'Your browser is blocking saving (private mode?). Coins and purchases will be lost when you close the game.';
+  document.body.appendChild(d); setTimeout(() => d.remove(), 9000);
+}
+const save = () => {
+  try { mergeSaved(JSON.parse(Store.get('save', ''))); } catch (e) { /* nothing saved yet */ }
+  Store.set('save', JSON.stringify(S));
+  if (Store.failed) warnNoSave();
+};
+// another tab saved: take over its numbers right away, so this tab never works from an old picture
+window.addEventListener('storage', (e) => {
+  if (e.key !== 'kick.save' || !e.newValue) return;
+  try { const o = JSON.parse(e.newValue); if (o && typeof o === 'object') { S.coins = o.coins | 0; mergeSaved(o); if (SHOES[o.shoe] && S.owned[o.shoe]) S.shoe = o.shoe; if (G.state === 'shop') renderShop(); } } catch (err) { /* ignore a damaged value */ }
+});
 const shoe = () => SHOES[S.shoe];
 
 /* ======================================================================
@@ -297,10 +322,11 @@ function updateFly(dt) {
     if (it.t === 'tramp' || it.t === 'rope' || it.t === 'tree') {
       it.squash = Math.max(0, it.squash - dt * 3);
       // bounce only when falling onto it from above
-      if (!it.spent && P.vy > 0 && prevY <= it.y + 2 && P.y >= it.y - 4 && Math.abs(P.x - it.x) < it.w / 2 + 12) {
+      if (!it.spent && P.vy > 0 && prevY <= it.y + 2 && P.y >= it.y - 4 && Math.abs(P.x - it.x) < it.w / 2 + 28) {
         it.spent = true;          // each bouncer works once, so the man cannot bounce on it forever
         const mul = S.shoe === 'spring' ? 1.15 : 1;
-        P.vy = -Math.max(it.t === 'tramp' ? 1700 : it.t === 'tree' ? 1900 : 1400, Math.abs(P.vy) * 0.9) * mul * bounceFade();
+        // stronger pads (they felt too weak), and a pad bounce is never faded below 62% by the earlier bounces of the same flight
+        P.vy = -Math.max(it.t === 'tramp' ? 2000 : it.t === 'tree' ? 2200 : 1700, Math.abs(P.vy) * 0.9) * mul * Math.max(bounceFade(), 0.62);
         it.squash = 1; P.y = it.y - 6;
         if (it.t === 'rope') trick('TWANG!', '#ffd23a', 'hop'); else trick(it.t === 'tree' ? 'SPROING!' : ['SALTO!', 'TA-DA!'][(Math.random() * 2) | 0], it.t === 'tree' ? '#35c759' : '#4ba8ff', Math.random() < 0.5 ? 'tuck' : 'ballet');
         fxAdd('burst', P.x, it.y, 90, 0.25);
@@ -990,12 +1016,12 @@ function renderShop() {
           if (S.adp[id] >= sh.need) { S.owned[id] = 1; S.shoe = id; Sound.buy(); }
           save(); renderShop();
         })));
-        else acts.push(btn('AD ' + done + '/' + sh.need, 'small', () => {}, true));
+        else acts.push(btn('NO AD NOW ' + done + '/' + sh.need, 'small', () => { const m = 'No ad is available right now. ' + sh.name + ' unlock by watching ' + sh.need + ' ads. Please try again later.'; if (typeof FGAds !== 'undefined' && FGAds.toast) FGAds.toast(m); else alert(m); }, false));
       } else {
         acts.push(btn(coinHtml + sh.cost, 'blue', () => { if (S.coins >= sh.cost) { S.coins -= sh.cost; S.owned[id] = 1; S.shoe = id; save(); Sound.buy(); renderShop(); } }, S.coins < sh.cost));
       }
     }
-    row(sh.name, (sh.how === 'ads' && !S.owned[id] ? 'AD ONLY. ' : '') + sh.desc, acts, 'img/leg/impact_' + id + '.png', !S.owned[id]);
+    row(sh.name, (sh.how === 'ads' && !S.owned[id] ? 'AD ONLY: watch ' + sh.need + ' ads to unlock.' + (adOK ? ' ' : ' No ad is available right now, try again later. ') : '') + sh.desc, acts, 'img/leg/impact_' + id + '.png', !S.owned[id]);
   });
 }
 

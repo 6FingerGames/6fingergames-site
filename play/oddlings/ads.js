@@ -41,6 +41,21 @@ const FGAds = (() => {
     setTimeout(() => d.remove(), 3200);
   }
 
+  // Counts what the player actually did, for the account card (localStorage 'fg_ads', same origin as the site).
+  // 'watched' = the ad was watched to the end. 'skipped' = the player pressed the button, the ad started and was closed early.
+  // 'unavailable' (no ad to show) is NOT counted: it is not the player's choice.
+  // NOTE: this is a client-side counter and can be edited by the player. Coins for ads must be credited by a
+  // server-validated wallet later: window.FG_AD_EVENT(kind, name, totals) is the single hook for that.
+  function record(kind, name) {
+    try {
+      const d = JSON.parse(localStorage.getItem('fg_ads') || '{}');
+      d.watched = d.watched || 0; d.skipped = d.skipped || 0;
+      d[kind]++; d.last = Date.now();
+      localStorage.setItem('fg_ads', JSON.stringify(d));
+      if (typeof window.FG_AD_EVENT === 'function') window.FG_AD_EVENT(kind, name, d);
+    } catch (e) {}
+  }
+
   function rewardH5(name) {
     return new Promise((resolve) => {
       let viewed = false, started = false, done = false, to;
@@ -93,6 +108,7 @@ const FGAds = (() => {
       try {
         const r = await Promise.race([isLocal ? rewardTest() : rewardH5(name), stuck]);
         if (r.stuck) cfg.onEnd();
+        if (r.ok) record('watched', name); else if (r.reason === 'dismissed') record('skipped', name);
         if (!r.ok && r.reason === 'unavailable') toast('No ad is available right now. Please try again later.');
         return r;
       } catch (e) { return { ok: false, reason: 'unavailable' }; }

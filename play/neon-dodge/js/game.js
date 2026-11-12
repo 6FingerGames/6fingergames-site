@@ -557,6 +557,10 @@ function updateShip(dt, controlled) {
     ship.tx = W / 2 + Math.sin(wt * 0.8) * 70;
     ship.ty = H * 0.74 + Math.sin(wt * 1.7) * 10;
   } else if (controlled) {
+    if (touch.active) {
+      touch.gy += (touch.gyT - touch.gy) * (1 - Math.exp(-dt * 10));
+      ship.tx = touch.fx + touch.gx; ship.ty = touch.fy + touch.gy;
+    }
     const kx = keys.r - keys.l, ky = keys.d - keys.u;
     if (kx || ky) { ship.tx += kx * 540 * dt; ship.ty += ky * 540 * dt; }
     ship.tx = clamp(ship.tx, 34, W - 34);
@@ -891,8 +895,17 @@ function drawFlame(power) {
   g.globalCompositeOperation = 'source-over';
 }
 
+function drawTouchCue() {
+  if (!touch.active || !touchInput || game.state !== 'playing') return;
+  const fx = clamp(touch.fx, 0, W), fy = clamp(touch.fy, 0, H);
+  ctx.save(); ctx.globalAlpha = 0.22; ctx.strokeStyle = '#9fefff'; ctx.lineWidth = 2;
+  ctx.setLineDash([4, 8]); ctx.beginPath(); ctx.moveTo(ship.x, ship.y + 28); ctx.lineTo(fx, fy - 30); ctx.stroke(); ctx.setLineDash([]);
+  ctx.beginPath(); ctx.arc(fx, fy, 30, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+}
+
 function drawShip() {
   if (!ship.visible) return;
+  drawTouchCue();
   const power = clamp((game.scroll - 1) / 1.6, 0, 1);
   ctx.save();
   ctx.translate(ship.x, ship.y);
@@ -1095,7 +1108,11 @@ function toLogical(e) {
   const r = cv.getBoundingClientRect();
   return { x: (e.clientX - r.left) / r.width * W, y: (e.clientY - r.top) / r.height * H };
 }
-const touch = { active: false, sx: 0, sy: 0, shipX: 0, shipY: 0 };
+// Touch: the ship rides ABOVE the finger, so the finger never covers it. The control stays free (relative): wherever you touch,
+// the ship keeps its distance to the finger and follows every move 1:1. If the finger lands closer than TOUCH_LIFT below the ship,
+// the ship eases up to that distance; if it lands further away, that distance is kept.
+const TOUCH_LIFT = 125;
+const touch = { active: false, fx: 0, fy: 0, gx: 0, gy: 0, gyT: 0 };
 const controlling = () => game.state === 'playing' || game.state === 'countdown';
 
 stage.addEventListener('pointerdown', (e) => {
@@ -1107,7 +1124,7 @@ stage.addEventListener('pointerdown', (e) => {
   }
   if (e.pointerType === 'mouse' || e.target.closest('button')) return;
   const p = toLogical(e);
-  touch.active = true; touch.sx = p.x; touch.sy = p.y; touch.shipX = ship.tx; touch.shipY = ship.ty;
+  touch.active = true; touch.fx = p.x; touch.fy = p.y; touch.gx = ship.tx - p.x; touch.gy = ship.ty - p.y; touch.gyT = Math.min(touch.gy, -TOUCH_LIFT);
   try { stage.setPointerCapture(e.pointerId); } catch (_) {}
 });
 stage.addEventListener('pointermove', (e) => {
@@ -1116,8 +1133,7 @@ stage.addEventListener('pointermove', (e) => {
     lastMouse = p;
     if (controlling()) { ship.tx = p.x; ship.ty = p.y; }
   } else if (touch.active && controlling()) {
-    ship.tx = touch.shipX + (p.x - touch.sx) * 1.2;
-    ship.ty = touch.shipY + (p.y - touch.sy) * 1.2;
+    touch.fx = p.x; touch.fy = p.y;
   }
 });
 const endTouch = () => { touch.active = false; };

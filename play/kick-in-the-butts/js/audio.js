@@ -1,6 +1,7 @@
 const Store = {
+  failed: false,                                                       // true when the browser refuses to keep our data (private mode, blocked storage)
   get(k, d) { try { const v = localStorage.getItem('kick.' + k); return v === null ? d : v; } catch (e) { return d; } },
-  set(k, v) { try { localStorage.setItem('kick.' + k, v); } catch (e) {} }
+  set(k, v) { try { localStorage.setItem('kick.' + k, v); this.failed = false; } catch (e) { this.failed = true; } }
 };
 
 const Sound = (() => {

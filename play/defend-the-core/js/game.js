@@ -11,6 +11,11 @@ let H = 960;
 const TAU = Math.PI * 2;
 const FONT = '"Cinzel", Georgia, serif';
 const INK = '#0b0a24';
+// Performance. Phones start one step lower (no glow blur, a lighter canvas), and the game watches its own frame time:
+// if it still cannot hold about 40 fps it steps down again (1.0x canvas). The screen is never drawn more than ~60 times a second.
+const IS_MOBILE = /Android|iPhone|iPad|iPod|Mobi/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && /Macintosh/.test(navigator.userAgent));
+const Q = { lvl: IS_MOBILE ? 1 : 2, ema: 0, t: 0 };                // 2 = full, 1 = no glow blur + 1.5x canvas, 0 = also 1.0x canvas and fewer effects
+const dprCap = () => (Q.lvl >= 2 ? 2 : Q.lvl === 1 ? 1.5 : 1);
 
 const rand = (a, b) => a + Math.random() * (b - a);
 const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
@@ -126,7 +131,7 @@ function resize() {
   const w = Math.min(aw, ah * a), h = w / a;
   stage.style.width = w + 'px';
   stage.style.height = h + 'px';
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const dpr = Math.min(window.devicePixelRatio || 1, dprCap());
   cv.width = Math.round(w * dpr);
   cv.height = Math.round(h * dpr);
   scale = cv.width / W;
@@ -171,17 +176,19 @@ function shieldCanvas() {
    ====================================================================== */
 function smoke(x, y, n, big) {
   for (let i = 0; i < n; i++) {
+    if (parts.length > (Q.lvl ? 150 : 80)) break;
     const a = rand(0, TAU), sp = rand(20, big ? 120 : 70);
     parts.push({ k: 'puff', x: x + Math.cos(a) * rand(0, 12), y: y + Math.sin(a) * rand(0, 12), vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: rand(0.5, 0.9), max: 0.9, s: rand(0.5, 1) * (big ? 1.6 : 0.9) * 46, rot: rand(0, TAU), vr: rand(-1.5, 1.5) });
   }
 }
 function sparks(x, y, n, col) {
   for (let i = 0; i < n; i++) {
+    if (parts.length > (Q.lvl ? 150 : 80)) break;
     const a = rand(0, TAU), sp = rand(80, 320);
     parts.push({ k: 'spark', x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: rand(0.25, 0.55), max: 0.55, s: rand(1.5, 3.2), col: col || '#fff3c9' });
   }
 }
-const ring = (x, y, r, life, col) => rings.push({ x, y, r, life, max: life, col: col || '255,243,201' });
+const ring = (x, y, r, life, col) => { if (rings.length < 10) rings.push({ x, y, r, life, max: life, col: col || '255,243,201' }); };
 const text = (x, y, txt, col, size) => texts.push({ x, y, txt, col: col || '#fff3c9', size: size || 24, life: 0.9 });
 
 /* ======================================================================
@@ -289,9 +296,8 @@ function updateGems(dt) {
     for (const q of m.trail) q.a -= dt * 2.2;
     if (e >= 1) {
       G.essShown += m.v; G.pulse = 1; G.comboT = 0.7;
-      ring(HUD_GEM.x, HUD_GEM.y, 46, 0.5, '143,216,255');
-      sparks(HUD_GEM.x, HUD_GEM.y, 5, '#bfe9ff');
-      Sound.crystal(G.combo++);
+      if (wt - (G.arrFx || 0) > 0.07) { G.arrFx = wt; ring(HUD_GEM.x, HUD_GEM.y, 46, 0.5, '143,216,255'); sparks(HUD_GEM.x, HUD_GEM.y, 3, '#bfe9ff'); }
+      if (wt - (G.arrSnd || 0) > 0.05) { G.arrSnd = wt; Sound.crystal(G.combo++); } else G.combo++;
       gems.splice(i, 1);
     }
   }
@@ -450,7 +456,7 @@ function glowText(txt, x, y, size, fill, align) {
   ctx.font = '800 ' + size + 'px ' + FONT;
   ctx.textAlign = align || 'center'; ctx.textBaseline = 'middle';
   ctx.lineJoin = 'round'; ctx.lineWidth = size * 0.18; ctx.strokeStyle = INK;
-  ctx.shadowColor = 'rgba(243,217,139,.7)'; ctx.shadowBlur = size * 0.5;
+  if (Q.lvl >= 2) { ctx.shadowColor = 'rgba(243,217,139,.7)'; ctx.shadowBlur = size * 0.5; }
   ctx.strokeText(txt, x, y);
   ctx.fillStyle = fill || '#fff3c9'; ctx.fillText(txt, x, y);
   ctx.restore();
@@ -478,7 +484,7 @@ function drawCore() {
   const out = (G.state === 'dying' ? 0.25 : 1) * (0.45 + 0.55 * hpR);
   const gr = ctx.createRadialGradient(core.x, core.y + bob, 6, core.x, core.y + bob, 190 * pulse * (0.7 + 0.3 * hpR));
   gr.addColorStop(0, 'rgba(255,243,201,' + (0.55 * out) + ')'); gr.addColorStop(0.35, 'rgba(243,217,139,' + (0.22 * out) + ')'); gr.addColorStop(1, 'rgba(122,92,207,0)');
-  ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.fillStyle = gr; ctx.fillRect(0, 0, W, H); ctx.restore();
+  { const R = 190 * pulse * (0.7 + 0.3 * hpR) + 2; ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.fillStyle = gr; ctx.fillRect(core.x - R, core.y + bob - R, R * 2, R * 2); ctx.restore(); }
 
   // sprite: the pose is chosen slowly; whenever it changes (hair drifting, light dimming) the new picture fades in over the old one
   const seq = ['kid_c', 'kid_r', 'kid_c', 'kid_l'];
@@ -513,7 +519,7 @@ function drawShield() {
   ctx.restore();
   if (S.nova && G.state === 'play') {
     const f = G.novaT / NOVA_EVERY;
-    ctx.save(); ctx.strokeStyle = 'rgba(143,216,255,' + (f > 0.97 ? 0.9 : 0.35) + ')'; ctx.lineWidth = 3; ctx.shadowColor = '#8fd8ff'; ctx.shadowBlur = 8;
+    ctx.save(); ctx.strokeStyle = 'rgba(143,216,255,' + (f > 0.97 ? 0.9 : 0.35) + ')'; ctx.lineWidth = 3; if (Q.lvl >= 2) { ctx.shadowColor = '#8fd8ff'; ctx.shadowBlur = 8; }
     ctx.beginPath(); ctx.arc(core.x, core.y, 66, -Math.PI / 2, -Math.PI / 2 + TAU * f); ctx.stroke(); ctx.restore();
   }
 }
@@ -539,26 +545,37 @@ function drawGhosts() {
 }
 
 const GEM_COL = [['#e9fbff', '#8fd8ff', '#8d74ff'], ['#fff0fb', '#ffb3e6', '#a86bff'], ['#fffbe0', '#ffd77a', '#ff9a5c']];
+const GEM_S0 = 16, GEM_PAD = 14, gemCache = {};
+function gemSprite(kind) {
+  const key = kind + '|' + scale + '|' + Q.lvl; if (gemCache[key]) return gemCache[key];
+  const size = (GEM_S0 + GEM_PAD) * 2, c = document.createElement('canvas'); c.width = c.height = Math.ceil(size * scale);
+  const g = c.getContext('2d'); g.setTransform(scale, 0, 0, scale, 0, 0); g.translate(size / 2, size / 2);
+  const col = GEM_COL[kind || 0], z = GEM_S0;
+  if (Q.lvl >= 2) { g.shadowColor = col[1]; g.shadowBlur = z * 0.9; }
+  const gr2 = g.createLinearGradient(-z * 0.6, -z, z * 0.6, z);
+  gr2.addColorStop(0, col[0]); gr2.addColorStop(0.45, col[1]); gr2.addColorStop(1, col[2]);
+  g.fillStyle = gr2; g.strokeStyle = 'rgba(255,255,255,.85)'; g.lineWidth = Math.max(1, z * 0.07); g.lineJoin = 'round';
+  g.beginPath(); g.moveTo(0, -z); g.lineTo(z * 0.62, -z * 0.25); g.lineTo(z * 0.4, z * 0.85); g.lineTo(-z * 0.4, z * 0.85); g.lineTo(-z * 0.62, -z * 0.25); g.closePath();
+  g.fill(); g.stroke(); g.shadowBlur = 0;
+  g.fillStyle = 'rgba(255,255,255,.55)';                                         // facets
+  g.beginPath(); g.moveTo(0, -z); g.lineTo(z * 0.62, -z * 0.25); g.lineTo(0, -z * 0.1); g.closePath(); g.fill();
+  g.fillStyle = 'rgba(40,20,120,.18)';
+  g.beginPath(); g.moveTo(0, -z * 0.1); g.lineTo(z * 0.62, -z * 0.25); g.lineTo(z * 0.4, z * 0.85); g.lineTo(0, z * 0.85); g.closePath(); g.fill();
+  gemCache[key] = c;
+  return c;
+}
 function drawGem(x, y, s, kind, rot, alpha) {
-  const c = GEM_COL[kind || 0];
+  const sp = gemSprite(kind), k = s / GEM_S0, w = (GEM_S0 + GEM_PAD) * 2 * k;
   ctx.save(); ctx.translate(x, y); ctx.rotate(Math.sin(rot) * 0.25); ctx.globalAlpha = alpha;
-  ctx.shadowColor = c[1]; ctx.shadowBlur = s * 0.9;
-  const gr2 = ctx.createLinearGradient(-s * 0.6, -s, s * 0.6, s);
-  gr2.addColorStop(0, c[0]); gr2.addColorStop(0.45, c[1]); gr2.addColorStop(1, c[2]);
-  ctx.fillStyle = gr2; ctx.strokeStyle = 'rgba(255,255,255,.85)'; ctx.lineWidth = Math.max(1, s * 0.07); ctx.lineJoin = 'round';
-  ctx.beginPath(); ctx.moveTo(0, -s); ctx.lineTo(s * 0.62, -s * 0.25); ctx.lineTo(s * 0.4, s * 0.85); ctx.lineTo(-s * 0.4, s * 0.85); ctx.lineTo(-s * 0.62, -s * 0.25); ctx.closePath();
-  ctx.fill(); ctx.stroke(); ctx.shadowBlur = 0;
-  ctx.fillStyle = 'rgba(255,255,255,.55)';                                         // facets
-  ctx.beginPath(); ctx.moveTo(0, -s); ctx.lineTo(s * 0.62, -s * 0.25); ctx.lineTo(0, -s * 0.1); ctx.closePath(); ctx.fill();
-  ctx.fillStyle = 'rgba(40,20,120,.18)';
-  ctx.beginPath(); ctx.moveTo(0, -s * 0.1); ctx.lineTo(s * 0.62, -s * 0.25); ctx.lineTo(s * 0.4, s * 0.85); ctx.lineTo(0, s * 0.85); ctx.closePath(); ctx.fill();
+  ctx.drawImage(sp, -w / 2, -w / 2, w, w);
   ctx.restore();
 }
 function drawGems() {
   for (const m of gems) {
     if (m.t < 0) continue;
     const sz = [9, 12, 16][m.kind];
-    for (const q of m.trail) if (q.a > 0) drawGem(q.x, q.y, sz * (0.45 + 0.4 * q.a), m.kind, m.rot, q.a * 0.28);     // ghostly echoes
+    const step = Q.lvl >= 2 ? 1 : 2;                                                                                   // lower quality: every second echo
+    for (let ti = 0; ti < m.trail.length; ti += step) { const q = m.trail[ti]; if (q.a > 0) drawGem(q.x, q.y, sz * (0.45 + 0.4 * q.a), m.kind, m.rot, q.a * 0.28); }     // ghostly echoes
     drawGem(m.x, m.y, sz, m.kind, m.rot, 1);
   }
 }
@@ -572,13 +589,13 @@ function drawFx() {
       ctx.save(); ctx.globalAlpha = a * 0.8; ctx.translate(p.x, p.y); ctx.rotate(p.rot);
       ctx.drawImage(mip(im, s * 2), -s, -s * im.naturalHeight / im.naturalWidth, s * 2, s * 2 * im.naturalHeight / im.naturalWidth); ctx.restore();
     } else {
-      ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = p.col; ctx.shadowColor = p.col; ctx.shadowBlur = 8;
+      ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = p.col; if (Q.lvl >= 2) { ctx.shadowColor = p.col; ctx.shadowBlur = 8; }
       ctx.beginPath(); ctx.arc(p.x, p.y, p.s * (0.4 + a * 0.6), 0, TAU); ctx.fill(); ctx.restore();
     }
   }
   for (const r of rings) {
     const t = 1 - r.life / r.max;
-    ctx.save(); ctx.strokeStyle = 'rgba(' + r.col + ',' + (0.8 * (1 - t)) + ')'; ctx.lineWidth = 6 * (1 - t) + 1; ctx.shadowColor = 'rgba(' + r.col + ',1)'; ctx.shadowBlur = 14;
+    ctx.save(); ctx.strokeStyle = 'rgba(' + r.col + ',' + (0.8 * (1 - t)) + ')'; ctx.lineWidth = 6 * (1 - t) + 1; if (Q.lvl >= 2) { ctx.shadowColor = 'rgba(' + r.col + ',1)'; ctx.shadowBlur = 14; }
     ctx.beginPath(); ctx.arc(r.x, r.y, 10 + r.r * t, 0, TAU); ctx.stroke(); ctx.restore();
   }
   for (const t of texts) { ctx.globalAlpha = clamp(t.life / 0.5, 0, 1); glowText(t.txt, t.x, t.y, t.size, t.col); }
@@ -595,14 +612,14 @@ function drawHud() {
   const orb = SPR.orb;
   for (let i = 0; i < n; i++) {
     const on = i < G.hp;
-    ctx.save(); ctx.globalAlpha = on ? 1 : 0.22; if (on) { ctx.shadowColor = '#fff3c9'; ctx.shadowBlur = 10; }
+    ctx.save(); ctx.globalAlpha = on ? 1 : 0.22; if (on && Q.lvl >= 2) { ctx.shadowColor = '#fff3c9'; ctx.shadowBlur = 10; }
     if (ready(orb)) ctx.drawImage(mip(orb, 24), x0 + i * step - 12, 36, 24, 24);
     else { ctx.fillStyle = '#fff3c9'; ctx.beginPath(); ctx.arc(x0 + i * step, 48, 11, 0, TAU); ctx.fill(); }
     ctx.restore();
   }
   const pz = 1 + G.pulse * 0.35;
   ctx.save(); ctx.translate(HUD_GEM.x, HUD_GEM.y); ctx.scale(pz, pz);
-  if (G.pulse > 0) { ctx.globalAlpha = G.pulse * 0.8; ctx.shadowColor = '#8fd8ff'; ctx.shadowBlur = 30; ctx.fillStyle = '#8fd8ff'; ctx.beginPath(); ctx.arc(0, 0, 14, 0, TAU); ctx.fill(); ctx.shadowBlur = 0; ctx.globalAlpha = 1; }
+  if (G.pulse > 0) { ctx.globalAlpha = G.pulse * 0.8; if (Q.lvl >= 2) { ctx.shadowColor = '#8fd8ff'; ctx.shadowBlur = 30; } ctx.fillStyle = '#8fd8ff'; ctx.beginPath(); ctx.arc(0, 0, 14, 0, TAU); ctx.fill(); ctx.shadowBlur = 0; ctx.globalAlpha = 1; }
   drawGem(0, 0, 17, 0, wt * 1.2, 1);
   ctx.restore();
   glowText(String(Math.round(G.essShown)), HUD_GEM.x - 28 * pz, HUD_GEM.y, 32 * (1 + G.pulse * 0.12), '#e9fbff', 'right');
@@ -788,17 +805,23 @@ fillAbout();
 setScreens('menu');
 Ads.init();
 
-let last = performance.now(), lockT = 0;
+let last = performance.now(), lockT = 0, lastDraw = 0;
 function frame(now) {
-  const dt = Math.min((now - last) / 1000, 0.05);
+  const raw = Math.min((now - last) / 1000, 0.25), dt = Math.min(raw, 0.05);
   last = now;
   lockT += dt;
   if (lockT > 3) { lockT = 0; if (!Lock.ok()) { Lock.block(); return; } }
   update(dt);
-  render();
+  if (now - lastDraw >= 14) { lastDraw = now; render(); }          // a 120 Hz phone screen would otherwise draw twice as much for no gain
+  // self-tuning: only while playing and the page is visible
+  if (G.state === 'play' && !document.hidden) {
+    Q.ema = Q.ema ? Q.ema * 0.96 + raw * 0.04 : raw; Q.t += raw;
+    if (Q.t > 3 && Q.ema > 0.026 && Q.lvl > 0) { Q.lvl--; Q.t = 0; Q.ema = 0; resize(); }
+    else if (Q.t > 3) Q.t = 0;
+  } else Q.t = 0;
   requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
 
-window.__defend = { G, S, core, shield, spawn, update, render, startRun, get ghosts() { return ghosts; } };
+window.__defend = { G, S, Q, core, shield, spawn, spawnGems, update, render, startRun, get ghosts() { return ghosts; } };
 })();

@@ -270,3 +270,11 @@ a.card:hover{background:var(--card-hi);border-color:#3a3a43;transform:translateY
 .doc ul.feat li{position:relative;padding:8px 0 8px 26px;border-bottom:1px solid var(--line);color:#d4d4da}
 .doc ul.feat li:before{content:"";position:absolute;left:4px;top:15px;width:9px;height:9px;border-radius:2px;background:var(--accent);transform:rotate(45deg)}
 .doc .back{margin:0}
+
+.adstats{display:flex;gap:10px;margin:10px 0 0}
+.adstats span{flex:1;padding:9px 10px;border:2px solid var(--line);border-radius:12px;background:var(--bg2);font-size:13px;text-align:center;color:var(--mute,inherit)}
+.adstats b{display:block;font-size:20px;color:var(--text,inherit)}
+.adstats .adok{border-color:#2fbf71;background:rgba(47,191,113,.12)}
+.adstats .adok b{color:#3ddc84}
+.adstats .adno{border-color:#e5484d;background:rgba(229,72,77,.12)}
+.adstats .adno b{color:#ff6369}

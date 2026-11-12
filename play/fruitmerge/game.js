@@ -11,8 +11,7 @@ let cur = 0, nxt = 1, aimX = W / 2, cooldown = 0;
 let combo = 0, comboTimer = 0, danger = 0, shake = 0, time = 0;
 let heat = 0; // each popped peach permanently raises drop difficulty
 let startBest = 0; // record when this run began, for new-best detection
-let runTime = 0, reviveUsed = false, reviveGrace = 0;
-let lastReviveOffer = -300000;
+let runTime = 0, reviveCount = 0, reviveGrace = 0;
 
 function rndLevel() {
   // gradual pressure: easy small fruits at first, big awkward ones later.
@@ -31,7 +30,7 @@ function reset() {
   world = new World(LEFT, RIGHT, FLOOR);
   Fx.clear();
   score = 0; shownScore = 0; newBest = false; combo = 0; comboTimer = 0; danger = 0; shake = 0; heat = 0;
-  runTime = 0; reviveUsed = false; reviveGrace = 0;
+  runTime = 0; reviveCount = 0; reviveGrace = 0;
   $("score").textContent = "0";
   startBest = best;
   cur = rndLevel(); nxt = rndLevel(); cooldown = 0; aimX = W / 2;
@@ -139,24 +138,10 @@ function dangerStep(dt) {
   if (danger > 1.6) gameOver();
 }
 function canRevive() {
-  if (!FGAds.available() || reviveUsed || runTime < 45 || Date.now() - lastReviveOffer < 300000) return false;
-  const alive = world.bodies.filter(b => b.alive);
-  const remaining = alive.filter(b => b.level < 4);
-  if (remaining.length === alive.length) return false;
-  // The reward must genuinely save the run: no small fruit may remain in the
-  // danger zone, and at least one safe birth lane must exist for the drop.
-  for (const b of remaining) if (b.y - b.r < DANGER) return false;
-  const r = FRUITS[cur].r;
-  for (let lane = 0; lane < 9; lane++) {
-    const x = LEFT + r + (RIGHT - LEFT - 2 * r) * lane / 8;
-    let clear = true;
-    for (const b of remaining) {
-      const dx = b.x - x, dy = b.y - DROP_Y, rr = b.r + r - 2;
-      if (dx * dx + dy * dy < rr * rr) { clear = false; break; }
-    }
-    if (clear) return true;
-  }
-  return false;
+  // The offer comes on almost every loss: once the run has really started (20 s or 150 points), at most twice per run.
+  // It is only an offer: the player chooses. The reward (reviveRun) always clears the danger, so watching never ends in an instant second loss.
+  if (!FGAds.available() || reviveCount >= 2 || (runTime < 20 && score < 150)) return false;
+  return true;
 }
 function finishGameOver() {
   newBest = score > startBest;
@@ -170,15 +155,16 @@ function finishGameOver() {
 function gameOver() {
   if (state !== "play") return;
   if (canRevive()) {
-    lastReviveOffer = Date.now();
     setState("revive");
   } else finishGameOver();
 }
 function reviveRun() {
-  reviveUsed = true;
+  reviveCount++;
   Fx.clear();
+  // the top of the pile goes: every fruit that reaches above the cut line (and any big fruit) is cleared, which leaves real room to keep playing
+  const cut = DANGER + 230;
   for (const b of world.bodies) {
-    if (!b.alive || b.level < 4) continue;
+    if (!b.alive || (b.level < 4 && b.y - b.r >= cut)) continue;
     Fx.burst(b.x, b.y, "#ffd23e", 22, 360);
     Fx.ring(b.x, b.y, b.r, "#ffffff");
     world.remove(b);
