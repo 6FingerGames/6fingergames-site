@@ -96,6 +96,8 @@ a.card:hover{background:var(--card-hi);border-color:#3a3a43;transform:translateY
 .btn:hover{background:#33333b}
 .btn.primary{background:var(--accent);color:#06121a}
 .btn.primary:hover{background:var(--accent-hi)}
+.btn.demo{background:var(--green);color:#04210f}
+.btn.demo:hover{background:#5ee69b}
 .btn svg{width:18px;height:18px}
 .btn.disabled{background:var(--bg2);color:var(--dim);cursor:default}
 
