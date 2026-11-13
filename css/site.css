@@ -90,6 +90,7 @@ a.card:hover{background:var(--card-hi);border-color:#3a3a43;transform:translateY
 .tag.download{color:var(--accent);background:rgba(38,187,255,.12)}
 .tag.soon{color:var(--amber);background:rgba(255,181,71,.12)}
 .tag.free{color:#04210f;background:var(--green)}
+.tag.pc{color:var(--accent);background:rgba(38,187,255,.12)}
 .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:13px 18px;border-radius:10px;border:0;cursor:pointer;
   font-weight:800;font-size:15px;background:var(--card-hi);color:var(--text);transition:background .15s}
 .btn:hover{background:#33333b}
