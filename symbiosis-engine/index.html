@@ -24,7 +24,7 @@
 <meta name="twitter:title" content="SYMBO Engine (Symbiosis Engine) | Free 2D Game Engine by 6 finger games">
 <meta name="twitter:description" content="Symbiosis Engine (SYMBO) is a free 2D game engine from 6 finger games, currently in development.">
 <meta name="twitter:image" content="https://6fingergames.com/img/studio-logo.png">
-<link rel="stylesheet" href="/css/site.css?v=81c51139">
+<link rel="stylesheet" href="/css/site.css?v=be441bfe">
 
 </head>
 <body>
@@ -41,7 +41,14 @@
   <main><div class="page">
 <article class="doc">
   <p><img src="/img/symbiosis/logo-white-600.png" alt="Symbiosis Engine logo: a human and an AI joined by an infinity loop" width="420" height="212" style="max-width:100%;height:auto"></p>
-  <h1>SYMBO ENGINE</h1>
+  <div class="engine-head">
+    <h1>SYMBO ENGINE</h1>
+    <div class="engine-dl" id="engine-download">
+      <!-- not active yet: a click only says the engine is still in development; put the real download link here when it is released -->
+      <button type="button" class="engine-dl-btn" aria-disabled="true" aria-describedby="engine-dl-note">DOWNLOAD</button>
+      <p class="engine-dl-note" id="engine-dl-note" role="status" hidden>SYMBO Engine is still in development. The download will appear here as soon as the first version is ready.</p>
+    </div>
+  </div>
   <p class="date">A free 2D game engine from 6 finger games (full name: Symbiosis Engine)</p>
 
   <p>Symbiosis Engine is the 2D game engine we are building at 6 finger games. We started it for our own games, and we want to give it to everyone: you will be able to download it for free and make your own 2D games with it.</p>
@@ -54,7 +61,7 @@
     <p>That is why, in parallel, I’ve been creating a new game engine. But this time, I integrated tools into it that incredibly accelerate the game development process: ready-made templates, blueprints, and integrated AI systems. You can create music right inside the engine, generate sprites, slice them, make animations, modify them, and create new ones. You can write scripts directly in the engine, build long logical blueprints, give enemies ready-made “brains,” or ask the integrated AI for help. It can even create games inside this engine on its own, without your assistance.</p>
     <p>But here is the difference: you can watch in real time as the AI does it. You can stop it and fix what you don’t like right on the spot in the editor. Instead of wasting time asking the AI to move an object to another place, you can do it yourself in a matter of seconds. This is what true symbiosis looks like. Today, if an AI agent makes a game, you can’t intervene directly: it just hands you a finished result. But here, you have complete freedom of action: stop the AI, tweak things exactly how you want them, and then press a button so it continues from where you left off.</p>
     <p class="letter-key">A game made this way can rightfully be considered your creation, because the AI simply assisted you, rather than building everything entirely on its own.</p>
-    <p><a href="#download">Download</a> our engine, it is completely free. You can plug in any AI using an API key. All the details and instructions are already prepared to show you how to do it.</p>
+    <p><a href="#engine-download">Download</a> our engine, it is completely free. You can plug in any AI using an API key. All the details and instructions are already prepared to show you how to do it.</p>
     <p>And then, just press the “Publish” button, and your game is ready. You can instantly package it to run on any server or export it as a Windows .exe file.</p>
   </section>
 
@@ -82,6 +89,18 @@
   <h2>Questions and ideas</h2>
   <p>If you want to know when the engine is released, or you have an idea for a feature, write to us on the <a href="/contact/">contact page</a>. We read every message. You can also follow our work on <a href="https://www.youtube.com/@6FingerGames">YouTube</a>.</p>
 </article>
+<script>
+/* the DOWNLOAD button is not active yet: it (and the "Download" word in the text, which also brings you up to it) only shows the note */
+(function(){
+  var btn=document.querySelector('.engine-dl-btn'),note=document.getElementById('engine-dl-note'),timer;
+  if(!btn||!note)return;
+  function show(){note.hidden=false;clearTimeout(timer);timer=setTimeout(function(){note.hidden=true},6000);}
+  btn.addEventListener('click',show);
+  document.querySelectorAll('a[href="#engine-download"]').forEach(function(a){a.addEventListener('click',function(e){
+    e.preventDefault();btn.scrollIntoView({behavior:'smooth',block:'center'});btn.focus({preventScroll:true});show();});});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')note.hidden=true;});
+})();
+</script>
 
   <footer class="foot"><span>© 2026 6 finger games · Georgia</span><a href="mailto:3dstudio@mail.com">3dstudio@mail.com</a><a href="/about/">About</a><a href="/terms/">Terms</a><a href="/privacy/">Privacy policy</a></footer>
   </div></main>
