@@ -269,6 +269,11 @@ a.card:hover{background:var(--card-hi);border-color:#3a3a43;transform:translateY
 @media (max-width:480px){.avmsg{text-align:center;width:auto}}
 
 .inlink{color:var(--accent);font-weight:700}.inlink:hover{color:var(--accent-hi)}
+.doc .letter{margin:18px 0 30px}
+.doc .letter p{color:#e4e4ea;font-size:17px;line-height:1.75;margin:0 0 14px}
+.doc .letter .letter-key{color:var(--text);font-size:19px;font-weight:600;line-height:1.6;margin:20px 0}
+.doc h2[id]{scroll-margin-top:calc(var(--top) + 16px)}
+@media (max-width:640px){.doc .letter p{font-size:16px}.doc .letter .letter-key{font-size:17px}}
 .doc ul.feat{margin:6px 0 20px;padding:0;list-style:none}
 .doc ul.feat li{position:relative;padding:8px 0 8px 26px;border-bottom:1px solid var(--line);color:#d4d4da}
 .doc ul.feat li:before{content:"";position:absolute;left:4px;top:15px;width:9px;height:9px;border-radius:2px;background:var(--accent);transform:rotate(45deg)}
