@@ -82,8 +82,8 @@
 })();
 
 /* ===== accounts: registration window + ID card =====
-   No server yet (the site is static), so the profile lives in this browser (localStorage).
-   FG_SAVE_PROFILE is the ONE place to connect a real backend later (and the HS coin wallet: FG_HS_BALANCE). */
+   The profile lives in this browser (localStorage); FG_SAVE_PROFILE is the ONE place to connect real accounts later.
+   The HS balance comes from the server wallet through js/fg-hs.js (window.FGHS); FG_HS_BALANCE only reads it. */
 (function(){
   var KEY = 'fg_user';
   var GAMES = window.FG_GAMES || [];
@@ -119,7 +119,7 @@
   /* Ad counters: written by the games (FGAds core) into localStorage 'fg_ads' = {watched, skipped}. Display only for now;
      coins for watched ads must be credited by a server-validated wallet later (see FG_AD_EVENT in fgads-core.js). */
   function FG_AD_STATS(){ var d = {}; try{ d = JSON.parse(localStorage.getItem('fg_ads') || '{}'); }catch(e){} return { watched: parseInt(d.watched, 10) || 0, skipped: parseInt(d.skipped, 10) || 0 }; }
-  function FG_HS_BALANCE(){ var n = 0; try{ n = parseInt(localStorage.getItem('fg_hs'), 10) || 0; }catch(e){} return n; }
+  function FG_HS_BALANCE(){ return window.FGHS ? window.FGHS.cached() : 0; }
 
   var btn = document.getElementById('regBtn');
   if(!btn) return;
@@ -235,5 +235,11 @@
       };
     });
   }
+  // the server balance: shown on the button and on an open ID card whenever it changes
+  window.addEventListener('fghs:balance', function(e){
+    refreshBtn();
+    var amt = modal.querySelector('.earned .amt'); if(amt) amt.textContent = e.detail;
+  });
   refreshBtn(); sync();
+  if(window.FGHS && window.FGHS.signedIn()) window.FGHS.balance();
 })();
