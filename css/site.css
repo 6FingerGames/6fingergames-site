@@ -289,6 +289,27 @@ a.card:hover{background:var(--card-hi);border-color:#3a3a43;transform:translateY
 .doc ul.feat li:before{content:"";position:absolute;left:4px;top:15px;width:9px;height:9px;border-radius:2px;background:var(--accent);transform:rotate(45deg)}
 .doc .back{margin:0}
 
+/* catalogs: every creature / item of a game (games/<id>/<slug>/, built from _tools/catalogs) */
+.doc.wide{max-width:1040px}
+.doc h2.rh{display:flex;align-items:center;gap:10px;margin-top:34px;scroll-margin-top:calc(var(--top) + 16px)}
+.doc h2.rh:before{content:"";width:12px;height:12px;border-radius:3px;background:var(--rc)}
+.doc .tw{overflow-x:auto;margin:8px 0 14px;color-scheme:dark}
+.doc table.odds{width:100%;border-collapse:collapse;font-size:15px}
+.doc table.odds th,.doc table.odds td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;color:#d4d4da;vertical-align:top}
+.doc table.odds th{color:var(--muted);font-weight:600;font-size:13px}
+.doc table.odds .sm{color:var(--dim);font-size:13px}
+.dex{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin:10px 0 8px}
+.dex .it{display:flex;flex-direction:column;align-items:center;text-align:center;padding:12px 14px 14px;background:var(--card);border:1px solid var(--line);border-top:3px solid var(--rc,var(--line));border-radius:var(--radius)}
+.dex img{width:112px;height:112px;object-fit:contain}
+.dex .rar{margin-top:4px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--rc)}
+.dex h3{margin:2px 0 0;font-size:18px}
+.doc .dex p{margin:6px 0 10px;font-size:14px;line-height:1.5;color:#c9c9d1}
+.dex .inc{margin-top:auto;font-size:13px;color:var(--muted)}
+.dex .inc b{color:var(--text)}
+.dex .pic{display:grid;place-items:center;width:124px;height:124px;border-radius:50%;background:var(--pbg,transparent)}
+.dex .pic img{width:100px;height:100px}
+@media (max-width:520px){.dex{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.dex .it{padding:10px 8px 12px}.dex img{width:84px;height:84px}.dex .inc{font-size:12px}.dex .pic{width:96px;height:96px}.dex .pic img{width:78px;height:78px}}
+
 .adstats{display:flex;gap:10px;margin:10px 0 0}
 .adstats span{flex:1;padding:9px 10px;border:2px solid var(--line);border-radius:12px;background:var(--bg2);font-size:13px;text-align:center;color:var(--mute,inherit)}
 .adstats b{display:block;font-size:20px;color:var(--text,inherit)}

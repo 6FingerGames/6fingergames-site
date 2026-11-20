@@ -18,7 +18,7 @@ window.NEON_CONFIG = {
   about: {
     studio: '6 Finger Games',
     author: 'Davit.T',      // shown only when filled in
-    email: '3dstudio@mail.com' // shown only when filled in
+    email: 'play@6fingergames.com' // shown only when filled in
   },
   music: [
     { src: 'audio/Track_1.ogg', loop: 34.32 },

@@ -16,7 +16,7 @@ window.DEFEND_CONFIG = {
   about: {
     studio: '6 Finger Games',
     author: 'Davit.T',
-    email: '3dstudio@mail.com'
+    email: 'play@6fingergames.com'
   },
   music: []                 // [{ src: 'audio/Track_1.ogg', loop: 12.5 }, ...]
 };

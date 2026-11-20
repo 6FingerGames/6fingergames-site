@@ -8,7 +8,7 @@ window.CFG = {
   about: {
     studio: '6 Finger Games',
     author: 'Davit.T',
-    email: '3dstudio@mail.com',
+    email: 'play@6fingergames.com',
     site: 'https://6fingergames.com'
   }
 };
